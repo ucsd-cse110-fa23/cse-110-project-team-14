@@ -107,6 +107,7 @@ public class initialUi extends Application {
         primaryStage.setResizable(false);
         // Show the app
         primaryStage.show();
+
     }
 
 
