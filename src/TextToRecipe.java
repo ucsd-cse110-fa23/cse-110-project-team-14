@@ -9,5 +9,5 @@ public class TextToRecipe {
     String ingredients; //Grabbed from second whisper
     String mealType; //Grabbed from first whisper
     Recipe recipe;
-    
+    // String generatedText = responseJson.getString("text"); --> use this to grab the user's speech as text
 }
