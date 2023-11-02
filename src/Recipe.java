@@ -7,7 +7,8 @@ import java.util.List;
  */
 public class Recipe {
     private String recipeTitle;
-    private List<String> recipeDetails; // Take the JSON response object from ChatGPT and put instructions into list (TODO Later)
+    String recipeInstructions; // Take the JSON response object from ChatGPT and put instructions into list (TODO Later)
+    String recipeIngredients;
     private String mealType;
 
     Recipe() {
@@ -21,12 +22,20 @@ public class Recipe {
         return recipeTitle;
     }
     
-    void setRecipeDetails(List<String> recipeDetails) {
-        this.recipeDetails = recipeDetails;
+    void setRecipeIngredients(String recipeIngredients) {
+        this.recipeIngredients = recipeIngredients;
     }
 
-    List<String> getRecipeDetails() {
-        return recipeDetails;
+    String getRecipeIngredients() {
+        return recipeIngredients;
+    }
+
+    void setRecipeInstructions(String recipeInstructions) {
+        this.recipeInstructions = recipeInstructions;
+    }
+
+    String getRecipeInstructions() {
+        return recipeInstructions;
     }
 
     void setMealType(String mealType) {
