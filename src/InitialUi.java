@@ -32,16 +32,16 @@ class Header extends HBox {
 }
 
 class Footer extends HBox {
-    private Button sampleButton;
+    private Button addButton;
 
     Footer() {
         this.setPrefSize(1000, 60);
         this.setStyle("-fx-background-color: #F5DEB3; -fx-border-radius: 0 0 15 15; -fx-background-radius: 0 0 15 15;");
 
-        sampleButton = new Button("Sample Button");
-        sampleButton.setStyle("-fx-background-color: #FFEBD7; -fx-text-fill: #8B4513; -fx-border-color: #8B4513; -fx-border-radius: 20; -fx-background-radius: 20; -fx-padding: 5 15 5 15;");
+        addButton = new Button("Create Recipe");
+        addButton.setStyle("-fx-background-color: #FFEBD7; -fx-text-fill: #8B4513; -fx-border-color: #8B4513; -fx-border-radius: 20; -fx-background-radius: 20; -fx-padding: 5 15 5 15;");
 
-        this.getChildren().addAll(sampleButton);
+        this.getChildren().addAll(addButton);
         this.setAlignment(Pos.CENTER);
 
         // Add shadow for depth
@@ -51,8 +51,8 @@ class Footer extends HBox {
         this.setEffect(ds);
     }
 
-    public Button getSampleButton() {
-        return sampleButton;
+    public Button getAddButton() {
+        return addButton;
     }
 }
 
@@ -61,6 +61,7 @@ class Footer extends HBox {
 class Appframe extends BorderPane {
     private Header header;
     private Footer footer;
+    private Button addButton;
 
     Appframe() {
         header = new Header();
@@ -74,12 +75,24 @@ class Appframe extends BorderPane {
         this.setCenter(mainContent);
         this.setBottom(footer);
 
+        this.addButton = footer.getAddButton();
+
         this.setStyle("-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #FFE4B5, #FFDEAD, #FFE4B5, #FFDEAD); " +
                       "-fx-border-color: #DEB887; " +
                       "-fx-border-width: 10; " +
                       "-fx-border-radius: 15; " +
                       "-fx-background-radius: 15;");
+
+        addListeners(); //define later
     }
+
+        public void addListeners() {
+            addButton.setOnAction(e -> {
+                //action of the button should code (chatGPT CALL)
+                System.out.println("BUTTON WORKS :)");
+            });
+        }
+
     }
 
 
