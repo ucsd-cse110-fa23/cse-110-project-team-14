@@ -1,4 +1,4 @@
-package src;
+package src.main;
 
 import java.io.IOException;
 import java.net.URISyntaxException;

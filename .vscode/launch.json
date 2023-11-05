@@ -22,7 +22,7 @@
             "type": "java",
             "name": "Main_Ivan",
             "request": "launch",
-            "mainClass": "src.InitialUi",
+            "mainClass": "InitialUi",
             "vmArgs": "--module-path 'C:/openjfx-21_windows-x64_bin-sdk/javafx-sdk-21/lib' --add-modules javafx.controls,javafx.fxml"
         },
         {
@@ -43,7 +43,7 @@
             "type": "java",
             "name": "Main_Aidan",
             "request": "launch",
-            "mainClass": "InitialUi",
+            "mainClass": "src.InitialUi",
             "vmArgs": "--module-path 'C:/Users/aidan/Documents/CSE_Courses/CSE_110/javafx-sdk-21/lib' --add-modules javafx.controls,javafx.fxml"
         }
     ]
