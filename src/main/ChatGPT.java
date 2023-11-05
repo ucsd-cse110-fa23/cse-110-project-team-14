@@ -16,9 +16,9 @@ public class ChatGPT {
     private static final String API_ENDPOINT = "https://api.openai.com/v1/completions";
     private static final String API_KEY = "";
     private static final String MODEL = "text-davinci-003";
-    String prompt;
-    int maxTokens;
-    String response;
+    private String prompt;
+    private int maxTokens;
+    private String response;
 
 
 
@@ -81,8 +81,8 @@ public class ChatGPT {
      * Parses the response from the API call to get the ingredients of the recipe
      */
     String parseRecipeIngredients() {
-        int indexOfIngredients = this.response.indexOf("Ingriedents: ");
-        int indexOfInstructions = this.response.indexOf("Instructions: ");
+        int indexOfIngredients = this.response.indexOf("Ingredients:");
+        int indexOfInstructions = this.response.indexOf("Instructions:");
         return this.response.substring(indexOfIngredients, indexOfInstructions);
     }
 
@@ -91,7 +91,7 @@ public class ChatGPT {
      * Parses the response from the API call to get the instructions of the recipe
      */
     String parseRecipeInstructions() {
-        int indexOfInstructions = this.response.indexOf("Instructions: ");
+        int indexOfInstructions = this.response.indexOf("Instructions:");
         return this.response.substring(indexOfInstructions);
     }
 }

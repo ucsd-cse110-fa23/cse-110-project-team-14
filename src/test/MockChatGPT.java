@@ -4,12 +4,11 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class MockChatGPT {
-    String prompt;
-    int maxTokens;
-    String response;
+    private String prompt;
+    private int maxTokens;
+    private String response;
     
-    void generatedRecipe(int maxTokens, String prompt) throws IOException, 
-        InterruptedException, URISyntaxException {
+    void generatedRecipe(int maxTokens, String prompt) {
         // TEST: 1
         // implemnet file reader? 
         if(prompt.equals("Make me a recipe using only: chicken, rice")){
@@ -30,8 +29,8 @@ public class MockChatGPT {
      * Parses the response from the API call to get the ingredients of the recipe
      */
     String parseRecipeIngredients() {
-        int indexOfIngredients = this.response.indexOf("Ingriedents: ");
-        int indexOfInstructions = this.response.indexOf("Instructions: ");
+        int indexOfIngredients = this.response.indexOf("Ingredients:");
+        int indexOfInstructions = this.response.indexOf("Instructions:");
         return this.response.substring(indexOfIngredients, indexOfInstructions);
     }
 
@@ -40,7 +39,7 @@ public class MockChatGPT {
      * Parses the response from the API call to get the instructions of the recipe
      */
     String parseRecipeInstructions() {
-        int indexOfInstructions = this.response.indexOf("Instructions: ");
+        int indexOfInstructions = this.response.indexOf("Instructions:");
         return this.response.substring(indexOfInstructions);
     }
     

@@ -6,8 +6,8 @@ package src.main;
  */
 public class Recipe {
     private String recipeTitle;
-    String recipeInstructions; // Take the JSON response object from ChatGPT and put instructions into list (TODO Later)
-    String recipeIngredients;
+    private String recipeInstructions; // Take the JSON response object from ChatGPT and put instructions into list (TODO Later)
+    private String recipeIngredients;
     private String mealType;
 
     Recipe() {

@@ -10,10 +10,10 @@ import java.net.URISyntaxException;
  * - Send the parsed response to the Recipe (with getters and setters)
  */
 public class TextToRecipe {
-    String ingredients; //Grabbed from second whisper
-    String mealType; //Grabbed from first whisper
-    Recipe recipe;
-    ChatGPT chatGPT;
+    private String ingredients; //Grabbed from second whisper
+    private String mealType; //Grabbed from first whisper
+    private Recipe recipe;
+    private ChatGPT chatGPT;
     // String generatedText = responseJson.getString("text"); --> use this to grab the user's speech as text
 
     TextToRecipe(String ingredients, String mealType, Recipe recipe) {
