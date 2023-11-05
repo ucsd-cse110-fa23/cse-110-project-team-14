@@ -8,7 +8,7 @@ public class Whisper {
     private static final String API_ENDPOINT = "https://api.openai.com/v1/audio/transcriptions";
     private static final String TOKEN = "";
     private static final String MODEL = "whisper-1";
-    private static final String FILE_PATH = ""; // path to audio
+    private static final String FILE_PATH = "\"recording.wav\""; // path to audio TODO: 
 
     private static void writeParameterToOutputStream(
             OutputStream outputStream,
@@ -44,7 +44,7 @@ public class Whisper {
     }
 
     // Helper method to handle a successful response
-    private static void handleSuccessResponse(HttpURLConnection connection)
+    private static String handleSuccessResponse(HttpURLConnection connection)
             throws IOException, JSONException {
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(connection.getInputStream()));
@@ -60,11 +60,12 @@ public class Whisper {
         String generatedText = responseJson.getString("text");
 
         // Print the transcription result
-        System.out.println("Transcription Result: " + generatedText);
+        connection.disconnect();
+        return ("Transcription Result: " + generatedText);
     }
 
     // Helper method to handle an error response
-    private static void handleErrorResponse(HttpURLConnection connection)
+    private static String handleErrorResponse(HttpURLConnection connection)
             throws IOException, JSONException {
         BufferedReader errorReader = new BufferedReader(
                 new InputStreamReader(connection.getErrorStream()));
@@ -75,14 +76,12 @@ public class Whisper {
         }
         errorReader.close();
         String errorResult = errorResponse.toString();
-        System.out.println("Error Result: " + errorResult);
+        connection.disconnect();
+        return ("Error Result: " + errorResult);
     }
 
-    public static void main(String[] args) throws IOException, URISyntaxException {
-
-        // Create file object from file path
+    public static String getResponse() throws IOException, URISyntaxException {
         File file = new File(FILE_PATH);
-        
         
         // Set up HTTP connection
         URL url = new URI(API_ENDPOINT).toURL();
@@ -127,13 +126,8 @@ public class Whisper {
         
         // Check response code and handle response accordingly
         if (responseCode == HttpURLConnection.HTTP_OK) {
-            handleSuccessResponse(connection);
-        } else {
-            handleErrorResponse(connection);
+            return handleSuccessResponse(connection);
         }
-        
-        
-        // Disconnect connection
-        connection.disconnect();
+        return handleErrorResponse(connection);
     }
 }
