@@ -29,7 +29,7 @@
             "type": "java",
             "name": "Main_Jackson",
             "request": "launch",
-            "mainClass": "src.InitialUi",
+            "mainClass": "src.main.InitialUi",
             "vmArgs": "--module-path /Users/jloughney/Desktop/CSE110/lab1/lib --add-modules javafx.controls,javafx.fxml"
         },
         {
