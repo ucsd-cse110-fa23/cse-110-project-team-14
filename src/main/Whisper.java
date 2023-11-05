@@ -1,6 +1,9 @@
 package src.main;
 
 public class Whisper {
+    private static final String API_ENDPOINT = "https://api.openai.com/v1/audio/transcriptions";
+    private static final String TOKEN = "";
+    private static final String MODEL = "whisper-1";
 
     private static void writeParameterToOutputStream(
             OutputStream outputStream,
