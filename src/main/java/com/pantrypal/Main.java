@@ -96,7 +96,7 @@ class Appframe extends BorderPane {
     }
 
 
-public class InitialUi extends Application {
+public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Appframe root = new Appframe();
