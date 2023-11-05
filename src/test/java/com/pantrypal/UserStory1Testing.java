@@ -48,19 +48,10 @@ public class UserStory1Testing {
 
     @Test
     void testCreateRecipeObj() throws IOException, InterruptedException, URISyntaxException {
-        // Arrange
-        String ingredients = "chicken, rice";
-        String mealType = "dinner";
-        Recipe recipe = new Recipe();
-
-        recipe.setMealType(mealType);
-
-        assertEquals("dinner", recipe.getMealType());
-
-        //TextToRecipe textToRecipe = new TextToRecipe(ingredients, mealType, recipe);
+        MockTextToRecipe textToRecipe = new MockTextToRecipe("chicken, rice", "dinner", new Recipe());
 
         // Act
-        //textToRecipe.createRecipeObj();
+        textToRecipe.createRecipeObj();
 
         // Assert
         
