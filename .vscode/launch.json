@@ -8,21 +8,21 @@
              "type": "java",
              "name": "Main_Path",
              "request": "launch",
-             "mainClass": "src.InitialUi",
+             "mainClass": "src.main.InitialUi",
              "vmArgs": "--module-path '${env:JAVAFX_PATH}' --add-modules javafx.controls,javafx.fxml"
          },
         {
              "type": "java",
              "name": "Main_Jay",
              "request": "launch",
-             "mainClass": "src.InitialUi",
+             "mainClass": "src.main.InitialUi",
              "vmArgs": "--module-path 'C:/Users/juhen/Downloads/openjfx-21_windows-x64_bin-sdk/javafx-sdk-21/lib' --add-modules javafx.controls,javafx.fxml"
          },
          {
             "type": "java",
             "name": "Main_Ivan",
             "request": "launch",
-            "mainClass": "InitialUi",
+            "mainClass": "src.main.InitialUi",
             "vmArgs": "--module-path 'C:/openjfx-21_windows-x64_bin-sdk/javafx-sdk-21/lib' --add-modules javafx.controls,javafx.fxml"
         },
         {
@@ -36,14 +36,14 @@
             "type": "java",
             "name": "mk",
             "request": "launch",
-            "mainClass": "src.InitialUi",
+            "mainClass": "src.main.InitialUi",
             "vmArgs": "--module-path C:/Users/calix/Desktop/cse110/openjfx-21_windows-x64_bin-sdk/javafx-sdk-21/lib --add-modules javafx.controls,javafx.fxml"
         },
         {
             "type": "java",
             "name": "Main_Aidan",
             "request": "launch",
-            "mainClass": "src.InitialUi",
+            "mainClass": "src.main.InitialUi",
             "vmArgs": "--module-path 'C:/Users/aidan/Documents/CSE_Courses/CSE_110/javafx-sdk-21/lib' --add-modules javafx.controls,javafx.fxml"
         }
     ]
