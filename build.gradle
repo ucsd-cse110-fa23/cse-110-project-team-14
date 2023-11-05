@@ -8,6 +8,8 @@
 plugins {
     // Apply the java plugin to add support for Java
     id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.1.0'
 }
 
 jar{
@@ -33,4 +35,9 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+javafx {
+    version = "21.0.1"
+    modules = [ 'javafx.controls' ]
 }
