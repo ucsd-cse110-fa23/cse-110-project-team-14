@@ -1,4 +1,4 @@
-package src.test;
+package test;
 
 import static org.junit.Assert.*;
 
@@ -6,9 +6,6 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 import org.junit.*;
-
-import src.main.Recipe;
-import src.main.TextToRecipe;
 
 
 public class UserStory1Testing {

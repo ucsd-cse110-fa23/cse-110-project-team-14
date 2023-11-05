@@ -1,4 +1,4 @@
-package src.main;
+package main;
 
 /*
  * Recipe class to store recipe information
