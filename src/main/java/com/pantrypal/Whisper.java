@@ -1,4 +1,4 @@
-package src.main;
+package com.pantrypal;
 
 import java.io.*;
 import java.net.*;
