@@ -51,11 +51,11 @@ class Footer extends HBox {
         this.setEffect(ds);
     }
 
+
     public Button getAddButton() {
         return addButton;
     }
 }
-
 
 
 class Appframe extends BorderPane {
@@ -83,7 +83,6 @@ class Appframe extends BorderPane {
                       "-fx-border-radius: 15; " +
                       "-fx-background-radius: 15;");
         addListeners();
-
     }
      public void addListeners() {
         // add buttons that don't change page
@@ -92,8 +91,7 @@ class Appframe extends BorderPane {
     public Button getAddButton() {
         return this.addButton;
     }
-
-    }
+}
 
 
 public class Main extends Application {
@@ -119,7 +117,6 @@ public class Main extends Application {
             primaryStage.setScene(new Scene(rp, width, height));
             System.out.println("SWITCHED TO RECORD PAGE");
         });
-
         primaryStage.show();
     }
 
