@@ -88,8 +88,12 @@ class Appframe extends BorderPane {
 
         public void addListeners() {
             addButton.setOnAction(e -> {
+
+                RecipeDetail.display();
                 //action of the button should code (chatGPT CALL)
                 System.out.println("BUTTON WORKS :)");
+
+
             });
         }
 
