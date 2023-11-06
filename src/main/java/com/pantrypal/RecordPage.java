@@ -1,5 +1,9 @@
 package com.pantrypal;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
+
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.effect.DropShadow;
@@ -15,6 +19,7 @@ public class RecordPage extends BorderPane{
     private VBox center;
     private Button recordButton;
     private LiveRecorder liveRecorder;
+    private Whisper whisper = new Whisper();
     private boolean isRecording; 
 
     RecordPage(){
@@ -52,10 +57,24 @@ public class RecordPage extends BorderPane{
                 recordButton.setText("RECORDING...?");
             }
             if(!isRecording){
-                liveRecorder.stopRecording();
                 // HERE WE WOULD OPEN THE NEW WINDOW
                 recordButton.setText("GOT VOICE");
-                
+                liveRecorder.stopRecording();
+                try {
+                    // TextToRecipe t2R = new TextToRecipe(whisper.getResponse(), "lunch", new Recipe());
+                   
+                    // t2R.createRecipeObj();
+                    System.out.println(whisper.getResponse());
+                }
+                // catch (InterruptedException e1) {
+                //     // TODO Auto-generated catch block
+                //     e1.printStackTrace();
+                // }
+                catch (IOException e1) {
+                    e1.printStackTrace();
+                } catch (URISyntaxException e1) {
+                    e1.printStackTrace();
+                }
             }
         });
     }

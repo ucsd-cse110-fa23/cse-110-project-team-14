@@ -8,7 +8,7 @@ public class Whisper {
     private static final String API_ENDPOINT = "https://api.openai.com/v1/audio/transcriptions";
     private static final String TOKEN = "";
     private static final String MODEL = "whisper-1";
-    private static final String FILE_PATH = "\"recording.wav\""; // path to audio TODO: 
+    private static final String FILE_PATH = "recording.wav"; // path to audio TODO: 
 
     private static void writeParameterToOutputStream(
             OutputStream outputStream,
@@ -80,7 +80,7 @@ public class Whisper {
         return ("Error Result: " + errorResult);
     }
 
-    public static String getResponse() throws IOException, URISyntaxException {
+    public String getResponse() throws IOException, URISyntaxException {
         File file = new File(FILE_PATH);
         
         // Set up HTTP connection

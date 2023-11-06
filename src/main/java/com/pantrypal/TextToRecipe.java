@@ -15,7 +15,7 @@ public class TextToRecipe {
     private Recipe recipe;
     private ChatGPT chatGPT;
     // String generatedText = responseJson.getString("text"); --> use this to grab the user's speech as text
-
+    
     TextToRecipe(String ingredients, String mealType, Recipe recipe) {
         this.ingredients = ingredients;
         this.mealType = mealType;
