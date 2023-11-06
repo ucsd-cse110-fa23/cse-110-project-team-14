@@ -51,11 +51,11 @@ class Footer extends HBox {
         this.setEffect(ds);
     }
 
+
     public Button getAddButton() {
         return addButton;
     }
 }
-
 
 
 class Appframe extends BorderPane {
@@ -82,28 +82,41 @@ class Appframe extends BorderPane {
                       "-fx-border-width: 10; " +
                       "-fx-border-radius: 15; " +
                       "-fx-background-radius: 15;");
-
-        addListeners(); //define later
+        addListeners();
+    }
+     public void addListeners() {
+        // add buttons that don't change page
     }
 
-    
-        public void addListeners() {
-            addButton.setOnAction(e -> {
-                //action of the button should code (chatGPT CALL)
-                System.out.println("BUTTON WORKS :)");
-            });
-        }
-
+    public Button getAddButton() {
+        return this.addButton;
     }
+}
 
 
 public class Main extends Application {
+    Appframe root = new Appframe();
+    RecordPage rp = new RecordPage();
+    private Button addButton = root.getAddButton();
+
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Appframe root = new Appframe();
+       
+        //CHANGE later for resolution
+        int width = 600;
+        int height = 600; //back to 900? 
+
         primaryStage.setTitle("PantryPal");
-        primaryStage.setScene(new Scene(root, 600, 900));
         primaryStage.setResizable(false);
+        
+        primaryStage.setScene(new Scene(root, width, height));
+
+        // main handles all listeners for now?
+        addButton.setOnAction(e -> {
+            // SET TO RECORDING STAGE
+            primaryStage.setScene(new Scene(rp, width, height));
+            System.out.println("SWITCHED TO RECORD PAGE");
+        });
         primaryStage.show();
     }
 
