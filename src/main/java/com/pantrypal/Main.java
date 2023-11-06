@@ -86,6 +86,7 @@ class Appframe extends BorderPane {
         addListeners(); //define later
     }
 
+    
         public void addListeners() {
             addButton.setOnAction(e -> {
                 //action of the button should code (chatGPT CALL)
