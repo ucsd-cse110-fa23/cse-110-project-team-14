@@ -33,16 +33,19 @@ class Header extends HBox {
 
 class Footer extends HBox {
     private Button addButton;
+    private Button SeeRecipeDetail;
 
     Footer() {
         this.setPrefSize(1000, 60);
         this.setStyle("-fx-background-color: #F5DEB3; -fx-border-radius: 0 0 15 15; -fx-background-radius: 0 0 15 15;");
 
         addButton = new Button("Create Recipe");
+        SeeRecipeDetail = new Button("See Recipe");
         addButton.setStyle("-fx-background-color: #FFEBD7; -fx-text-fill: #8B4513; -fx-border-color: #8B4513; -fx-border-radius: 20; -fx-background-radius: 20; -fx-padding: 5 15 5 15;");
 
-        this.getChildren().addAll(addButton);
+        this.getChildren().addAll(addButton, SeeRecipeDetail);
         this.setAlignment(Pos.CENTER);
+        SeeRecipeDetail.setStyle("-fx-background-color: #FFEBD7; -fx-text-fill: #8B4513; -fx-border-color: #8B4513; -fx-border-radius: 20; -fx-background-radius: 20; -fx-padding: 5 15 5 15;");
 
         // Add shadow for depth
         DropShadow ds = new DropShadow();
@@ -54,6 +57,9 @@ class Footer extends HBox {
     public Button getAddButton() {
         return addButton;
     }
+    public Button getSeeRecipeDetail() {
+        return SeeRecipeDetail;
+    }
 }
 
 
@@ -62,7 +68,7 @@ class Appframe extends BorderPane {
     private Header header;
     private Footer footer;
     private Button addButton;
-
+    private Button SeeRecipeDetail;
     Appframe() {
         header = new Header();
         footer = new Footer();
@@ -76,7 +82,7 @@ class Appframe extends BorderPane {
         this.setBottom(footer);
 
         this.addButton = footer.getAddButton();
-
+        this.SeeRecipeDetail = footer.getSeeRecipeDetail();
         this.setStyle("-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #FFE4B5, #FFDEAD, #FFE4B5, #FFDEAD); " +
                       "-fx-border-color: #DEB887; " +
                       "-fx-border-width: 10; " +
@@ -93,14 +99,20 @@ class Appframe extends BorderPane {
         return this.addButton;
     }
 
+
+    public Button getSeeRecipeDetail() {
+        return this.SeeRecipeDetail;
     }
+
+}
 
 
 public class Main extends Application {
     Appframe root = new Appframe();
     RecordPage rp = new RecordPage();
+    SeeRecipePage SRP = new SeeRecipePage();
     private Button addButton = root.getAddButton();
-
+    private Button SeeRecipeDetail = root.getSeeRecipeDetail();
     @Override
     public void start(Stage primaryStage) throws Exception {
        
@@ -118,6 +130,11 @@ public class Main extends Application {
             // SET TO RECORDING STAGE
             primaryStage.setScene(new Scene(rp, width, height));
             System.out.println("SWITCHED TO RECORD PAGE");
+        });
+
+        SeeRecipeDetail.setOnAction(e2 -> {
+            primaryStage.setScene(new Scene(SRP, width, height));
+
         });
 
         primaryStage.show();

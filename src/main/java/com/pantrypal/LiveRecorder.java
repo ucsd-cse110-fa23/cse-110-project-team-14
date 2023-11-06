@@ -25,14 +25,15 @@ public class LiveRecorder {
         int sampleSizeInBits = 16;
 
         // the number of audio channels in this format (1 for mono, 2 for stereo).
-        int channels = 2;
-
+        //int channels = 2;
+        int channels = 1; //Tomek need 1 to run the program.
+//todo
         // whether the data is signed or unsigned.
         boolean signed = true;
 
         // whether the audio data is stored in big-endian or little-endian order.
         boolean bigEndian = false;
-
+//todo
         return new AudioFormat(
                 sampleRate,
                 sampleSizeInBits,
