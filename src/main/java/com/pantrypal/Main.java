@@ -117,7 +117,7 @@ public class Main extends Application {
         addButton.setOnAction(e -> {
             // SET TO RECORDING STAGE
             primaryStage.setScene(new Scene(rp, width, height));
-            System.out.println("HI");
+            System.out.println("SWITCHED TO RECORD PAGE");
         });
 
         primaryStage.show();
