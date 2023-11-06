@@ -41,7 +41,7 @@ public class LiveRecorder {
                 bigEndian);
     }
 
-    private void startRecording() {
+    public void startRecording() {
         Thread t = new Thread(
         new Runnable() {
           @Override
@@ -77,7 +77,7 @@ public class LiveRecorder {
         t.start();
     }
 
-    private void stopRecording() {
+    public void stopRecording() {
         targetDataLine.stop();
         targetDataLine.close();
     }

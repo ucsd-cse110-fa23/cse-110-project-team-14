@@ -14,6 +14,8 @@ public class RecordPage extends BorderPane{
     private Footer footer;
     private VBox center;
     private Button recordButton;
+    private LiveRecorder liveRecorder;
+    private boolean isRecording; 
 
     RecordPage(){
         VBox mainContent = new VBox();
@@ -36,13 +38,25 @@ public class RecordPage extends BorderPane{
 
 
         this.recordButton = footer.getRecordButton();
+        isRecording = false;
+        this.liveRecorder = new LiveRecorder();
 
         addListeners();
     }
 
     public void addListeners() {
         recordButton.setOnAction(e -> {
-            System.out.println("RECORDING");
+            isRecording = !isRecording; // TOGGLES
+            if(isRecording){
+                liveRecorder.startRecording();
+                recordButton.setText("RECORDING...?");
+            }
+            if(!isRecording){
+                liveRecorder.stopRecording();
+                // HERE WE WOULD OPEN THE NEW WINDOW
+                recordButton.setText("GOT VOICE");
+                
+            }
         });
     }
 
