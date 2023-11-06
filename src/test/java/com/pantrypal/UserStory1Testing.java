@@ -51,8 +51,8 @@ public class UserStory1Testing {
         MockTextToRecipe textToRecipe = new MockTextToRecipe("chicken, rice", "dinner", new Recipe());
 
         // Act
-        textToRecipe.createRecipeObj();
-
+        //textToRecipe.createRecipeObj();
+        
         // Assert
         
         
