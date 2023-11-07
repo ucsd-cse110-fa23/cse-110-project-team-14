@@ -27,11 +27,11 @@ public abstract class Page {
         createView();
     }
 
-    protected abstract void createView(); // 用于初始化页面视图的抽象方法
+    protected abstract void createView(); //
 
     public Scene getScene() {
         return scene;
     }
 
-    // 可以添加其他通用方法，例如添加导航栏，公共样式设置等
+
 }
