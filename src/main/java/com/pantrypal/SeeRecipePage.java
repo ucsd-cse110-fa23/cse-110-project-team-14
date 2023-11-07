@@ -17,11 +17,14 @@ public class SeeRecipePage extends BorderPane {
     private Button recordButton;
     private String title;
     private String detail;
+    private String ingredients;
+    
 
     SeeRecipePage(Recipe r)
     {
         this.title = r.getRecipeTitle();
         this.detail = r.getRecipeInstructions();
+        this.ingredients = r.getRecipeIngredients();
         
         VBox mainContent = new VBox();
         // mainContent.setSpacing(15);
@@ -30,8 +33,15 @@ public class SeeRecipePage extends BorderPane {
         detailLable.setTextFill(Color.web("#8B4513"));
         detailLable.setWrapText(true);
         //changing font size so itll fit
-        detailLable.setStyle("-fx-font-weight: bold; -fx-font-size: 16;"); 
-        mainContent.getChildren().add(detailLable);//TODO: we need to fill in what chatgpt said
+        detailLable.setStyle("-fx-font-weight: bold; -fx-font-size: 12;"); 
+
+        Label ingredientLabel = new Label(this.ingredients);
+        ingredientLabel.setTextFill(Color.web("#8B4513"));
+        ingredientLabel.setWrapText(true);
+        //changing font size so itll fit
+        ingredientLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 12;"); 
+        
+        mainContent.getChildren().addAll(ingredientLabel, detailLable);//TODO: we need to fill in what chatgpt said
         paneHeader a =new paneHeader();
         this.paneHeader = new paneHeader();
         this.center = mainContent;
