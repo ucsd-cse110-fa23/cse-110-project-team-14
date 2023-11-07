@@ -89,7 +89,19 @@ public class ChatGPT {
      */
     String parseRecipeIngredients() {
         int indexOfIngredients = this.response.indexOf("Ingredients:");
+
+        //Check if the ChatGPT Ingredients did not had semicolons
+        if(indexOfIngredients == -1){
+            indexOfIngredients = this.response.indexOf("Ingredients");
+        }
+
         int indexOfInstructions = this.response.indexOf("Instructions:");
+
+        //Check if the ChatGPT Instructions did not had semicolons
+        if(indexOfInstructions == -1){
+            indexOfInstructions = this.response.indexOf("Instructions");
+        }
+
         return this.response.substring(indexOfIngredients, indexOfInstructions);
     }
 
@@ -99,6 +111,11 @@ public class ChatGPT {
      */
     String parseRecipeInstructions() {
         int indexOfInstructions = this.response.indexOf("Instructions:");
+
+        //Check if the ChatGPT Instructions did not had semicolons
+        if(indexOfInstructions == -1){
+            indexOfInstructions = this.response.indexOf("Instructions");
+        }
         return this.response.substring(indexOfInstructions);
     }
 }
