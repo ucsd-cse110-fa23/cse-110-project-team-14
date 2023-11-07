@@ -73,8 +73,15 @@ public class ChatGPT {
      * Parses the response from the API call to get the title of the recipe
      */
     String parseTitle() {
-        int indexOfNewLine = this.response.indexOf("\n");
-        return response.substring(0, indexOfNewLine);
+        int indexFirstCharacter = 0;
+        while(this.response.charAt(indexFirstCharacter) == '\n'){
+            indexFirstCharacter++;
+        }
+        int indexOfNewLine = this.response.indexOf("\n", indexFirstCharacter);
+
+        System.out.println("CAT GPTSAYS" + this.response);
+        return response.substring(indexFirstCharacter, indexOfNewLine);
+
     }
 
     /**
@@ -82,7 +89,19 @@ public class ChatGPT {
      */
     String parseRecipeIngredients() {
         int indexOfIngredients = this.response.indexOf("Ingredients:");
+
+        //Check if the ChatGPT Ingredients did not had semicolons
+        if(indexOfIngredients == -1){
+            indexOfIngredients = this.response.indexOf("Ingredients");
+        }
+
         int indexOfInstructions = this.response.indexOf("Instructions:");
+
+        //Check if the ChatGPT Instructions did not had semicolons
+        if(indexOfInstructions == -1){
+            indexOfInstructions = this.response.indexOf("Instructions");
+        }
+
         return this.response.substring(indexOfIngredients, indexOfInstructions);
     }
 
@@ -92,6 +111,11 @@ public class ChatGPT {
      */
     String parseRecipeInstructions() {
         int indexOfInstructions = this.response.indexOf("Instructions:");
+
+        //Check if the ChatGPT Instructions did not had semicolons
+        if(indexOfInstructions == -1){
+            indexOfInstructions = this.response.indexOf("Instructions");
+        }
         return this.response.substring(indexOfInstructions);
     }
 }

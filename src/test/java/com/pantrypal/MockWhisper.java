@@ -11,8 +11,11 @@ public class MockWhisper {
     private static final String FILE_PATH = "recording.wav"; // path to audio TODO: 
 
 
-    public String getResponse(){
-
+    public String getResponse(int response){
+        if(response == 1){
+            return "apple, cinammon, sugar and flour";
+        }
+        
         return "chicken, rice";
     }
 }
