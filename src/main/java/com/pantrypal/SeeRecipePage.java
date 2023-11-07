@@ -29,11 +29,11 @@ public class SeeRecipePage extends BorderPane {
         VBox mainContent = new VBox();
         // mainContent.setSpacing(15);
         mainContent.setAlignment(Pos.CENTER);
-        Label detailLable = new Label(detail);
-        detailLable.setTextFill(Color.web("#8B4513"));
-        detailLable.setWrapText(true);
+        Label detailLabel = new Label(detail);
+        detailLabel.setTextFill(Color.web("#8B4513"));
+        detailLabel.setWrapText(true);
         //changing font size so itll fit
-        detailLable.setStyle("-fx-font-weight: bold; -fx-font-size: 12;"); 
+        detailLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 12;"); 
 
         Label ingredientLabel = new Label(this.ingredients);
         ingredientLabel.setTextFill(Color.web("#8B4513"));
@@ -41,7 +41,7 @@ public class SeeRecipePage extends BorderPane {
         //changing font size so itll fit
         ingredientLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 12;"); 
         
-        mainContent.getChildren().addAll(ingredientLabel, detailLable);//TODO: we need to fill in what chatgpt said
+        mainContent.getChildren().addAll(ingredientLabel, detailLabel);//TODO: we need to fill in what chatgpt said
         paneHeader a =new paneHeader();
         this.paneHeader = new paneHeader();
         this.center = mainContent;
