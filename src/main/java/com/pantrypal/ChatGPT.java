@@ -14,7 +14,7 @@ import java.io.IOException;
 
 public class ChatGPT {
     private static final String API_ENDPOINT = "https://api.openai.com/v1/completions";
-    private static final String API_KEY = "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";
+    private static final String API_KEY = "";
     private static final String MODEL = "text-davinci-003";
     private String prompt;
     private int maxTokens;
