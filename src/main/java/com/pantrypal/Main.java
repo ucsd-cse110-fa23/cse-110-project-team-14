@@ -1,5 +1,8 @@
 package com.pantrypal;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -18,7 +21,6 @@ class Appframe extends BorderPane {
      paneHeader paneHeader = new paneHeader();
      paneFooter paneFooter = new paneFooter();
     private Button addButton;
-    private Button SeeRecipeDetail;
     Appframe() {
 //        header = new Header();
 //        footer = new Footer();
@@ -38,15 +40,9 @@ class Appframe extends BorderPane {
                 "-fx-border-radius: 20; " +
                 "-fx-background-radius: 20; " +
                 "-fx-padding: 5 15 5 15;");
-        this.SeeRecipeDetail = paneFooter.creatButton("SeeRecipeDetail","-fx-background-color: #FFEBD7; " +
-                "-fx-text-fill: #8B4513; " +
-                "-fx-border-color: #8B4513; " +
-                "-fx-border-radius: 20; " +
-                "-fx-background-radius: 20; " +
-                "-fx-padding: 5 15 5 15;");
+       
         paneFooter.setButton(this.addButton);
-        paneFooter.setButton(this.SeeRecipeDetail);
-
+       
         this.setStyle("-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #FFE4B5, #FFDEAD, #FFE4B5, #FFDEAD); " +
                       "-fx-border-color: #DEB887; " +
                       "-fx-border-width: 10; " +
@@ -63,20 +59,16 @@ class Appframe extends BorderPane {
         return this.addButton;
     }
 
-
-    public Button getSeeRecipeDetail() {
-        return this.SeeRecipeDetail;
-    }
-
 }
 
 
 public class Main extends Application {
     Appframe root = new Appframe();
     RecordPage rp = new RecordPage();
-    SeeRecipePage SRP = new SeeRecipePage();
     private Button addButton = root.getAddButton();
-    private Button SeeRecipeDetail = root.getSeeRecipeDetail();
+    private Button recordButton = rp.getRecordButton();
+    // private boolean isRecording = rp.getIsRecording();
+    
     @Override
     public void start(Stage primaryStage) throws Exception {
        
@@ -96,9 +88,37 @@ public class Main extends Application {
             System.out.println("SWITCHED TO RECORD PAGE");
         });
 
-        SeeRecipeDetail.setOnAction(e2 -> {
-            primaryStage.setScene(new Scene(SRP, width, height));
+         recordButton.setOnAction(e -> {
+            // isRecording = !isRecording; // TOGGLES
+            rp.setIsrecording(!rp.getIsRecording()); // this works?
 
+            if (rp.getIsRecording()) {
+                recordButton.setText("RECORDING...?");
+                rp.liveRecorder.startRecording();
+                
+            }
+            if (!rp.getIsRecording()) {
+                // HERE WE WOULD OPEN THE NEW WINDOW
+                rp.liveRecorder.stopRecording();
+                recordButton.setText("GOT VOICE");
+
+                try {
+                    // make recipe
+                    TextToRecipe t2R = new TextToRecipe(rp.whisper.getResponse(), "lunch", new Recipe());
+                    t2R.createRecipeObj();
+                    SeeRecipePage SRP = new SeeRecipePage(t2R.getRecipe());
+                    primaryStage.setScene(new Scene(SRP, width, height));
+                    // System.out.println(rp.whisper.getResponse());
+                }
+                catch (InterruptedException e1) {
+                    e1.printStackTrace();
+                }
+                catch (IOException e1) {
+                    e1.printStackTrace();
+                } catch (URISyntaxException e1) {
+                    e1.printStackTrace();
+                }
+            }
         });
 
         primaryStage.show();

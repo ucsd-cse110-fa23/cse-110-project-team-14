@@ -4,6 +4,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -14,32 +15,29 @@ public class SeeRecipePage extends BorderPane {
     private paneFooter paneFooter;
     private VBox center;
     private Button recordButton;
-    private String title = "Spaghetti Carbonara";
-    private String detail= "Instructions:\n" +
-            "\n" +
-            "Cook spaghetti in salted boiling water until al dente.\n" +
-            "Fry pancetta/bacon until crisp.\n" +
-            "Beat eggs with grated Parmesan and pepper.\n" +
-            "Drain pasta, reserving some cooking water.\n" +
-            "Mix hot spaghetti with egg mixture and pancetta.\n" +
-            "Add pasta water if needed to make it creamy.\n" +
-            "Serve with extra cheese and pepper.";
+    private String title;
+    private String detail;
 
-    SeeRecipePage()
+    SeeRecipePage(Recipe r)
     {
+        this.title = r.getRecipeTitle();
+        this.detail = r.getRecipeInstructions();
+        
         VBox mainContent = new VBox();
-        mainContent.setSpacing(15);
+        // mainContent.setSpacing(15);
         mainContent.setAlignment(Pos.CENTER);
         Label detailLable = new Label(detail);
         detailLable.setTextFill(Color.web("#8B4513"));
-        detailLable.setStyle("-fx-font-weight: bold; -fx-font-size: 26;");
+        detailLable.setWrapText(true);
+        //changing font size so itll fit
+        detailLable.setStyle("-fx-font-weight: bold; -fx-font-size: 16;"); 
         mainContent.getChildren().add(detailLable);//TODO: we need to fill in what chatgpt said
         paneHeader a =new paneHeader();
         this.paneHeader = new paneHeader();
         this.center = mainContent;
         this.paneFooter = new paneFooter();
-        paneHeader.setTitleInMiddle(new Text(title));
-        this.setTop(this.paneHeader);
+        this.paneHeader.setTitleInMiddle(new Text(this.title));   
+        this.setTop(paneHeader);
         this.setCenter(this.center);
         this.setBottom(this.paneFooter);
 
@@ -48,10 +46,6 @@ public class SeeRecipePage extends BorderPane {
                 "-fx-border-width: 10; " +
                 "-fx-border-radius: 15; " +
                 "-fx-background-radius: 15;");
-
-
-
-
 
         //addListeners();
     }

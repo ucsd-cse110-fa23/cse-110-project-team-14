@@ -73,8 +73,15 @@ public class ChatGPT {
      * Parses the response from the API call to get the title of the recipe
      */
     String parseTitle() {
-        int indexOfNewLine = this.response.indexOf("\n");
-        return response.substring(0, indexOfNewLine);
+        int indexFirstCharacter = 0;
+        while(this.response.charAt(indexFirstCharacter) == '\n'){
+            indexFirstCharacter++;
+        }
+        int indexOfNewLine = this.response.indexOf("\n", indexFirstCharacter);
+
+        System.out.println("CAT GPTSAYS" + this.response);
+        return response.substring(indexFirstCharacter, indexOfNewLine);
+
     }
 
     /**

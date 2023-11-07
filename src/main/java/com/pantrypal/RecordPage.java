@@ -16,8 +16,8 @@ public class RecordPage extends BorderPane {
     private paneFooter paneFooter;
     private VBox center;
     private Button recordButton;
-    private LiveRecorder liveRecorder;
-    private Whisper whisper = new Whisper();
+    public LiveRecorder liveRecorder;
+    public Whisper whisper = new Whisper();
     private boolean isRecording;
 
     RecordPage() {
@@ -50,42 +50,50 @@ public class RecordPage extends BorderPane {
         isRecording = false;
         this.liveRecorder = new LiveRecorder();
 
-        addListeners();
+        // addListeners();
     }
 
-    public void addListeners() {
-        recordButton.setOnAction(e -> {
-            isRecording = !isRecording; // TOGGLES
-            if (isRecording) {
-                liveRecorder.startRecording();
-                recordButton.setText("RECORDING...?");
-            }
-            if (!isRecording) {
-                // HERE WE WOULD OPEN THE NEW WINDOW
-                recordButton.setText("GOT VOICE");
-                liveRecorder.stopRecording();
-                try {
-                    // TextToRecipe t2R = new TextToRecipe(whisper.getResponse(), "lunch", new Recipe());
-                    //TODO:
+    // public void addListeners() {
+    //     recordButton.setOnAction(e -> {
+    //         isRecording = !isRecording; // TOGGLES
+    //         if (isRecording) {
+    //             liveRecorder.startRecording();
+    //             recordButton.setText("RECORDING...?");
+    //         }
+    //         if (!isRecording) {
+    //             // HERE WE WOULD OPEN THE NEW WINDOW
+    //             recordButton.setText("GOT VOICE");
+    //             liveRecorder.stopRecording();
+    //             try {
+    //                 // TextToRecipe t2R = new TextToRecipe(whisper.getResponse(), "lunch", new Recipe());
+    //                 //TODO:
 
-                    // t2R.createRecipeObj();
-                    System.out.println(whisper.getResponse());
-                }
-                // catch (InterruptedException e1) {
-                //     // TODO Auto-generated catch block
-                //     e1.printStackTrace();
-                // }
-                catch (IOException e1) {
-                    e1.printStackTrace();
-                } catch (URISyntaxException e1) {
-                    e1.printStackTrace();
-                }
-            }
-        });
-    }
+    //                 // t2R.createRecipeObj();
+    //                 System.out.println(whisper.getResponse());
+    //             }
+    //             // catch (InterruptedException e1) {
+    //             //     // TODO Auto-generated catch block
+    //             //     e1.printStackTrace();
+    //             // }
+    //             catch (IOException e1) {
+    //                 e1.printStackTrace();
+    //             } catch (URISyntaxException e1) {
+    //                 e1.printStackTrace();
+    //             }
+    //         }
+    //     });
+    // }
 
     public Button getRecordButton() {
         return this.recordButton;
+    }
+    //getter and setter for isRecording
+    public boolean getIsRecording(){
+        return isRecording;
+    }
+    
+    public void setIsrecording(boolean b){
+        this.isRecording = b;
     }
 
 

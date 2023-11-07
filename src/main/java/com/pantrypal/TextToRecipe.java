@@ -30,6 +30,7 @@ public class TextToRecipe {
 
         //Fill Recipe title
         recipe.setRecipeTitle(chatGPT.parseTitle());
+    
         
         //Fill recipe ingredients
         recipe.setRecipeIngredients(chatGPT.parseRecipeIngredients());
