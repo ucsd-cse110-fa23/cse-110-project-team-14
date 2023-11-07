@@ -49,7 +49,6 @@ class Appframe extends BorderPane {
                       "-fx-border-radius: 15; " +
                       "-fx-background-radius: 15;");
         addListeners();
-
     }
      public void addListeners() {
         // add buttons that don't change page
@@ -88,6 +87,7 @@ public class Main extends Application {
             System.out.println("SWITCHED TO RECORD PAGE");
         });
 
+
          recordButton.setOnAction(e -> {
             // isRecording = !isRecording; // TOGGLES
             rp.setIsrecording(!rp.getIsRecording()); // this works?
@@ -120,6 +120,7 @@ public class Main extends Application {
                 }
             }
         });
+
 
         primaryStage.show();
     }
