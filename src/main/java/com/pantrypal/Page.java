@@ -22,7 +22,7 @@ public abstract class Page {
     public Page(int width, int height) {
         this.width = width;
         this.height = height;
-        this.borderPane = new BorderPane(); // 使用BorderPane
+        this.borderPane = new BorderPane(); // use BorderPane
         this.scene = new Scene(borderPane, width, height);
         createView();
     }
@@ -31,6 +31,10 @@ public abstract class Page {
 
     public Scene getScene() {
         return scene;
+    }
+
+    public BorderPane getBorderPane() {
+        return borderPane;
     }
 
 
