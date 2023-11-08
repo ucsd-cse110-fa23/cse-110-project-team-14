@@ -1,9 +1,7 @@
 package com.pantrypal;
 
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -22,7 +20,7 @@ class mainPage extends Page {
         addButton.setOnAction(e -> {
             // SET TO RECORDING STAGE
             Stage stage = (Stage) this.getScene().getWindow();
-            stage.setScene(new RecordPage_(width, height).getScene());
+            stage.setScene(new RecordPage(width, height).getScene());
             System.out.println("RecordPage_");
         });
         // add buttons that don't change page
