@@ -2,6 +2,7 @@ package com.pantrypal;
 
 import java.io.*;
 import java.net.*;
+
 import org.json.*;
 
 public class Whisper {
@@ -82,48 +83,48 @@ public class Whisper {
 
     public String getResponse() throws IOException, URISyntaxException {
         File file = new File(FILE_PATH);
-        
+
         // Set up HTTP connection
         URL url = new URI(API_ENDPOINT).toURL();
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("POST");
         connection.setDoOutput(true);
-        
-        
+
+
         // Set up request headers
         String boundary = "Boundary-" + System.currentTimeMillis();
         connection.setRequestProperty(
-            "Content-Type",
-            "multipart/form-data; boundary=" + boundary
+                "Content-Type",
+                "multipart/form-data; boundary=" + boundary
         );
         connection.setRequestProperty("Authorization", "Bearer " + TOKEN);
-        
-        
+
+
         // Set up output stream to write request body
         OutputStream outputStream = connection.getOutputStream();
-        
-        
+
+
         // Write model parameter to request body
         writeParameterToOutputStream(outputStream, "model", MODEL, boundary);
-        
-        
+
+
         // Write file parameter to request body
         writeFileToOutputStream(outputStream, file, boundary);
-        
-        
+
+
         // Write closing boundary to request body
         outputStream.write(("\r\n--" + boundary + "--\r\n").getBytes());
-        
-        
+
+
         // Flush and close output stream
         outputStream.flush();
         outputStream.close();
-        
-        
+
+
         // Get response code
         int responseCode = connection.getResponseCode();
-        
-        
+
+
         // Check response code and handle response accordingly
         if (responseCode == HttpURLConnection.HTTP_OK) {
             return handleSuccessResponse(connection);

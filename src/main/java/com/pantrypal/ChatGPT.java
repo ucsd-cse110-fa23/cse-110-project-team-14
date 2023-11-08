@@ -89,7 +89,7 @@ public class ChatGPT {
      */
     String parseRecipeIngredients() {
         int indexOfIngredients = this.response.indexOf("Ingredients:");
-        int indexOfInstructions = this.response.indexOf("Instructions:");
+        int indexOfInstructions = this.response.indexOf("Instructions:");//TODO: May cause string out of bound if respouse from chatgtp didn't contain "Ingredients" or "Instructions"
         return this.response.substring(indexOfIngredients, indexOfInstructions);
     }
 
@@ -98,7 +98,7 @@ public class ChatGPT {
      * Parses the response from the API call to get the instructions of the recipe
      */
     String parseRecipeInstructions() {
-        int indexOfInstructions = this.response.indexOf("Instructions:");
+        int indexOfInstructions = this.response.indexOf("Instructions:");//TODO: May cause string out of bound if respouse from chatgtp didn't contain "Ingredients" or "Instructions"
         return this.response.substring(indexOfInstructions);
     }
 }

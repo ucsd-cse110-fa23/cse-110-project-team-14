@@ -22,8 +22,8 @@ class mainPage extends Page {
         addButton.setOnAction(e -> {
             // SET TO RECORDING STAGE
             Stage stage = (Stage) this.getScene().getWindow();
-            stage.setScene(new SeeRecipePage_(width, height).getScene());
-            System.out.println("SeeRecipePage_");
+            stage.setScene(new RecordPage_(width, height).getScene());
+            System.out.println("RecordPage_");
         });
         // add buttons that don't change page
     }
@@ -34,6 +34,8 @@ class mainPage extends Page {
 
     @Override
     protected void createView() {
+
+
         paneHeader = new paneHeader();
         paneFooter = new paneFooter();
         VBox mainContent = new VBox();

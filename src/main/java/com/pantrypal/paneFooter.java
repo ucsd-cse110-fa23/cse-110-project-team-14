@@ -5,44 +5,44 @@ import javafx.scene.control.Button;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+
 import java.util.HashMap;
 import java.util.Map;
 
- class paneFooter extends HBox {
+class paneFooter extends HBox {
 
     private Map<String, Button> ButtonList = new HashMap<String, Button>();
+
     paneFooter() {
         this.setPrefSize(1000, 60);
         this.setStyle("-fx-background-color: #F5DEB3; -fx-border-radius: 0 0 15 15; -fx-background-radius: 0 0 15 15;");
         this.setAlignment(Pos.CENTER);
-        ButtonList.put("a",new Button("a"));
+        ButtonList.put("a", new Button("a"));
         // Add shadow for depth
         DropShadow ds = new DropShadow();
         ds.setOffsetY(-3.0);
         ds.setColor(Color.color(0.4, 0.4, 0.4));
         this.setEffect(ds);
     }
-    public void setButton(Button bt, String btStyle)
-    {
-        ButtonList.put(bt.getText(),bt);
+
+    public void setButton(Button bt, String btStyle) {
+        ButtonList.put(bt.getText(), bt);
         ButtonList.get(bt.getText()).setStyle(btStyle);
-        this.getChildren().add( ButtonList.get(bt.getText()));
+        this.getChildren().add(ButtonList.get(bt.getText()));
         this.setAlignment(Pos.CENTER);
     }
-     public void setButton(Button bt)
-     {
-         ButtonList.put(bt.getText(),bt);
-         this.getChildren().add( ButtonList.get(bt.getText()));
-         this.setAlignment(Pos.CENTER);
-     }
 
-    public Button getButton(String name)
-    {
+    public void setButton(Button bt) {
+        ButtonList.put(bt.getText(), bt);
+        this.getChildren().add(ButtonList.get(bt.getText()));
+        this.setAlignment(Pos.CENTER);
+    }
+
+    public Button getButton(String name) {
         return ButtonList.get(name);
     }
 
-    public Button creatButton(String name, String style)
-    {
+    public Button creatButton(String name, String style) {
         Button button = new Button(name);
         button.setStyle(style);
         ButtonList.put(name, button);

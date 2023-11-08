@@ -12,11 +12,6 @@ class paneHeader extends HBox {
     public paneHeader() {
         this.setPrefSize(1000, 60);
         this.setStyle("-fx-background-color: #F5DEB3; -fx-border-radius: 15 15 0 0; -fx-background-radius: 15 15 0 0;");
-
-
-        //TODO: need to be filled in from what gpt said
-
-
         // Add shadow for depth
         DropShadow ds = new DropShadow();
         ds.setOffsetY(3.0);
@@ -25,7 +20,6 @@ class paneHeader extends HBox {
     }
     public void setTitleInMiddle(Text title)
     {
-
         this.titleText = title;
         titleText.setFill(Color.web("#8B4513"));  // Saddle Brown
         titleText.setStyle("-fx-font-weight: bold; -fx-font-size: 26;");
