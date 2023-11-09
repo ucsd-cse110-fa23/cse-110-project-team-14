@@ -1,12 +1,8 @@
 package com.pantrypal;
-
 import javafx.application.Application;
 import javafx.stage.Stage;
-
 public class Main extends Application {
     mainPage root = new mainPage(600, 600);
-
-
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("PantryPal");
@@ -18,9 +14,7 @@ public class Main extends Application {
         //TODO: we need load the all saved recipe from database
         stgControl.registerPage("RecordPage", new RecordPage(600, 600));
         //TODO: add other page to stgControl
-
         primaryStage.show();
-
     }
 
     public static void main(String[] args) {
