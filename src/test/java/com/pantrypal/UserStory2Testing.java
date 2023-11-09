@@ -10,7 +10,7 @@ public class UserStory2Testing {
     @Test
     public void testUserStory()  {
         MockWhisper whisper = new MockWhisper();
-        MockTextToRecipe textToRecipe = new MockTextToRecipe(whisper.getResponse(), "dinner", new Recipe());
+        MockTextToRecipe textToRecipe = new MockTextToRecipe(whisper.getResponse(0), "dinner", new Recipe());
         try {
             textToRecipe.createRecipeObj();
             assertEquals("Chicken and Rice Casserole", textToRecipe.getRecipe().getRecipeTitle());

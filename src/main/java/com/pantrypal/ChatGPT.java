@@ -14,7 +14,7 @@ import java.io.IOException;
 
 public class ChatGPT {
     private static final String API_ENDPOINT = "https://api.openai.com/v1/completions";
-    private static final String API_KEY = "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";
+    private static final String API_KEY = "";
     private static final String MODEL = "text-davinci-003";
     private String prompt;
     private int maxTokens;
@@ -89,7 +89,19 @@ public class ChatGPT {
      */
     String parseRecipeIngredients() {
         int indexOfIngredients = this.response.indexOf("Ingredients:");
-        int indexOfInstructions = this.response.indexOf("Instructions:");//TODO: May cause string out of bound if respouse from chatgtp didn't contain "Ingredients" or "Instructions"
+
+        //Check if the ChatGPT Ingredients did not had semicolons
+        if(indexOfIngredients == -1){
+            indexOfIngredients = this.response.indexOf("Ingredients");
+        }
+
+        int indexOfInstructions = this.response.indexOf("Instructions:");
+
+        //Check if the ChatGPT Instructions did not had semicolons
+        if(indexOfInstructions == -1){
+            indexOfInstructions = this.response.indexOf("Instructions");
+        }
+
         return this.response.substring(indexOfIngredients, indexOfInstructions);
     }
 
@@ -98,7 +110,12 @@ public class ChatGPT {
      * Parses the response from the API call to get the instructions of the recipe
      */
     String parseRecipeInstructions() {
-        int indexOfInstructions = this.response.indexOf("Instructions:");//TODO: May cause string out of bound if respouse from chatgtp didn't contain "Ingredients" or "Instructions"
+        int indexOfInstructions = this.response.indexOf("Instructions:");
+
+        //Check if the ChatGPT Instructions did not had semicolons
+        if(indexOfInstructions == -1){
+            indexOfInstructions = this.response.indexOf("Instructions");
+        }
         return this.response.substring(indexOfInstructions);
     }
 }
