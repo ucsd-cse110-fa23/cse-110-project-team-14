@@ -36,10 +36,12 @@ public class Recipe {
         return recipeInstructions;
     }
 
+    @SuppressWarnings("unused")
     void setMealType(String mealType) {
         this.mealType = mealType;
     }
 
+    @SuppressWarnings("unused")
     String getMealType() {
         return mealType;
     }
