@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 
 public abstract class Page {
     protected Scene scene;
-    protected BorderPane borderPane; // 使用BorderPane作为根布局
+    protected BorderPane borderPane; //
     protected int width;
     protected int height;
     protected String style;
