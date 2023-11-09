@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 
 class mainPage extends Page {
 
+
     paneHeader paneHeader;
     paneFooter paneFooter;
     private Button addButton;
@@ -19,8 +20,10 @@ class mainPage extends Page {
     public void addListeners() {
         addButton.setOnAction(e -> {
             // SET TO RECORDING STAGE
-            Stage stage = (Stage) this.getScene().getWindow();
-            stage.setScene(new RecordPage(width, height).getScene());
+            StageController stgController = StageController.getInstance();
+            stgController.changeTo("RecordPage");
+//            Stage stage = (Stage) this.getScene().getWindow();
+//            stage.setScene(new RecordPage(width, height).getScene());
             System.out.println("RecordPage_");
         });
         // add buttons that don't change page

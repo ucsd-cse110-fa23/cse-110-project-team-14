@@ -44,8 +44,12 @@ public class RecordPage extends Page {
                     t2R.createRecipeObj();
                     SeeRecipePage SRP = new SeeRecipePage(600, 600);
                     SRP.setRecipe(t2R.getRecipe());
-                    Stage stage = (Stage) this.getScene().getWindow();
-                    stage.setScene(SRP.getScene());
+                    StageController stg = StageController.getInstance();
+                    stg.registerPage(t2R.getRecipe().getRecipeTitle(), SRP);
+                    stg.changeTo(t2R.getRecipe().getRecipeTitle());
+
+//                    Stage stage = (Stage) this.getScene().getWindow();
+//                    stage.setScene(SRP.getScene());
                     // System.out.println(rp.whisper.getResponse());
                 } catch (InterruptedException e1) {
                     e1.printStackTrace();
