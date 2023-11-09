@@ -6,10 +6,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class StageController {
-    private static StageController instance = new StageController();
+    private static final StageController instance = new StageController();
 
     private Stage primaryStage;
-    private Map<String, Page> pages = new HashMap<>();
+    private final Map<String, Page> pages = new HashMap<>();
 
     private StageController() {
 
