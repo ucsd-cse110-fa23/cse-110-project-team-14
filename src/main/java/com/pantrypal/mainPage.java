@@ -2,6 +2,7 @@ package com.pantrypal;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -36,12 +37,27 @@ class mainPage extends Page {
     @Override
     protected void createView() {
 
-
         paneHeader = new paneHeader();
+
+        RecipeTitleListView recipeTitleListView = new RecipeTitleListView();
+        
+        // Populate list initially for testing --- REMOVE AFTER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        for(int i=0; i < 20; i++){
+            Recipe recipe = new Recipe();
+            recipe.setRecipeTitle(("Recipe " + i));
+            recipeTitleListView.getChildren().add(new RecipeTitleView(recipe));
+        }
+
+        ScrollPane scroll = new ScrollPane(recipeTitleListView);
+        scroll.setFitToWidth(true);
+        scroll.setFitToHeight(true);
+
         paneFooter = new paneFooter();
         VBox mainContent = new VBox();
         mainContent.setSpacing(15);
         mainContent.setAlignment(Pos.CENTER);
+        mainContent.getChildren().add(scroll);
+        mainContent.getChildren().add(recipeTitleListView);
 
         paneHeader.setTitleInMiddle(new Text("PantryPal: The best Recipe manager"));
         this.borderPane.setTop(paneHeader);
