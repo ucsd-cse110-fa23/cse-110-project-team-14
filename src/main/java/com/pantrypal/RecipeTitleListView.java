@@ -6,6 +6,7 @@ import javafx.scene.layout.VBox;
 public class RecipeTitleListView extends VBox {
     // Create the recipeTitle button
     //private Button recipeTitleButton = .toggleRecipeTitleButton();
+    private static final RecipeTitleListView instance = new RecipeTitleListView();
 
     RecipeTitleListView() {
         // Set margin to the top and bottom of the RecipeTitleList
@@ -22,5 +23,9 @@ public class RecipeTitleListView extends VBox {
                 index++;
             }
         }
+    }
+
+    public static RecipeTitleListView getInstance() {
+        return instance;
     }
 }

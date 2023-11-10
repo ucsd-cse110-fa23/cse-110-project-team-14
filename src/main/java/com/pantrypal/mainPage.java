@@ -39,7 +39,7 @@ class mainPage extends Page {
 
         paneHeader = new paneHeader();
 
-        RecipeTitleListView recipeTitleListView = new RecipeTitleListView();
+        RecipeTitleListView recipeTitleListView = RecipeTitleListView.getInstance();
         
         // Populate list initially for testing --- REMOVE AFTER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         for(int i=0; i < 20; i++){

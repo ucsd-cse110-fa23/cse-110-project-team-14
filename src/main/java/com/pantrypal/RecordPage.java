@@ -44,6 +44,18 @@ public class RecordPage extends Page {
                     t2R.createRecipeObj();
                     SeeRecipePage SRP = new SeeRecipePage(600, 600);
                     SRP.setRecipe(t2R.getRecipe());
+
+                    // make a listener for recipeTitleView
+                    RecipeTitleView recipeTitleView = new RecipeTitleView(t2R.getRecipe());
+
+                    RecipeTitleListView.getInstance().getChildren().add(recipeTitleView);
+
+                    recipeTitleView.getRecipeTitleButton().setOnAction(e1 -> {
+                        StageController stg = StageController.getInstance();
+                        stg.registerPage(t2R.getRecipe().getRecipeTitle(), SRP);
+                        stg.changeTo(t2R.getRecipe().getRecipeTitle());
+                    });
+
                     StageController stg = StageController.getInstance();
                     stg.registerPage(t2R.getRecipe().getRecipeTitle(), SRP);
                     stg.changeTo(t2R.getRecipe().getRecipeTitle());
