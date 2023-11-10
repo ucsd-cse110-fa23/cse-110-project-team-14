@@ -38,26 +38,29 @@ class mainPage extends Page {
     protected void createView() {
 
         paneHeader = new paneHeader();
-
-        RecipeTitleListView recipeTitleListView = RecipeTitleListView.getInstance();
         
         // Populate list initially for testing --- REMOVE AFTER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        for(int i=0; i < 20; i++){
-            Recipe recipe = new Recipe();
-            recipe.setRecipeTitle(("Recipe " + i));
-            recipeTitleListView.getChildren().add(new RecipeTitleView(recipe));
-        }
+        // for(int i=0; i < 20; i++){
+        //     Recipe recipe = new Recipe();
+        //     recipe.setRecipeTitle(("Recipe " + i));
+        //     recipeTitleListView.getChildren().add(new RecipeTitleView(recipe));
+        // }
 
-        ScrollPane scroll = new ScrollPane(recipeTitleListView);
+        IntializeRecipeList.uploadRecipes();
+
+        ScrollPane scroll = new ScrollPane(RecipeTitleListView.getInstance());
+        scroll.setPrefSize(1000, 1000);
         scroll.setFitToWidth(true);
         scroll.setFitToHeight(true);
 
         paneFooter = new paneFooter();
         VBox mainContent = new VBox();
+        mainContent.minHeight(1000);
+        mainContent.minWidth(1000);
         mainContent.setSpacing(15);
         mainContent.setAlignment(Pos.CENTER);
         mainContent.getChildren().add(scroll);
-        mainContent.getChildren().add(recipeTitleListView);
+        // mainContent.getChildren().add(RecipeTitleListView.getInstance());
 
         paneHeader.setTitleInMiddle(new Text("PantryPal: The best Recipe manager"));
         this.borderPane.setTop(paneHeader);

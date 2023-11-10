@@ -13,6 +13,8 @@ public class RecipeTitleListView extends VBox {
         this.setPadding(new Insets(5,0,5,0));
         this.setSpacing(5); // sets spacing between recipes
         this.setStyle("-fx-background-color: #8B4513;");
+        this.minWidth(1000);
+        this.minHeight(1000);
     }
 
     public void updateRecipeIndices() {

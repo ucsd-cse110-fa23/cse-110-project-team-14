@@ -58,19 +58,19 @@ public class SeeRecipePage extends Page {
 
         VBox mainContent = new VBox();
         // mainContent.setSpacing(15);
-        mainContent.setAlignment(Pos.CENTER);
+        mainContent.setAlignment(Pos.TOP_LEFT);
 
         detailLable = new Label(detail);
         detailLable.setTextFill(Color.web("#8B4513"));
         detailLable.setWrapText(true);
         //changing font size so itll fit
-        detailLable.setStyle("-fx-font-weight: bold; -fx-font-size: 12;");
+        detailLable.setStyle("-fx-font-weight: bold; -fx-font-size: 20;");
 
         ingredientLabel = new Label(ingredients);
         ingredientLabel.setTextFill(Color.web("#8B4513"));
         ingredientLabel.setWrapText(true);
         //changing font size so itll fit
-        ingredientLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 12;");
+        ingredientLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 20;");
 
         mainContent.getChildren().addAll(ingredientLabel, detailLable);//TODO: we need to fill in what chatgpt said
         Header = new paneHeader();
