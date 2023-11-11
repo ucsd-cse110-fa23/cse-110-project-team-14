@@ -22,22 +22,29 @@ public class DatabaseOPS {
     
     private String uri = "mongodb+srv://team14:team14onTop@cluster0.pqup4sj.mongodb.net/?retryWrites=true&w=majority"; // TEAM 14 Database managed by Aidan
     // INSERT BACK --> "mongodb+srv://jarredondo:Lab6Connection@cluster0.qpdv67p.mongodb.net/?retryWrites=true&w=majority";
+    final private String collectionName;
 
+    final private MongoClient mongoClient = MongoClients.create(uri);
 
-    final private MongoClient mongoClient = MongoClients.create(uri);;
+    DatabaseOPS(String collectionName) {
+        this.collectionName = collectionName;
+
+    }
     
     // Add Recipe to database
     public void insert(Recipe recipe_obj){
         
         try (mongoClient) {
             MongoDatabase recipeDB = mongoClient.getDatabase("recipeDB");
-            MongoCollection<Document> recipesCollection = recipeDB.getCollection("recipes");
+            MongoCollection<Document> recipesCollection = recipeDB.getCollection(collectionName);
             // No need to worry about duplicate recipes as per the project requirements
             Document recipe = new Document("Title", recipe_obj.getRecipeTitle());
             recipe.append("Ingredients", recipe_obj.getRecipeIngredients())
                    .append("Instructions", recipe_obj.getRecipeInstructions()); // Instructions list
 
             recipesCollection.insertOne(recipe);
+            // Get size of collection
+            System.out.println("Size of collection: " + recipesCollection.countDocuments());
         }
     }
 
@@ -45,7 +52,7 @@ public class DatabaseOPS {
     public Document findUno(Recipe recipe_obj){
         try (mongoClient) {
             MongoDatabase recipeDB = mongoClient.getDatabase("recipeDB");
-            MongoCollection<Document> recipesCollection = recipeDB.getCollection("recipes");
+            MongoCollection<Document> recipesCollection = recipeDB.getCollection(collectionName);
             Document recipe = recipesCollection.find(eq("Title", recipe_obj.getRecipeTitle())).first();
             return recipe;
         }
@@ -55,7 +62,7 @@ public class DatabaseOPS {
     public void update(Recipe recipe_obj){
         try (mongoClient) {
             MongoDatabase recipeDB = mongoClient.getDatabase("recipeDB");
-            MongoCollection<Document> recipesCollection = recipeDB.getCollection("recipes");
+            MongoCollection<Document> recipesCollection = recipeDB.getCollection(collectionName);
             recipesCollection.updateOne(eq("Title", recipe_obj.getRecipeTitle()), new Document("$set", new Document("Ingredients", recipe_obj.getRecipeIngredients())));
         }
     }
@@ -64,7 +71,7 @@ public class DatabaseOPS {
     public void deleteUno(Recipe recipe_obj){
         try (mongoClient) {
             MongoDatabase recipeDB = mongoClient.getDatabase("recipeDB");
-            MongoCollection<Document> recipesCollection = recipeDB.getCollection("recipes");
+            MongoCollection<Document> recipesCollection = recipeDB.getCollection(collectionName);
             recipesCollection.deleteOne(eq("Title", recipe_obj.getRecipeTitle()));
         }
     }
@@ -73,17 +80,20 @@ public class DatabaseOPS {
     public void deleteAll() {
         try (mongoClient) {
             MongoDatabase recipeDB = mongoClient.getDatabase("recipeDB");
-            MongoCollection<Document> recipesCollection = recipeDB.getCollection("recipes");
+            MongoCollection<Document> recipesCollection = recipeDB.getCollection(collectionName);
             recipesCollection.deleteMany(new Document());
         }
     }
 
-    // Helper function to get the collection
-    private MongoCollection<Document> getCollection(){
+
+    public long getCollectionSize() {
         try (mongoClient) {
-        MongoDatabase projectsRecipesDB = mongoClient.getDatabase("project-team-14");
-        MongoCollection<Document> recipesCollection = projectsRecipesDB.getCollection("recipes");
-        return recipesCollection;
+            MongoDatabase recipeDB = mongoClient.getDatabase("recipeDB");
+            MongoCollection<Document> recipesCollection = recipeDB.getCollection(collectionName);
+            System.out.println("Size of collection: " + recipesCollection.countDocuments());
+            return recipesCollection.countDocuments();
+        } catch (Exception e) {
+            return -1;
         }
     }
 }

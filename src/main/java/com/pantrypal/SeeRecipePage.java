@@ -27,12 +27,14 @@ public class SeeRecipePage extends Page {
     private Recipe r;
     private DatabaseOPS db;
     RecipeTitleView recipeTitleView; 
+
+    final private String COLLECTION_NAME = "recipes";
             
 
 
     public SeeRecipePage(int width, int height) {
         super(width, height);
-        this.db = new DatabaseOPS();
+        this.db = new DatabaseOPS(COLLECTION_NAME);
     }
 
     public void setRecipe(Recipe r) {
