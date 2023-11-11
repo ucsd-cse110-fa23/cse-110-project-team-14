@@ -13,9 +13,21 @@ class mainPage extends Page {
     paneHeader paneHeader;
     paneFooter paneFooter;
     private Button addButton;
+    // private boolean initialized;
 
     public mainPage(int width, int height) {
         super(width, height);
+        // initialized = true;;
+        
+        IntializeRecipeList.uploadRecipes();
+        
+    }
+     public mainPage(int width, int height, boolean initialized) {
+        super(width, height);
+        // initialized = true;
+        // IntializeRecipeList.uploadRecipes()
+        //IntializeRecipeList.uploadRecipes();
+        
     }
 
     public void addListeners() {
@@ -46,7 +58,13 @@ class mainPage extends Page {
         //     recipeTitleListView.getChildren().add(new RecipeTitleView(recipe));
         // }
 
-        IntializeRecipeList.uploadRecipes();
+        // if(initialized){
+            // IntializeRecipeList.uploadRecipes();
+            // initialized = false;
+            System.out.println("CALLED");
+        // }
+
+       
 
         ScrollPane scroll = new ScrollPane(RecipeTitleListView.getInstance());
         scroll.setPrefSize(1000, 1000);
