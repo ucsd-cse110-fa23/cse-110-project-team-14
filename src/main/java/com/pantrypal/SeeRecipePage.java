@@ -25,12 +25,14 @@ public class SeeRecipePage extends Page {
     private Label ingredientLabel;
     private Text titleText;
     private Recipe r;
+    private DatabaseOPS db;
     RecipeTitleView recipeTitleView; 
             
 
 
     public SeeRecipePage(int width, int height) {
         super(width, height);
+        this.db = new DatabaseOPS();
     }
 
     public void setRecipe(Recipe r) {
@@ -47,18 +49,22 @@ public class SeeRecipePage extends Page {
 
     public void addListeners() {
         back.setOnAction(e -> {
-            // go back
+            // go back to main page
             Stage stage = (Stage) this.getScene().getWindow();
             stage.setScene(new mainPage(width, height, false).getScene());
-            System.out.println("SWITCHED TO See PAGE");
+            System.out.println("SWITCHED TO MAIN PAGE");
         });
 
         //save button action
         saveButton.setOnAction(e -> {
             // ADDs DUPLICATE AT THE BOTTOM???
             // WE'LL ASK
+            // Change the page to SeeRecipePageRecording
             SeeRecipePage SRP = new SeeRecipePage(600, 600);
             SRP.setRecipe(r);
+            // Save recipe to database
+            db.insert(r);
+
             recipeTitleView.getRecipeTitleButton().setOnAction(e1 -> {
                 StageController stg = StageController.getInstance();
                 stg.registerPage(r.getRecipeTitle(), SRP);
