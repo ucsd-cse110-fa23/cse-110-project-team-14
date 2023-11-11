@@ -91,6 +91,9 @@ public class SeeRecipePage extends Page {
         });
 
         deleteButton.setOnAction(e -> {
+            // Delete recipe from database
+            db.deleteUno(r);
+
             // System.out.println("DELETING RECIPE: " + RecipeTitleListView.getInstance().getChildren().remove(recipeTitleView));
             for(Object e2 : RecipeTitleListView.getInstance().getChildren()){
                 if(e2 instanceof RecipeTitleView){

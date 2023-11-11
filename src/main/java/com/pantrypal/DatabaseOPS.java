@@ -44,7 +44,8 @@ public class DatabaseOPS {
     // Read/Find Recipe from database and return the one you search for
     public Document findUno(Recipe recipe_obj){
         try (mongoClient) {
-            MongoCollection<Document> recipesCollection = getCollection();
+            MongoDatabase recipeDB = mongoClient.getDatabase("recipeDB");
+            MongoCollection<Document> recipesCollection = recipeDB.getCollection("recipes");
             Document recipe = recipesCollection.find(eq("Title", recipe_obj.getRecipeTitle())).first();
             return recipe;
         }
@@ -53,7 +54,8 @@ public class DatabaseOPS {
     // Update Recipe in database
     public void update(Recipe recipe_obj){
         try (mongoClient) {
-            MongoCollection<Document> recipesCollection = getCollection();
+            MongoDatabase recipeDB = mongoClient.getDatabase("recipeDB");
+            MongoCollection<Document> recipesCollection = recipeDB.getCollection("recipes");
             recipesCollection.updateOne(eq("Title", recipe_obj.getRecipeTitle()), new Document("$set", new Document("Ingredients", recipe_obj.getRecipeIngredients())));
         }
     }
@@ -61,7 +63,8 @@ public class DatabaseOPS {
     // Delete one Recipe in database (If you deleteOne, may override recipesCollection)
     public void deleteUno(Recipe recipe_obj){
         try (mongoClient) {
-            MongoCollection<Document> recipesCollection = getCollection();
+            MongoDatabase recipeDB = mongoClient.getDatabase("recipeDB");
+            MongoCollection<Document> recipesCollection = recipeDB.getCollection("recipes");
             recipesCollection.deleteOne(eq("Title", recipe_obj.getRecipeTitle()));
         }
     }
@@ -69,7 +72,8 @@ public class DatabaseOPS {
     // Delete all Recipes in database
     public void deleteAll() {
         try (mongoClient) {
-            MongoCollection<Document> recipesCollection = getCollection();
+            MongoDatabase recipeDB = mongoClient.getDatabase("recipeDB");
+            MongoCollection<Document> recipesCollection = recipeDB.getCollection("recipes");
             recipesCollection.deleteMany(new Document());
         }
     }
