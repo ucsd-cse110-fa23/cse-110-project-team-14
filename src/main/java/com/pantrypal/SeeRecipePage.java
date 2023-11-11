@@ -81,7 +81,7 @@ public class SeeRecipePage extends Page {
             // RecipeTitleListView.getInstance().updateRecipeIndices();
             Stage stage = (Stage) this.getScene().getWindow();
             stage.setScene(new mainPage(width, height, false).getScene());
-            System.out.println("SWITCHED TO See PAGE");
+            // System.out.println("SWITCHED TO See PAGE");
         });
 
         deleteButton.setOnAction(e -> {
@@ -96,7 +96,7 @@ public class SeeRecipePage extends Page {
             }
             Stage stage = (Stage) this.getScene().getWindow();
             stage.setScene(new mainPage(width, height, false).getScene());
-            System.out.println("SWITCHED TO See PAGE");
+            // System.out.println("SWITCHED TO See PAGE");
         });
 
 
