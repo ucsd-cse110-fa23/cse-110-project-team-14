@@ -64,7 +64,20 @@ public class SeeRecipePage extends Page {
                 stg.registerPage(r.getRecipeTitle(), SRP);
                 stg.changeTo(r.getRecipeTitle());
             });
-            // RecipeTitleListView.getInstance().getChildren().add(recipeTitleView);
+
+            boolean addingTwice = false;
+            for(Object e2 : RecipeTitleListView.getInstance().getChildren()){
+                if(e2 instanceof RecipeTitleView){
+                    if( ((RecipeTitleView)e2).getRecipe().equals(this.r)){
+                        addingTwice = true;
+                        break;
+                    }
+                }
+            }
+            if(!addingTwice){
+                RecipeTitleListView.getInstance().getChildren().add(recipeTitleView);
+            }
+            
             // RecipeTitleListView.getInstance().updateRecipeIndices();
             Stage stage = (Stage) this.getScene().getWindow();
             stage.setScene(new mainPage(width, height, false).getScene());

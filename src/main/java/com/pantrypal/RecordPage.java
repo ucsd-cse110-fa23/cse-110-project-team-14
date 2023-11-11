@@ -47,8 +47,8 @@ public class RecordPage extends Page {
 
                     // make a listener for recipeTitleView
                     RecipeTitleView recipeTitleView = new RecipeTitleView(t2R.getRecipe());
-
-                    RecipeTitleListView.getInstance().getChildren().add(recipeTitleView);
+                    //remove this ??
+                    //RecipeTitleListView.getInstance().getChildren().add(recipeTitleView); 
 
                     recipeTitleView.getRecipeTitleButton().setOnAction(e1 -> {
                         StageController stg = StageController.getInstance();
