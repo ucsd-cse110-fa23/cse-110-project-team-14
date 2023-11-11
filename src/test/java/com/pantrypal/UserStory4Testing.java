@@ -36,7 +36,7 @@ public class UserStory4Testing {
         MongoDatabase recipeDB = mongoClient.getDatabase("recipeDB");
         MongoCollection<Document> recipesCollection = recipeDB.getCollection(COLLECTION_NAME);
         db.deleteAll();
-        // Insert recipe_obj into recipesCollection using for loop and check the size everytime
+        // Insert recipe_obj into recipesCollection using for loop and check the size everytime 
         for (int i = 0; i < 10; i++) {
             DatabaseOPS db2 = new DatabaseOPS(COLLECTION_NAME);
             Recipe recipe_obj = new Recipe();
