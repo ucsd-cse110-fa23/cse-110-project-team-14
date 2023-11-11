@@ -30,7 +30,8 @@ public class DatabaseOPS {
     public void insert(Recipe recipe_obj){
         
         try (mongoClient) {
-            MongoCollection<Document> recipesCollection = getCollection();
+            MongoDatabase recipeDB = mongoClient.getDatabase("recipeDB");
+            MongoCollection<Document> recipesCollection = recipeDB.getCollection("recipes");
             // No need to worry about duplicate recipes as per the project requirements
             Document recipe = new Document("Title", recipe_obj.getRecipeTitle());
             recipe.append("Ingredients", recipe_obj.getRecipeIngredients())
