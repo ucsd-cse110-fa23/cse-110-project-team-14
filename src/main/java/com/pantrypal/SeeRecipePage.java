@@ -64,7 +64,7 @@ public class SeeRecipePage extends Page {
                 stg.registerPage(r.getRecipeTitle(), SRP);
                 stg.changeTo(r.getRecipeTitle());
             });
-            RecipeTitleListView.getInstance().getChildren().add(recipeTitleView);
+            // RecipeTitleListView.getInstance().getChildren().add(recipeTitleView);
             // RecipeTitleListView.getInstance().updateRecipeIndices();
             Stage stage = (Stage) this.getScene().getWindow();
             stage.setScene(new mainPage(width, height, false).getScene());

@@ -22,6 +22,7 @@ class mainPage extends Page {
         IntializeRecipeList.uploadRecipes();
         
     }
+    //second constructor to prevent loading recipes everytime
      public mainPage(int width, int height, boolean initialized) {
         super(width, height);
         // initialized = true;
