@@ -99,7 +99,7 @@ public class ChatGPT {
 
         //Check if the ChatGPT Instructions did not had semicolons
         if(indexOfInstructions == -1){
-            indexOfInstructions = this.response.indexOf("Instructions");
+            indexOfInstructions = this.response.indexOf("Directions");
         }
 
         return this.response.substring(indexOfIngredients, indexOfInstructions);
