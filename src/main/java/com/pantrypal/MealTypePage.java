@@ -2,7 +2,9 @@ package com.pantrypal;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
@@ -15,6 +17,7 @@ public class MealTypePage extends Page {
     private paneFooter paneFooter;
     private VBox center;
     private Button recordButton;
+    private Button back;
     public LiveRecorder liveRecorder;
     public Whisper whisper = new Whisper();
     private boolean isRecording;
@@ -51,17 +54,36 @@ public class MealTypePage extends Page {
                     } else {
                         mealType = "";//defaut meal type is lunch
                     }
-                    StageController stg = StageController.getInstance();
-                    RecordPage recordPage;
-                    recordPage = (RecordPage) stg.getPage("RecordPage");
-                    recordPage.setMealType(mealType);
-                    stg.changeTo("RecordPage");
+                    if(mealType=="")
+                    {
+                        this.center.getChildren().clear();
+                        Label errorLabel  =new Label("Can't recognize meal type,\n please say breakfast, lunch, or dinner. ");
+                        errorLabel.setTextFill(Color.web("#8B4513"));
+                        errorLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 22;");
+                        this.center.getChildren().add(errorLabel);
+                        //this.update();
+                    }
+                    else
+                    {
+                        StageController stg = StageController.getInstance();
+                        RecordPage recordPage;
+                        recordPage = (RecordPage) stg.getPage("RecordPage");
+                        recordPage.setMealType(mealType);
+                        stg.changeTo("RecordPage");
+                    }
+
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 } catch (URISyntaxException e1) {
                     e1.printStackTrace();
                 }
             }
+        });
+
+        back.setOnAction(e->
+        {
+            StageController stg =  StageController.getInstance();
+            stg.changeTo("mainPage");
         });
     }
 
@@ -99,7 +121,14 @@ public class MealTypePage extends Page {
                     "-fx-border-radius: 20; " +
                     "-fx-background-radius: 20; " +
                     "-fx-padding: 5 15 5 15;");
+            this.back = paneFooter.creatButton("Back", "-fx-background-color: #FFEBD7; " +
+                    "-fx-text-fill: #8B4513; " +
+                    "-fx-border-color: #8B4513; " +
+                    "-fx-border-radius: 20; " +
+                    "-fx-background-radius: 20; " +
+                    "-fx-padding: 5 15 5 15;");
             this.paneFooter.setButton(recordButton);
+            this.paneFooter.setButton(back);
             isRecording = false;
             this.liveRecorder = new LiveRecorder();
 

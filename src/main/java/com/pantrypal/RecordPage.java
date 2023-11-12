@@ -15,6 +15,7 @@ public class RecordPage extends Page {
     private paneFooter paneFooter;
     private VBox center;
     private Button recordButton;
+    private Button back;
     public LiveRecorder liveRecorder;
     public Whisper whisper = new Whisper();
     private boolean isRecording;
@@ -69,6 +70,11 @@ public class RecordPage extends Page {
                 }
             }
         });
+
+        back.setOnAction(e->{
+            StageController stg = StageController.getInstance();
+            stg.changeTo("MealTypePage");
+        });
     }
 
     private boolean getIsRecording() {
@@ -105,7 +111,15 @@ public class RecordPage extends Page {
                     "-fx-border-radius: 20; " +
                     "-fx-background-radius: 20; " +
                     "-fx-padding: 5 15 5 15;");
+            back = paneFooter.creatButton("Back", "-fx-background-color: #FFEBD7; " +
+                    "-fx-text-fill: #8B4513; " +
+                    "-fx-border-color: #8B4513; " +
+                    "-fx-border-radius: 20; " +
+                    "-fx-background-radius: 20; " +
+                    "-fx-padding: 5 15 5 15;");
+
             this.paneFooter.setButton(recordButton);
+            paneFooter.setButton(back);
             isRecording = false;
             this.liveRecorder = new LiveRecorder();
 
