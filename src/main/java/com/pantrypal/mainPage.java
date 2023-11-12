@@ -2,6 +2,7 @@ package com.pantrypal;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -12,9 +13,23 @@ class mainPage extends Page {
     paneHeader paneHeader;
     paneFooter paneFooter;
     private Button addButton;
+    // private boolean initialized;
 
     public mainPage(int width, int height) {
         super(width, height);
+        // initialized = true;;
+
+        // DELETE ONCE WE NO LONGER NEED TO LOAD DUMMY RECIPES
+        IntializeRecipeList.uploadRecipes();
+        
+    }
+    //second constructor to prevent loading recipes everytime
+     public mainPage(int width, int height, boolean initialized) {
+        super(width, height);
+        // initialized = true;
+        // IntializeRecipeList.uploadRecipes()
+        //IntializeRecipeList.uploadRecipes();
+        
     }
 
     public void addListeners() {
@@ -36,12 +51,36 @@ class mainPage extends Page {
     @Override
     protected void createView() {
 
-
         paneHeader = new paneHeader();
+        
+        // Populate list initially for testing --- REMOVE AFTER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        // for(int i=0; i < 20; i++){
+        //     Recipe recipe = new Recipe();
+        //     recipe.setRecipeTitle(("Recipe " + i));
+        //     recipeTitleListView.getChildren().add(new RecipeTitleView(recipe));
+        // }
+
+        // if(initialized){
+            // IntializeRecipeList.uploadRecipes();
+            // initialized = false;
+            System.out.println("CALLED");
+        // }
+
+       
+
+        ScrollPane scroll = new ScrollPane(RecipeTitleListView.getInstance());
+        scroll.setPrefSize(1000, 1000);
+        scroll.setFitToWidth(true);
+        scroll.setFitToHeight(true);
+
         paneFooter = new paneFooter();
         VBox mainContent = new VBox();
+        mainContent.minHeight(1000);
+        mainContent.minWidth(1000);
         mainContent.setSpacing(15);
         mainContent.setAlignment(Pos.CENTER);
+        mainContent.getChildren().add(scroll);
+        // mainContent.getChildren().add(RecipeTitleListView.getInstance());
 
         paneHeader.setTitleInMiddle(new Text("PantryPal: The best Recipe manager"));
         this.borderPane.setTop(paneHeader);
