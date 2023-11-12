@@ -15,6 +15,7 @@ public class RecordPage extends Page {
     private paneFooter paneFooter;
     private VBox center;
     private Button recordButton;
+    private Button backButton;
     public LiveRecorder liveRecorder;
     public Whisper whisper = new Whisper();
     private boolean isRecording;
@@ -24,6 +25,11 @@ public class RecordPage extends Page {
     }
 
     public void addListeners() {
+        backButton.setOnAction(e -> {
+            Stage stage = (Stage) this.getScene().getWindow();
+            stage.setScene(new mainPage(width, height, false).getScene());
+            System.out.println("SWITCHED TO MAIN PAGE");
+        });
         recordButton.setOnAction(e -> {
             // isRecording = !isRecording; // TOGGLES
             this.setIsrecording(!this.getIsRecording()); // this works?
@@ -42,7 +48,7 @@ public class RecordPage extends Page {
                     // make recipe
                     TextToRecipe t2R = new TextToRecipe(this.whisper.getResponse(), "lunch", new Recipe());
                     t2R.createRecipeObj();
-                    SeeRecipePage SRP = new SeeRecipePage(600, 600);
+                    SeeRecipeFromRecording SRP = new SeeRecipeFromRecording(600, 600);
                     SRP.setRecipe(t2R.getRecipe());
 
                     // make a listener for recipeTitleView
@@ -108,6 +114,13 @@ public class RecordPage extends Page {
                     "-fx-border-radius: 20; " +
                     "-fx-background-radius: 20; " +
                     "-fx-padding: 5 15 5 15;");
+            this.backButton = paneFooter.creatButton("BACK BUTTON", "-fx-background-color: #FFEBD7; " +
+                    "-fx-text-fill: #8B4513; " +
+                    "-fx-border-color: #8B4513; " +
+                    "-fx-border-radius: 20; " +
+                    "-fx-background-radius: 20; " +
+                    "-fx-padding: 5 15 5 15;");
+            this.paneFooter.setButton(backButton);
             this.paneFooter.setButton(recordButton);
             isRecording = false;
             this.liveRecorder = new LiveRecorder();

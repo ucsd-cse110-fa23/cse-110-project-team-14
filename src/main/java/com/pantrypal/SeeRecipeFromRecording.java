@@ -9,12 +9,13 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 // SeeRecipePage now extends the abstract Page class
-public class SeeRecipePage extends Page implements ISeeRecipePage{
+public class SeeRecipeFromRecording extends Page implements ISeeRecipePage {
 
     private String title;
     private String detail;
     private String ingredients;
     private Button back;
+    private Button saveButton;
     private Button editButton;
     
     private paneHeader Header;
@@ -30,11 +31,12 @@ public class SeeRecipePage extends Page implements ISeeRecipePage{
     final private String COLLECTION_NAME = "recipes";
             
 
-    public SeeRecipePage(int width, int height) {
+    public SeeRecipeFromRecording(int width, int height) {
         super(width, height);
         this.db = new DatabaseOPS(COLLECTION_NAME);
     }
 
+   
     public void setRecipe(Recipe r) {
         this.r = r;
         this.recipeTitleView = new RecipeTitleView(r);
@@ -54,8 +56,27 @@ public class SeeRecipePage extends Page implements ISeeRecipePage{
             stage.setScene(new mainPage(width, height, false).getScene());
             System.out.println("SWITCHED TO MAIN PAGE");
         });
+        
+     
+        saveButton.setOnAction(e -> {
+            // Change the page to SeeRecipePageRecording
+            SeeRecipePage SRP = new SeeRecipePage(600, 600);
+            SRP.setRecipe(r);
+            // Save recipe to database
+            // db.insert(r);
 
-         
+            recipeTitleView.getRecipeTitleButton().setOnAction(e1 -> {
+                StageController stg = StageController.getInstance();
+                stg.registerPage(r.getRecipeTitle(), SRP);
+                stg.changeTo(r.getRecipeTitle());
+            });
+    
+            RecipeTitleListView.getInstance().getChildren().add(recipeTitleView); 
+            Stage stage = (Stage) this.getScene().getWindow();
+            stage.setScene(new mainPage(width, height, false).getScene());
+            // System.out.println("SWITCHED TO See PAGE");
+        });
+        
         editButton.setOnAction(e -> {
             //OPEN EDIT PAGE
             EditRecipePage ERP = new EditRecipePage(600, 600, this);
@@ -68,8 +89,6 @@ public class SeeRecipePage extends Page implements ISeeRecipePage{
 
     // Implementation of the createView method from Page
     @Override
-
-
     public void createView() {
 
         VBox mainContent = new VBox();
@@ -94,14 +113,23 @@ public class SeeRecipePage extends Page implements ISeeRecipePage{
         Footer = new paneFooter();
         titleText = new Text(title);
         Header.setTitleInMiddle(titleText);
-        this.back = Footer.creatButton("Back to Home", "-fx-background-color: #FFEBD7; " +
+        this.back = Footer.creatButton("Cancel", "-fx-background-color: #FFEBD7; " +
                 "-fx-text-fill: #8B4513; " +
                 "-fx-border-color: #8B4513; " +
                 "-fx-border-radius: 20; " +
                 "-fx-background-radius: 20; " +
                 "-fx-padding: 5 15 5 15;");
         Footer.getChildren().add(this.back);
-      
+
+       
+        this.saveButton = Footer.creatButton("Save Recipe", "-fx-background-color: #FFEBD7; " +
+            "-fx-text-fill: #8B4513; " +
+            "-fx-border-color: #8B4513; " +
+            "-fx-border-radius: 20; " +
+            "-fx-background-radius: 20; " +
+            "-fx-padding: 5 15 5 15;");  
+            Footer.getChildren().add(saveButton);
+        
         this.editButton = Footer.creatButton("Edit Button", "-fx-background-color: #FFEBD7; " +
                 "-fx-text-fill: #8B4513; " +
                 "-fx-border-color: #8B4513; " +
