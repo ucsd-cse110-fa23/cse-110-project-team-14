@@ -18,7 +18,8 @@ class mainPage extends Page {
     public mainPage(int width, int height) {
         super(width, height);
         // initialized = true;;
-        
+
+        // DELETE ONCE WE NO LONGER NEED TO LOAD DUMMY RECIPES
         IntializeRecipeList.uploadRecipes();
         
     }
