@@ -28,7 +28,6 @@ public class MockChatGPT {
         }
         int indexOfNewLine = this.response.indexOf("\n", indexFirstCharacter);
 
-        System.out.println("CAT GPTSAYS" + this.response);
         return response.substring(indexFirstCharacter, indexOfNewLine);
 
     }

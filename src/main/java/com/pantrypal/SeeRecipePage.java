@@ -8,7 +8,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-// SeeRecipePage now extends the abstract Page class
+// SeeRecipePage now extends the abstract Page class 
+//SeeRecipePage uses an Interface to allow it to work with SeeRecipeFromRecording
 public class SeeRecipePage extends Page implements ISeeRecipePage{
 
     private String title;
@@ -73,7 +74,6 @@ public class SeeRecipePage extends Page implements ISeeRecipePage{
     public void createView() {
 
         VBox mainContent = new VBox();
-        // mainContent.setSpacing(15);
         mainContent.setAlignment(Pos.TOP_LEFT);
 
         detailLable = new Label(detail);

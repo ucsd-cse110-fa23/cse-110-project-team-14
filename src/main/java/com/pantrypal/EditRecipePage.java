@@ -3,6 +3,7 @@ package com.pantrypal;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -22,8 +23,8 @@ public class EditRecipePage extends Page {
     private paneHeader Header;
     private VBox center;
     private paneFooter Footer;
-    private TextField detailLable;
-    private TextField ingredientLabel;
+    private TextArea detailLable;
+    private TextArea ingredientLabel;
     private Text titleText;
     private Recipe r;
     private DatabaseOPS db;
@@ -74,15 +75,11 @@ public class EditRecipePage extends Page {
 
         //save button action
         saveButton.setOnAction(e -> {
-            // ADDs DUPLICATE AT THE BOTTOM???
-            // WE'LL ASK
-            // Change the page to SeeRecipePageRecording
-            // SeeRecipePage SRP = new SeeRecipePage(600, 600);
+
             r.setRecipeIngredients(ingredientLabel.getText());
             r.setRecipeInstructions(detailLable.getText());
             SRP.setRecipe(r);
             // Save recipe to database
-            // db.insert(r);
 
             recipeTitleView.getRecipeTitleButton().setOnAction(e1 -> {
                 StageController stg = StageController.getInstance();
@@ -92,26 +89,22 @@ public class EditRecipePage extends Page {
 
             Stage stage = (Stage) this.getScene().getWindow();
             stage.setScene(SRP.getScene());
-            // System.out.println("SWITCHED TO See PAGE");
+
         });
 
         deleteButton.setOnAction(e -> {
             // Delete recipe from database
-            // TODO: COMMENTED DB STUFF FOR TESTING
-            // db.deleteUno(r);
-
-            // System.out.println("DELETING RECIPE: " + RecipeTitleListView.getInstance().getChildren().remove(recipeTitleView));
+            
             for(Object e2 : RecipeTitleListView.getInstance().getChildren()){
                 if(e2 instanceof RecipeTitleView){
                     if( ((RecipeTitleView)e2).getRecipe().equals(this.r)){
-                        System.out.println(RecipeTitleListView.getInstance().getChildren().remove(e2));
+                        RecipeTitleListView.getInstance().getChildren().remove(e2);
                         break;
                     }
                 }
             }
             Stage stage = (Stage) this.getScene().getWindow();
             stage.setScene(new mainPage(width, height, false).getScene());
-            // System.out.println("SWITCHED TO See PAGE");
         });
 
 
@@ -123,22 +116,23 @@ public class EditRecipePage extends Page {
 
     protected void createView() {  
         VBox mainContent = new VBox();
-        // mainContent.setSpacing(15);
         mainContent.setAlignment(Pos.TOP_LEFT);
 
-        detailLable = new TextField(detail);
-        // detailLable.setTe(Color.web("#8B4513"));
-        // detailLable.setWrapText(true);
+        detailLable = new TextArea(detail);
+        detailLable.setWrapText(true);
+
         //changing font size so itll fit
         detailLable.setStyle("-fx-font-weight: bold; -fx-font-size: 20;");
 
-        ingredientLabel = new TextField(ingredients);
-        // ingredientLabel.setTextFill(Color.web("#8B4513"));
-        // ingredientLabel.setWrapText(true);
+        ingredientLabel = new TextArea(ingredients);
+        detailLable.setWrapText(true);
+
+
+
         //changing font size so itll fit
         ingredientLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 20;");
 
-        mainContent.getChildren().addAll(ingredientLabel, detailLable);//TODO: we need to fill in what chatgpt said
+        mainContent.getChildren().addAll(ingredientLabel, detailLable);
         Header = new paneHeader();
         this.center = mainContent;
         Footer = new paneFooter();
@@ -166,8 +160,6 @@ public class EditRecipePage extends Page {
                 "-fx-padding: 5 15 5 15;");
         
         
-        
-        // Footer.setButton(back);
         Footer.getChildren().addAll(back, saveButton, deleteButton);
         this.borderPane.setTop(Header);
         this.borderPane.setCenter(this.center);

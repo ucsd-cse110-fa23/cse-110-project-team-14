@@ -9,6 +9,7 @@ import javafx.scene.paint.Color;
 import java.util.HashMap;
 import java.util.Map;
 
+// pre formatted Footer class
 class paneFooter extends HBox {
 
     private Map<String, Button> ButtonList = new HashMap<String, Button>();
@@ -25,6 +26,8 @@ class paneFooter extends HBox {
         this.setEffect(ds);
     }
 
+    // appends Button to Footer
+    // styling already specified
     public void setButton(Button bt, String btStyle) {
         ButtonList.put(bt.getText(), bt);
         ButtonList.get(bt.getText()).setStyle(btStyle);
@@ -32,16 +35,21 @@ class paneFooter extends HBox {
         this.setAlignment(Pos.CENTER);
     }
 
+    // appends Button to Footer
+    // default styling
     public void setButton(Button bt) {
         ButtonList.put(bt.getText(), bt);
         this.getChildren().add(ButtonList.get(bt.getText()));
         this.setAlignment(Pos.CENTER);
     }
 
+    // gets Button 
+    // returns null if no matching name
     public Button getButton(String name) {
         return ButtonList.get(name);
     }
 
+    // creates Button and adds to list of buttons on footer.
     public Button creatButton(String name, String style) {
         Button button = new Button(name);
         button.setStyle(style);

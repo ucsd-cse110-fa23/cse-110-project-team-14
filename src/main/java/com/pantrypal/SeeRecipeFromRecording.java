@@ -8,7 +8,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-// SeeRecipePage now extends the abstract Page class
+// SeeRecipeFromRcording now extends the abstract Page class and implements interface
 public class SeeRecipeFromRecording extends Page implements ISeeRecipePage {
 
     private String title;
@@ -54,7 +54,6 @@ public class SeeRecipeFromRecording extends Page implements ISeeRecipePage {
             // go back to main page
             Stage stage = (Stage) this.getScene().getWindow();
             stage.setScene(new mainPage(width, height, false).getScene());
-            System.out.println("SWITCHED TO MAIN PAGE");
         });
         
      
@@ -63,7 +62,7 @@ public class SeeRecipeFromRecording extends Page implements ISeeRecipePage {
             SeeRecipePage SRP = new SeeRecipePage(600, 600);
             SRP.setRecipe(r);
             // Save recipe to database
-            // db.insert(r);
+            db.insert(r);
 
             recipeTitleView.getRecipeTitleButton().setOnAction(e1 -> {
                 StageController stg = StageController.getInstance();
@@ -74,7 +73,7 @@ public class SeeRecipeFromRecording extends Page implements ISeeRecipePage {
             RecipeTitleListView.getInstance().getChildren().add(recipeTitleView); 
             Stage stage = (Stage) this.getScene().getWindow();
             stage.setScene(new mainPage(width, height, false).getScene());
-            // System.out.println("SWITCHED TO See PAGE");
+           
         });
         
         editButton.setOnAction(e -> {
