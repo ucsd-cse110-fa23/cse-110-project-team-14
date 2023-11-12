@@ -24,6 +24,10 @@ public abstract class Page {
         return scene;
     }
 
+    public void update()
+    {
+        createView();
+    }
     public BorderPane getBorderPane() {
         return borderPane;
     }

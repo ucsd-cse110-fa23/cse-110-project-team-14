@@ -29,7 +29,9 @@ class mainPage extends Page {
         addButton.setOnAction(e -> {
             // swap to record page
             StageController stgController = StageController.getInstance();
-            stgController.changeTo("RecordPage");
+
+            stgController.changeTo("MealTypePage");
+
         });
     }
 
