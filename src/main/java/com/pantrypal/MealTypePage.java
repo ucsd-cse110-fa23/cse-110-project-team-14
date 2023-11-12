@@ -2,16 +2,18 @@ package com.pantrypal;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public class RecordPage extends Page {
+public class MealTypePage extends Page {
     private paneHeader paneHeader;
-    //    private Footer footer;
     private paneFooter paneFooter;
     private VBox center;
     private Button recordButton;
@@ -19,20 +21,12 @@ public class RecordPage extends Page {
     public LiveRecorder liveRecorder;
     public Whisper whisper = new Whisper();
     private boolean isRecording;
-    private String mealType;
+    private String mealType = "lunch";//defaut is Lunch
 
-    public RecordPage(int width, int height) {
+    MealTypePage(int width, int height) {
         super(width, height);
     }
 
-    public void setMealType(String mealType)
-    {
-        this.mealType = mealType;
-    }
-    public String getMealType()
-    {
-        return this.mealType;
-    }
     public void addListeners() {
         recordButton.setOnAction(e -> {
             // isRecording = !isRecording; // TOGGLES
@@ -50,31 +44,34 @@ public class RecordPage extends Page {
 
                 try {
                     // make recipe
-                    TextToRecipe t2R = new TextToRecipe(this.whisper.getResponse(), mealType, new Recipe());
-                    t2R.createRecipeObj();
-                    SeeRecipePage SRP = new SeeRecipePage(600, 600);
-                    SRP.setRecipe(t2R.getRecipe());
+                    mealType = this.whisper.getResponse();
+                    mealType = mealType.toLowerCase();
 
-                    // make a listener for recipeTitleView
-                    RecipeTitleView recipeTitleView = new RecipeTitleView(t2R.getRecipe());
-                    //remove this ??
-                    //RecipeTitleListView.getInstance().getChildren().add(recipeTitleView); 
-
-                    recipeTitleView.getRecipeTitleButton().setOnAction(e1 -> {
+                    Pattern pattern = Pattern.compile("lunch|dinner|breakfast");
+                    Matcher matcher = pattern.matcher(mealType);
+                    if (matcher.find()) {
+                        mealType = matcher.group();//we only want mealType be a single world.
+                    } else {
+                        mealType = "";//defaut meal type is lunch
+                    }
+                    if(mealType=="")
+                    {
+                        this.center.getChildren().clear();
+                        Label errorLabel  =new Label("Can't recognize meal type,\n please say breakfast, lunch, or dinner. ");
+                        errorLabel.setTextFill(Color.web("#8B4513"));
+                        errorLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 22;");
+                        this.center.getChildren().add(errorLabel);
+                        //this.update();
+                    }
+                    else
+                    {
                         StageController stg = StageController.getInstance();
-                        stg.registerPage(t2R.getRecipe().getRecipeTitle(), SRP);
-                        stg.changeTo(t2R.getRecipe().getRecipeTitle());
-                    });
+                        RecordPage recordPage;
+                        recordPage = (RecordPage) stg.getPage("RecordPage");
+                        recordPage.setMealType(mealType);
+                        stg.changeTo("RecordPage");
+                    }
 
-                    StageController stg = StageController.getInstance();
-                    stg.registerPage(t2R.getRecipe().getRecipeTitle(), SRP);
-                    stg.changeTo(t2R.getRecipe().getRecipeTitle());
-
-//                    Stage stage = (Stage) this.getScene().getWindow();
-//                    stage.setScene(SRP.getScene());
-                    // System.out.println(rp.whisper.getResponse());
-                } catch (InterruptedException e1) {
-                    e1.printStackTrace();
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 } catch (URISyntaxException e1) {
@@ -83,9 +80,10 @@ public class RecordPage extends Page {
             }
         });
 
-        back.setOnAction(e->{
-            StageController stg = StageController.getInstance();
-            stg.changeTo("MealTypePage");
+        back.setOnAction(e->
+        {
+            StageController stg =  StageController.getInstance();
+            stg.changeTo("mainPage");
         });
     }
 
@@ -105,7 +103,7 @@ public class RecordPage extends Page {
             mainContent.setSpacing(15);
             mainContent.setAlignment(Pos.CENTER);
             this.paneHeader = new paneHeader();
-            paneHeader.setTitleInMiddle(new Text("Say your "+mealType+" Ingredients..."));
+            paneHeader.setTitleInMiddle(new Text("Do you want a Breakfast, Lunch, or Dinner.\n                        Say your Meal Type..."));
             this.center = mainContent;
             this.paneFooter = new paneFooter();
             this.borderPane.setTop(this.paneHeader);
@@ -123,21 +121,18 @@ public class RecordPage extends Page {
                     "-fx-border-radius: 20; " +
                     "-fx-background-radius: 20; " +
                     "-fx-padding: 5 15 5 15;");
-            back = paneFooter.creatButton("Back", "-fx-background-color: #FFEBD7; " +
+            this.back = paneFooter.creatButton("Back", "-fx-background-color: #FFEBD7; " +
                     "-fx-text-fill: #8B4513; " +
                     "-fx-border-color: #8B4513; " +
                     "-fx-border-radius: 20; " +
                     "-fx-background-radius: 20; " +
                     "-fx-padding: 5 15 5 15;");
-
             this.paneFooter.setButton(recordButton);
-            paneFooter.setButton(back);
+            this.paneFooter.setButton(back);
             isRecording = false;
             this.liveRecorder = new LiveRecorder();
 
             addListeners();
         }
     }
-
-
 }
