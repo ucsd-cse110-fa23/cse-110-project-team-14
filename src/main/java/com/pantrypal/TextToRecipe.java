@@ -25,7 +25,8 @@ public class TextToRecipe {
 
     void createRecipeObj() throws IOException,
             InterruptedException, URISyntaxException {
-        String prompt = "Make me a meal using only these ingredients: " + this.ingredients;
+                //specify the title 
+        String prompt = "Make me a meal using only these ingredients: " + this.ingredients + "include title, ingredients, and instructions.";
         chatGPT.generatedRecipe(300, prompt);
 
         //Fill Recipe title

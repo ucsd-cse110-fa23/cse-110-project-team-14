@@ -14,7 +14,7 @@ import java.io.IOException;
 
 public class ChatGPT {
     private static final String API_ENDPOINT = "https://api.openai.com/v1/completions";
-    private static final String API_KEY = "";
+    private static final String API_KEY = "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";
     private static final String MODEL = "text-davinci-003";
     private String prompt;
     private int maxTokens;
@@ -99,7 +99,7 @@ public class ChatGPT {
 
         //Check if the ChatGPT Instructions did not had semicolons
         if(indexOfInstructions == -1){
-            indexOfInstructions = this.response.indexOf("Instructions");
+            indexOfInstructions = this.response.indexOf("Directions");
         }
 
         return this.response.substring(indexOfIngredients, indexOfInstructions);
