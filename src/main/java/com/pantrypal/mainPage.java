@@ -21,7 +21,7 @@ class mainPage extends Page {
         addButton.setOnAction(e -> {
             // SET TO RECORDING STAGE
             StageController stgController = StageController.getInstance();
-            stgController.changeTo("RecordPage");
+            stgController.changeTo("MealTypePage");
 //            Stage stage = (Stage) this.getScene().getWindow();
 //            stage.setScene(new RecordPage(width, height).getScene());
             System.out.println("RecordPage_");

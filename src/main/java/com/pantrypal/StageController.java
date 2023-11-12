@@ -33,6 +33,7 @@ public class StageController {
             System.out.println("Error: page " + key + "not found");
             return;
         }
+        page.update();
         primaryStage.setScene(page.getScene());
         primaryStage.show();
     }

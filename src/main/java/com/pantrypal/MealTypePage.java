@@ -4,34 +4,26 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public class RecordPage extends Page {
+public class MealTypePage extends Page {
     private paneHeader paneHeader;
-    //    private Footer footer;
     private paneFooter paneFooter;
     private VBox center;
     private Button recordButton;
     public LiveRecorder liveRecorder;
     public Whisper whisper = new Whisper();
     private boolean isRecording;
-    private String mealType;
+    private String mealType = "lunch";//defaut is Lunch
 
-    public RecordPage(int width, int height) {
+    MealTypePage(int width, int height) {
         super(width, height);
     }
 
-    public void setMealType(String mealType)
-    {
-        this.mealType = mealType;
-    }
-    public String getMealType()
-    {
-        return this.mealType;
-    }
     public void addListeners() {
         recordButton.setOnAction(e -> {
             // isRecording = !isRecording; // TOGGLES
@@ -49,19 +41,21 @@ public class RecordPage extends Page {
 
                 try {
                     // make recipe
-                    TextToRecipe t2R = new TextToRecipe(this.whisper.getResponse(), mealType, new Recipe());
-                    t2R.createRecipeObj();
-                    SeeRecipePage SRP = new SeeRecipePage(600, 600);
-                    SRP.setRecipe(t2R.getRecipe());
-                    StageController stg = StageController.getInstance();
-                    stg.registerPage(t2R.getRecipe().getRecipeTitle(), SRP);
-                    stg.changeTo(t2R.getRecipe().getRecipeTitle());
+                    mealType = this.whisper.getResponse();
+                    mealType = mealType.toLowerCase();
 
-//                    Stage stage = (Stage) this.getScene().getWindow();
-//                    stage.setScene(SRP.getScene());
-                    // System.out.println(rp.whisper.getResponse());
-                } catch (InterruptedException e1) {
-                    e1.printStackTrace();
+                    Pattern pattern = Pattern.compile("lunch|dinner|breakfast");
+                    Matcher matcher = pattern.matcher(mealType);
+                    if (matcher.find()) {
+                        mealType = matcher.group();//we only want mealType be a single world.
+                    } else {
+                        mealType = "";//defaut meal type is lunch
+                    }
+                    StageController stg = StageController.getInstance();
+                    RecordPage recordPage;
+                    recordPage = (RecordPage) stg.getPage("RecordPage");
+                    recordPage.setMealType(mealType);
+                    stg.changeTo("RecordPage");
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 } catch (URISyntaxException e1) {
@@ -87,7 +81,7 @@ public class RecordPage extends Page {
             mainContent.setSpacing(15);
             mainContent.setAlignment(Pos.CENTER);
             this.paneHeader = new paneHeader();
-            paneHeader.setTitleInMiddle(new Text("Say your "+mealType+" Ingredients..."));
+            paneHeader.setTitleInMiddle(new Text("Do you want a Breakfast, Lunch, or Dinner.\n                        Say your Meal Type..."));
             this.center = mainContent;
             this.paneFooter = new paneFooter();
             this.borderPane.setTop(this.paneHeader);
@@ -112,6 +106,4 @@ public class RecordPage extends Page {
             addListeners();
         }
     }
-
-
 }
