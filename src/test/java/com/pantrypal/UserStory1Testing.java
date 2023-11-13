@@ -17,7 +17,12 @@ public class UserStory1Testing {
     @Test
     public void testParseTitle() {
         MockChatGPT mockChatGPT = new MockChatGPT();
-        mockChatGPT.generatedRecipe(300, "Make me a meal using only these ingredients: chicken, rice");
+        String prompt = "Make me a dinner recipe using only these ingredients: chicken, rice. \n" +
+        "Please give me the recipe following this format:\n" +
+        "Recipe title\n" +
+        "Ingredients:\n" +
+        "Instructions:\n";
+        mockChatGPT.generatedRecipe(300, prompt);
         String title = mockChatGPT.parseTitle();
         assertEquals("Chicken and Rice Casserole", title);
     }
@@ -29,7 +34,12 @@ public class UserStory1Testing {
     @Test
     public void testParseRecipeIngredients() {
         MockChatGPT mockChatGPT = new MockChatGPT();
-        mockChatGPT.generatedRecipe(300, "Make me a meal using only these ingredients: chicken, rice");
+        String prompt = "Make me a dinner recipe using only these ingredients: chicken, rice. \n" +
+        "Please give me the recipe following this format:\n" +
+        "Recipe title\n" +
+        "Ingredients:\n" +
+        "Instructions:\n";
+        mockChatGPT.generatedRecipe(300, prompt);
         String ingredients = mockChatGPT.parseRecipeIngredients();
         assertEquals("Ingredients:\n\n- 2 cups cooked rice\n- 2 cups cooked and diced chicken\n- 1 onion, diced\n- 1 bell pepper, diced\n- 1 teaspoon garlic powder\n- 1 teaspoon smoked paprika\n- 1/2 teaspoon ground cumin\n- 2 tablespoons olive oil\n- 1 can of diced tomatoes\n- 1 cup shredded cheese of your choice\n\n", ingredients);
     }
@@ -41,9 +51,14 @@ public class UserStory1Testing {
     @Test
     public void testParseRecipeInstructions() {
         MockChatGPT mockChatGPT = new MockChatGPT();
-        mockChatGPT.generatedRecipe(300, "Make me a meal using only these ingredients: chicken, rice");
+        String prompt = "Make me a dinner recipe using only these ingredients: chicken, rice. \n" +
+        "Please give me the recipe following this format:\n" +
+        "Recipe title\n" +
+        "Ingredients:\n" +
+        "Instructions:\n";
+        mockChatGPT.generatedRecipe(300, prompt);
         String instructions = mockChatGPT.parseRecipeInstructions();
-        assertEquals("Instructions:\n\n1. Preheat oven to 375°F.\n\n2. Heat olive oil in a large skillet over medium heat. Add the onion and bell pepper. Saute until they start to soften.\n\n3. Add garlic powder, smoked paprika, and cumin. Cook for another minute or two.\n\n4. Add the diced tomatoes and cooked chicken. Simmer for 5-7 minutes.\n\n5. Meanwhile, spread the cooked rice in the bottom of a greased 9x13 inch baking dish", instructions);
+        assertEquals("Instructions:\n\n1. Preheat oven to 375F.\n\n2. Heat olive oil in a large skillet over medium heat. Add the onion and bell pepper. Saute until they start to soften.\n\n3. Add garlic powder, smoked paprika, and cumin. Cook for another minute or two.\n\n4. Add the diced tomatoes and cooked chicken. Simmer for 5-7 minutes.\n\n5. Meanwhile, spread the cooked rice in the bottom of a greased 9x13 inch baking dish", instructions);
     }
 
     @Test

@@ -16,11 +16,11 @@ public class TextToRecipe {
     private ChatGPT chatGPT;
     // String generatedText = responseJson.getString("text"); --> use this to grab the user's speech as text
 
-    TextToRecipe(String ingredients, String mealType, Recipe recipe) {
+    TextToRecipe(String ingredients, String mealType, Recipe recipe, ChatGPT chatGPT) {
         this.ingredients = ingredients;
         this.mealType = mealType;
         this.recipe = recipe;
-        this.chatGPT = new ChatGPT();
+        this.chatGPT = chatGPT;
     }
 
     void createRecipeObj() throws IOException,

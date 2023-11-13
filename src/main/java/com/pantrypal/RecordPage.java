@@ -58,7 +58,7 @@ public class RecordPage extends Page {
 
                 try {
                     // make recipe
-                    TextToRecipe t2R = new TextToRecipe(this.whisper.getResponse(), mealType, new Recipe());
+                    TextToRecipe t2R = new TextToRecipe(this.whisper.getResponse(), mealType, new Recipe(), new ChatGPT());
                     t2R.createRecipeObj();
                     SeeRecipeFromRecording SRP = new SeeRecipeFromRecording(constants.width, constants.height);
                     SRP.setRecipe(t2R.getRecipe());

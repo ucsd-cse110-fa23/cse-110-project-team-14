@@ -14,7 +14,7 @@ public class UserStory3Testing {
     @Test
     public void testUserStory3(){
         MockWhisper whisper = new MockWhisper();
-        MockTextToRecipe textToRecipe = new MockTextToRecipe(whisper.getResponse(1), "dinner", new Recipe());
+        TextToRecipe textToRecipe = new TextToRecipe(whisper.getResponse(1), "dinner", new Recipe(), new MockChatGPT());
         try {
             textToRecipe.createRecipeObj();
             assertEquals("Baked Cinnamon Apple Crisp", textToRecipe.getRecipe().getRecipeTitle());
