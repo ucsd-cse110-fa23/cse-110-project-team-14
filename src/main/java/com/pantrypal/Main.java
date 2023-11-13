@@ -2,7 +2,7 @@ package com.pantrypal;
 import javafx.application.Application;
 import javafx.stage.Stage;
 public class Main extends Application {
-    mainPage root = new mainPage(600, 600);
+    mainPage root = new mainPage(constants.width, constants.height);
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("PantryPal");
@@ -12,10 +12,10 @@ public class Main extends Application {
         stgControl.init(primaryStage);
         stgControl.registerPage("mainPage", root);
 
-        stgControl.registerPage("MealTypePage",new MealTypePage(600,600));
+        stgControl.registerPage("MealTypePage",new MealTypePage(constants.width,constants.height));
         //TODO: we need load the all saved recipe from database
 
-        stgControl.registerPage("RecordPage", new RecordPage(600, 600));
+        stgControl.registerPage("RecordPage", new RecordPage(constants.width, constants.height));
         primaryStage.show();
     }
 

@@ -66,7 +66,7 @@ public class SeeRecipeFromRecording extends Page implements ISeeRecipePage {
      
         saveButton.setOnAction(e -> {
             // Change the page to SeeRecipePageRecording
-            SeeRecipePage SRP = new SeeRecipePage(600, 600);
+            SeeRecipePage SRP = new SeeRecipePage(constants.width, constants.height);
             SRP.setRecipe(r);
             // Save recipe to database
             db.insert(r);
@@ -85,7 +85,7 @@ public class SeeRecipeFromRecording extends Page implements ISeeRecipePage {
         
         editButton.setOnAction(e -> {
             //OPEN EDIT PAGE
-            EditRecipePage ERP = new EditRecipePage(600, 600, this);
+            EditRecipePage ERP = new EditRecipePage(constants.width, constants.height, this);
             ERP.setRecipe(r);
             StageController stg = StageController.getInstance();
             stg.registerPage(r.getRecipeTitle(), ERP);

@@ -93,6 +93,12 @@ public class ChatGPT {
         else if (this.response.contains("Recipe Title")){
             indexFirstCharacter += 13;
         }
+        else if (this.response.contains("Title:")){
+            indexFirstCharacter += 7;
+        }
+        else if (this.response.contains("Title")){
+            indexFirstCharacter += 6;
+        }
 
         int indexOfNewLine = this.response.indexOf("\n", indexFirstCharacter);
 

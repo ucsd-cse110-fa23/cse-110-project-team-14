@@ -44,7 +44,7 @@ public class EditRecipePage extends Page {
         if(SRP instanceof SeeRecipeFromRecording){
             fromRecording = true;
             // this.SRPR = (SeeRecipeFromRescording) SRPR;
-            this.SRP = new SeeRecipePage(600, 600);
+            this.SRP = new SeeRecipePage(constants.width, constants.height);
             this.SRP.setRecipe( ((SeeRecipeFromRecording)SRP).getRecipe());
         }
         if(SRP instanceof SeeRecipePage){
@@ -69,7 +69,7 @@ public class EditRecipePage extends Page {
             // go back to main page
             Stage stage = (Stage) this.getScene().getWindow();
             if(fromRecording){
-                SeeRecipeFromRecording SRPR = new SeeRecipeFromRecording(600, 600);
+                SeeRecipeFromRecording SRPR = new SeeRecipeFromRecording(constants.width, constants.height);
                 SRPR.setRecipe(this.r);
                 stage.setScene(SRPR.getScene());
             }

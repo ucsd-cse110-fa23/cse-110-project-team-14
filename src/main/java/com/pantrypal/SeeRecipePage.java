@@ -62,7 +62,7 @@ public class SeeRecipePage extends Page implements ISeeRecipePage{
          
         editButton.setOnAction(e -> {
             //OPEN EDIT PAGE
-            EditRecipePage ERP = new EditRecipePage(600, 600, this);
+            EditRecipePage ERP = new EditRecipePage(constants.width, constants.height, this);
             ERP.setRecipe(r);
             StageController stg = StageController.getInstance();
             stg.registerPage(r.getRecipeTitle(), ERP);

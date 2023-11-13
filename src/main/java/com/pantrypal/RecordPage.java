@@ -60,7 +60,7 @@ public class RecordPage extends Page {
                     // make recipe
                     TextToRecipe t2R = new TextToRecipe(this.whisper.getResponse(), mealType, new Recipe());
                     t2R.createRecipeObj();
-                    SeeRecipeFromRecording SRP = new SeeRecipeFromRecording(600, 600);
+                    SeeRecipeFromRecording SRP = new SeeRecipeFromRecording(constants.width, constants.height);
                     SRP.setRecipe(t2R.getRecipe());
 
                     // make a listener for recipeTitleView
