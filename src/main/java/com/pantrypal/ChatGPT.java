@@ -69,7 +69,7 @@ public class ChatGPT {
         this.response = generatedText;
 
         //TODO: Remove this print statement
-        //System.out.println(generatedText);
+        System.out.println("CHATGPT says: " + generatedText);
     }
 
     /**

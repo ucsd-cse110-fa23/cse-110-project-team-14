@@ -20,7 +20,6 @@ public class EditRecipePage extends Page {
     private String ingredients;
     private Button back;
     private Button saveButton;
-    private Button deleteButton;
     
     private paneHeader Header;
     private VBox center;
@@ -68,11 +67,11 @@ public class EditRecipePage extends Page {
     public void addListeners() {
         back.setOnAction(e -> {
             // go back to main page
-            
             Stage stage = (Stage) this.getScene().getWindow();
             if(fromRecording){
-                
-                stage.setScene(new mainPage(width, height, false).getScene());
+                SeeRecipeFromRecording SRPR = new SeeRecipeFromRecording(600, 600);
+                SRPR.setRecipe(this.r);
+                stage.setScene(SRPR.getScene());
             }
             else{
                 stage.setScene(this.SRP.getScene());
@@ -108,54 +107,6 @@ public class EditRecipePage extends Page {
             stage.setScene(SRP.getScene());
 
         });
-
-        deleteButton.setOnAction(e -> {
-            // Delete recipe from database
-            Popup confirmDelete = new Popup();
-            VBox confirmDeleteContent = new VBox();
-            confirmDeleteContent.styleProperty().set("-fx-background-color: #FFEBD7; " +
-                    "-fx-border-color: #8B4513; " +
-                    "-fx-border-radius: 20; " +
-                    "-fx-background-radius: 20; " +
-                    "-fx-padding: 20 20 20 20;");
-            Label label = new Label("Do you want to delete this recipe?");
-            Button yesButton = new Button("Yes");
-            Button noButton = new Button("No");
-            HBox buttonBox = new HBox();
-            buttonBox.setAlignment(Pos.CENTER);
-            buttonBox.getChildren().add(yesButton);
-            buttonBox.getChildren().add(noButton);
-            confirmDeleteContent.getChildren().add(label);
-            confirmDeleteContent.getChildren().add(buttonBox);
-
-            // add the label 
-            confirmDelete.getContent().add(confirmDeleteContent);
-
-            Stage stage = (Stage) this.getScene().getWindow();
-            confirmDelete.show(stage);
-            confirmDelete.setAutoHide(true);
-
-            yesButton.setOnAction(e1 -> {
-                db.deleteUno(r);
-                for(Object e2 : RecipeTitleListView.getInstance().getChildren()){
-                    if(e2 instanceof RecipeTitleView){
-                        if( ((RecipeTitleView)e2).getRecipe().equals(this.r)){
-                            RecipeTitleListView.getInstance().getChildren().remove(e2);
-                            break;
-                        }
-                    }
-                }
-
-                confirmDelete.hide();
-                stage.setScene(new mainPage(width, height, false).getScene());
-            });
-
-            noButton.setOnAction(e1 -> {
-                confirmDelete.hide();
-            });
-        });
-
-
     }
 
     // Implementation of the createView method from Page
@@ -199,16 +150,8 @@ public class EditRecipePage extends Page {
                 "-fx-border-radius: 20; " +
                 "-fx-background-radius: 20; " +
                 "-fx-padding: 5 15 5 15;");
-
-        this.deleteButton = Footer.creatButton("Delete Recipe", "-fx-background-color: #FFEBD7; " +
-                "-fx-text-fill: #8B4513; " +
-                "-fx-border-color: #8B4513; " +
-                "-fx-border-radius: 20; " +
-                "-fx-background-radius: 20; " +
-                "-fx-padding: 5 15 5 15;");
         
-        
-        Footer.getChildren().addAll(back, saveButton, deleteButton);
+        Footer.getChildren().addAll(back, saveButton);
         this.borderPane.setTop(Header);
         this.borderPane.setCenter(this.center);
         this.borderPane.setBottom(this.Footer);

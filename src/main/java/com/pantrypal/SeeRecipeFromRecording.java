@@ -3,9 +3,11 @@ package com.pantrypal;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 // SeeRecipeFromRcording now extends the abstract Page class and implements interface
@@ -17,6 +19,7 @@ public class SeeRecipeFromRecording extends Page implements ISeeRecipePage {
     private Button back;
     private Button saveButton;
     private Button editButton;
+    private Button deleteButton;
     
     private paneHeader Header;
     private VBox center;
@@ -88,6 +91,8 @@ public class SeeRecipeFromRecording extends Page implements ISeeRecipePage {
             stg.registerPage(r.getRecipeTitle(), ERP);
             stg.changeTo(r.getRecipeTitle());       
             });
+
+       
         }
 
     // Implementation of the createView method from Page
@@ -140,6 +145,14 @@ public class SeeRecipeFromRecording extends Page implements ISeeRecipePage {
                 "-fx-background-radius: 20; " +
                 "-fx-padding: 5 15 5 15;");    
                 Footer.getChildren().add(editButton);
+        
+        // this.deleteButton = Footer.creatButton("Delete Button", "-fx-background-color: #FFEBD7; " +
+        //         "-fx-text-fill: #8B4513; " +
+        //         "-fx-border-color: #8B4513; " +
+        //         "-fx-border-radius: 20; " +
+        //         "-fx-background-radius: 20; " +
+        //         "-fx-padding: 5 15 5 15;");    
+        //         Footer.getChildren().add(deleteButton);
         
         
         this.borderPane.setTop(Header);

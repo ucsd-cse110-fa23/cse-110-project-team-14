@@ -66,7 +66,7 @@ class mainPage extends Page {
         this.borderPane.setCenter(mainContent);
         this.borderPane.setBottom(paneFooter);
 
-        this.addButton = paneFooter.creatButton("addButton", "-fx-background-color: #FFEBD7; " +
+        this.addButton = paneFooter.creatButton("Create Recipe", "-fx-background-color: #FFEBD7; " +
                 "-fx-text-fill: #8B4513; " +
                 "-fx-border-color: #8B4513; " +
                 "-fx-border-radius: 20; " +
