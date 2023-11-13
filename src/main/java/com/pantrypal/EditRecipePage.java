@@ -82,6 +82,7 @@ public class EditRecipePage extends Page {
             r.setRecipeInstructions(detailLable.getText());
             SRP.setRecipe(r);
             // Save recipe to database
+            db.update(r);
 
             recipeTitleView.getRecipeTitleButton().setOnAction(e1 -> {
                 StageController stg = StageController.getInstance();

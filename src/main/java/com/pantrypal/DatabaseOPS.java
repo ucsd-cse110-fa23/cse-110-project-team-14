@@ -66,6 +66,7 @@ public class DatabaseOPS {
             MongoDatabase recipeDB = mongoClient.getDatabase("recipeDB");
             MongoCollection<Document> recipesCollection = recipeDB.getCollection(collectionName);
             recipesCollection.updateOne(eq("Title", recipe_obj.getRecipeTitle()), new Document("$set", new Document("Ingredients", recipe_obj.getRecipeIngredients())));
+            recipesCollection.updateOne(eq("Title", recipe_obj.getRecipeTitle()), new Document("$set", new Document("Instructions", recipe_obj.getRecipeInstructions())));
         }
     }
     
