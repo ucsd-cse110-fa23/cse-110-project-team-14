@@ -15,8 +15,9 @@ class mainPage extends Page {
 
     public mainPage(int width, int height) {
         super(width, height);
-        IntializeRecipeList.uploadRecipes();
-        
+        // IntializeRecipeList.uploadRecipes();
+        DatabaseOPS db = new DatabaseOPS("recipes");
+        db.initializeRecipesToList();
     }
     // pass garbage boolean
     // prevents initializing recipe list multiple times
