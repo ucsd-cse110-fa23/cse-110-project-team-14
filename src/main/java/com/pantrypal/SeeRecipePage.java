@@ -3,9 +3,11 @@ package com.pantrypal;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 // SeeRecipePage now extends the abstract Page class 
@@ -17,6 +19,7 @@ public class SeeRecipePage extends Page implements ISeeRecipePage{
     private String ingredients;
     private Button back;
     private Button editButton;
+    private Button deleteButton; 
     
     private paneHeader Header;
     private VBox center;
@@ -59,12 +62,58 @@ public class SeeRecipePage extends Page implements ISeeRecipePage{
          
         editButton.setOnAction(e -> {
             //OPEN EDIT PAGE
-            EditRecipePage ERP = new EditRecipePage(600, 600, this);
+            EditRecipePage ERP = new EditRecipePage(constants.width, constants.height, this);
             ERP.setRecipe(r);
             StageController stg = StageController.getInstance();
             stg.registerPage(r.getRecipeTitle(), ERP);
             stg.changeTo(r.getRecipeTitle());       
             });
+
+         deleteButton.setOnAction(e -> {
+            // Delete recipe from database
+            Popup confirmDelete = new Popup();
+            VBox confirmDeleteContent = new VBox();
+            confirmDeleteContent.styleProperty().set("-fx-background-color: #FFEBD7; " +
+                    "-fx-border-color: #8B4513; " +
+                    "-fx-border-radius: 20; " +
+                    "-fx-background-radius: 20; " +
+                    "-fx-padding: 20 20 20 20;");
+            Label label = new Label("Do you want to delete this recipe?");
+            Button yesButton = new Button("Yes");
+            Button noButton = new Button("No");
+            HBox buttonBox = new HBox();
+            buttonBox.setAlignment(Pos.CENTER);
+            buttonBox.getChildren().add(yesButton);
+            buttonBox.getChildren().add(noButton);
+            confirmDeleteContent.getChildren().add(label);
+            confirmDeleteContent.getChildren().add(buttonBox);
+
+            // add the label 
+            confirmDelete.getContent().add(confirmDeleteContent);
+
+            Stage stage = (Stage) this.getScene().getWindow();
+            confirmDelete.show(stage);
+            confirmDelete.setAutoHide(true);
+
+            yesButton.setOnAction(e1 -> {
+                db.deleteUno(r);
+                for(Object e2 : RecipeTitleListView.getInstance().getChildren()){
+                    if(e2 instanceof RecipeTitleView){
+                        if( ((RecipeTitleView)e2).getRecipe().equals(this.r)){
+                            RecipeTitleListView.getInstance().getChildren().remove(e2);
+                            break;
+                        }
+                    }
+                }
+
+                confirmDelete.hide();
+                stage.setScene(new mainPage(width, height, false).getScene());
+            });
+
+            noButton.setOnAction(e1 -> {
+                confirmDelete.hide();
+            });
+        });
         }
 
     // Implementation of the createView method from Page
@@ -109,6 +158,14 @@ public class SeeRecipePage extends Page implements ISeeRecipePage{
                 "-fx-background-radius: 20; " +
                 "-fx-padding: 5 15 5 15;");    
                 Footer.getChildren().add(editButton);
+
+        this.deleteButton = Footer.creatButton("Delete Button", "-fx-background-color: #FFEBD7; " +
+            "-fx-text-fill: #8B4513; " +
+            "-fx-border-color: #8B4513; " +
+            "-fx-border-radius: 20; " +
+            "-fx-background-radius: 20; " +
+            "-fx-padding: 5 15 5 15;");    
+                Footer.getChildren().add(deleteButton);
         
         
         this.borderPane.setTop(Header);

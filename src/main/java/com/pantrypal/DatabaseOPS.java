@@ -117,7 +117,7 @@ public class DatabaseOPS {
                 recipe.setRecipeIngredients(ingredients);
                 recipe.setRecipeInstructions(instructions);
                 RecipeTitleView recipeTitleView = new RecipeTitleView(recipe);
-                SeeRecipePage SRP = new SeeRecipePage(600, 600);
+                SeeRecipePage SRP = new SeeRecipePage(constants.width, constants.height);
                 SRP.setRecipe(recipe);
                 recipeTitleView.getRecipeTitleButton().setOnAction(e1 -> {
                     StageController stg = StageController.getInstance();

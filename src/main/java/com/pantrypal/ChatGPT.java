@@ -69,7 +69,7 @@ public class ChatGPT {
         this.response = generatedText;
 
         //TODO: Remove this print statement
-        //System.out.println(generatedText);
+        System.out.println("CHATGPT says: " + generatedText);
     }
 
     /**
@@ -92,6 +92,12 @@ public class ChatGPT {
         }
         else if (this.response.contains("Recipe Title")){
             indexFirstCharacter += 13;
+        }
+        else if (this.response.contains("Title:")){
+            indexFirstCharacter += 7;
+        }
+        else if (this.response.contains("Title")){
+            indexFirstCharacter += 6;
         }
 
         int indexOfNewLine = this.response.indexOf("\n", indexFirstCharacter);
