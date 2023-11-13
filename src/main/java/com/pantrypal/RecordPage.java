@@ -36,7 +36,7 @@ public class RecordPage extends Page {
     }
     public void addListeners() {
         // return to mainPage
-        backButton.setOnAction(e -> {
+        back.setOnAction(e -> {
             Stage stage = (Stage) this.getScene().getWindow();
             stage.setScene(new mainPage(width, height, false).getScene());
         });
