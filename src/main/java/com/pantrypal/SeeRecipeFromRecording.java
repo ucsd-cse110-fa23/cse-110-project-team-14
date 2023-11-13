@@ -66,8 +66,7 @@ public class SeeRecipeFromRecording extends Page implements ISeeRecipePage {
             SeeRecipePage SRP = new SeeRecipePage(600, 600);
             SRP.setRecipe(r);
             // Save recipe to database
-            // TODO: COMMENTED FOR TESTING
-            // db.insert(r);
+            db.insert(r);
 
             recipeTitleView.getRecipeTitleButton().setOnAction(e1 -> {
                 StageController stg = StageController.getInstance();

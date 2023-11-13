@@ -86,12 +86,16 @@ public class EditRecipePage extends Page {
             r.setRecipeInstructions(detailLable.getText());
             SRP.setRecipe(r);
             // Save recipe to database
-            db.update(r);
+
 
            
             // ADD TO DATABASE 
             if(fromRecording){
                 RecipeTitleListView.getInstance().getChildren().add(recipeTitleView); 
+                db.insert(r);
+            }
+            else{
+                db.update(r);
             }
             
             recipeTitleView.getRecipeTitleButton().setOnAction(e1 -> {

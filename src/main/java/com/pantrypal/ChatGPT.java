@@ -67,6 +67,9 @@ public class ChatGPT {
 
 
         this.response = generatedText;
+
+        //TODO: Remove this print statement
+        //System.out.println(generatedText);
     }
 
     /**
@@ -77,6 +80,20 @@ public class ChatGPT {
         while(this.response.charAt(indexFirstCharacter) == '\n'){
             indexFirstCharacter++;
         }
+        //If statement for a bug where chatGPT returns "Recipe:"
+        if(this.response.contains("Recipe:")){
+            indexFirstCharacter += 8;
+        }
+        else if (this.response.contains("Recipe")){
+            indexFirstCharacter += 7;
+        }
+        else if (this.response.contains("Recipe Title:")){
+            indexFirstCharacter += 14;
+        }
+        else if (this.response.contains("Recipe Title")){
+            indexFirstCharacter += 13;
+        }
+
         int indexOfNewLine = this.response.indexOf("\n", indexFirstCharacter);
 
         return response.substring(indexFirstCharacter, indexOfNewLine);
