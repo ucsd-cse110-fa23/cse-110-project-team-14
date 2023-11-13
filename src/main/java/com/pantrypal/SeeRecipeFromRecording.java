@@ -49,6 +49,10 @@ public class SeeRecipeFromRecording extends Page implements ISeeRecipePage {
 
     }
 
+    public Recipe getRecipe(){
+        return this.r;
+    }
+
     public void addListeners() {
         back.setOnAction(e -> {
             // go back to main page
@@ -62,7 +66,8 @@ public class SeeRecipeFromRecording extends Page implements ISeeRecipePage {
             SeeRecipePage SRP = new SeeRecipePage(600, 600);
             SRP.setRecipe(r);
             // Save recipe to database
-            db.insert(r);
+            // TODO: COMMENTED FOR TESTING
+            // db.insert(r);
 
             recipeTitleView.getRecipeTitleButton().setOnAction(e1 -> {
                 StageController stg = StageController.getInstance();

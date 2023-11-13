@@ -29,19 +29,22 @@ public class EditRecipePage extends Page {
     private Recipe r;
     private DatabaseOPS db;
     RecipeTitleView recipeTitleView; 
-    private SeeRecipeFromRecording SRPR;
+    // private SeeRecipeFromRecording SRPR;
     private SeeRecipePage SRP;
     
 
     final private String COLLECTION_NAME = "recipes";
             
 
-
+    private boolean fromRecording = false;
     public EditRecipePage(int width, int height, ISeeRecipePage SRP) {
         super(width, height);
         this.db = new DatabaseOPS(COLLECTION_NAME);
         if(SRP instanceof SeeRecipeFromRecording){
-            this.SRPR = (SeeRecipeFromRecording) SRPR;
+            fromRecording = true;
+            // this.SRPR = (SeeRecipeFromRescording) SRPR;
+            this.SRP = new SeeRecipePage(600, 600);
+            this.SRP.setRecipe( ((SeeRecipeFromRecording)SRP).getRecipe());
         }
         if(SRP instanceof SeeRecipePage){
             this.SRP = (SeeRecipePage) SRP;
@@ -63,14 +66,15 @@ public class EditRecipePage extends Page {
     public void addListeners() {
         back.setOnAction(e -> {
             // go back to main page
+            
             Stage stage = (Stage) this.getScene().getWindow();
-            if(SRP != null){
-                this.SRPR = (SeeRecipeFromRecording) SRPR;
+            if(fromRecording){
+                
+                stage.setScene(new mainPage(width, height, false).getScene());
             }
-            if(SRPR != null){
-                this.SRP = (SeeRecipePage) SRP;
+            else{
+                stage.setScene(this.SRP.getScene());
             }
-            stage.setScene(SRP.getScene());
         });
 
         //save button action
@@ -79,8 +83,12 @@ public class EditRecipePage extends Page {
             r.setRecipeIngredients(ingredientLabel.getText());
             r.setRecipeInstructions(detailLable.getText());
             SRP.setRecipe(r);
-            // Save recipe to database
-
+           
+            // ADD TO DATABASE 
+            if(fromRecording){
+                RecipeTitleListView.getInstance().getChildren().add(recipeTitleView); 
+            }
+            
             recipeTitleView.getRecipeTitleButton().setOnAction(e1 -> {
                 StageController stg = StageController.getInstance();
                 stg.registerPage(r.getRecipeTitle(), SRP);
