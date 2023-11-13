@@ -66,8 +66,15 @@ public class EditRecipePage extends Page {
     public void addListeners() {
         back.setOnAction(e -> {
             // go back to main page
+            
             Stage stage = (Stage) this.getScene().getWindow();
-            stage.setScene(this.SRP.getScene());
+            if(fromRecording){
+                
+                stage.setScene(new mainPage(width, height, false).getScene());
+            }
+            else{
+                stage.setScene(this.SRP.getScene());
+            }
         });
 
         //save button action
