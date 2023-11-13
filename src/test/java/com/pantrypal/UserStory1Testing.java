@@ -63,12 +63,37 @@ public class UserStory1Testing {
 
     @Test
     void testCreateRecipeObj() throws IOException, InterruptedException, URISyntaxException {
-        //MockTextToRecipe textToRecipe = new MockTextToRecipe("chicken, rice", "dinner", new Recipe());
+        TextToRecipe textToRecipe = new TextToRecipe("pasta, chicken, tomatoes", "lunch", new Recipe(), new MockChatGPT());
+        try {
+            textToRecipe.createRecipeObj();
+            assertEquals("Stovetop Baked Chicken Tomato Pasta", textToRecipe.getRecipe().getRecipeTitle());
 
-        // Act
-        //textToRecipe.createRecipeObj();
-        
-        // Assert
+            String ingredients = "Ingredients:\n- 2 chicken breasts, cubed\n- 1 cup pasta" +
+            "\n- 1/2 cup diced tomatoes" + 
+            "\n- 1/4 cup Parmesan cheese" +
+            "\n- 2 cloves garlic, minced" +
+            "\n- 2-3 tbsp olive oil" +
+            "\n- Salt and pepper\n";
+            assertEquals(ingredients, textToRecipe.getRecipe().getRecipeIngredients());
+
+            String instructions = "Instructions:" +
+            "\n1. In a large skillet, heat 2 tablespoons of olive oil over medium-high heat." +
+            "\n2. Add the cubed chicken and season with salt and pepper. Cook for 4-5 minutes or until chicken is cooked through" +
+            "\n3. Add the garlic and cook for one minute, stirring often" +
+            "\n4. Add the tomatoes and cook for 2-3 minutes" +
+            "\n5. Add the pasta and 1 cup of water. Bring to a boil, reduce to a simmer and cook for 8-10 minutes or until pasta is cooked through." + 
+            "\n6. Add the Parmesan cheese and remaining tablespoon of olive oil, stirring to combine." +
+            "\n7. Serve warm and enjoy!";
+            assertEquals(instructions, textToRecipe.getRecipe().getRecipeInstructions());
+            
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
         
         
     }

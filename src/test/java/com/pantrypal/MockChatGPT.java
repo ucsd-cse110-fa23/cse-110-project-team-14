@@ -34,7 +34,7 @@ public class MockChatGPT extends ChatGPT {
         "Please give me the recipe following this format:\n" +
         "Recipe title\n" +
         "Ingredients:\n" +
-        "Instructions:\n";;
+        "Instructions:\n";
 
         if(prompt.equals(prompt1)){
             response = "Chicken and Rice Casserole\n\nIngredients:\n\n- 2 cups cooked rice\n- 2 cups cooked and diced chicken" +
