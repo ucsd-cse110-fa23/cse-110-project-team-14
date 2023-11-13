@@ -11,10 +11,11 @@ public class Main extends Application {
         StageController stgControl = StageController.getInstance();
         stgControl.init(primaryStage);
         stgControl.registerPage("mainPage", root);
+
         stgControl.registerPage("MealTypePage",new MealTypePage(600,600));
         //TODO: we need load the all saved recipe from database
+
         stgControl.registerPage("RecordPage", new RecordPage(600, 600));
-        //TODO: add other page to stgControl
         primaryStage.show();
     }
 

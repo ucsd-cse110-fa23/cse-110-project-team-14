@@ -5,7 +5,7 @@ package com.pantrypal;
  */
 public class Recipe {
     private String recipeTitle;
-    private String recipeInstructions; // Take the JSON response object from ChatGPT and put instructions into list (TODO Later)
+    private String recipeInstructions; 
     private String recipeIngredients;
     private String mealType;
 
@@ -46,5 +46,4 @@ public class Recipe {
         return mealType;
     }
 
-    //TODO: Once we have the JSON response object from ChatGPT, we can parse it and put the instructions into a list
 }

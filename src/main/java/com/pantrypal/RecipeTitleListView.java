@@ -5,7 +5,7 @@ import javafx.scene.layout.VBox;
 
 public class RecipeTitleListView extends VBox {
     // Create the recipeTitle button
-    //private Button recipeTitleButton = .toggleRecipeTitleButton();
+    // private Button recipeTitleButton = .toggleRecipeTitleButton();
     private static final RecipeTitleListView instance = new RecipeTitleListView();
 
     RecipeTitleListView() {

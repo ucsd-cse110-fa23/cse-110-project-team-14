@@ -11,11 +11,12 @@ import java.net.URISyntaxException;
 
 public class RecordPage extends Page {
     private paneHeader paneHeader;
-    //    private Footer footer;
     private paneFooter paneFooter;
     private VBox center;
     private Button recordButton;
+
     private Button back;
+
     public LiveRecorder liveRecorder;
     public Whisper whisper = new Whisper();
     private boolean isRecording;
@@ -34,9 +35,17 @@ public class RecordPage extends Page {
         return this.mealType;
     }
     public void addListeners() {
+        // return to mainPage
+        back.setOnAction(e -> {
+            Stage stage = (Stage) this.getScene().getWindow();
+            stage.setScene(new mainPage(width, height, false).getScene());
+        });
+
+        // initialize recording
+        // open recipe
         recordButton.setOnAction(e -> {
-            // isRecording = !isRecording; // TOGGLES
-            this.setIsrecording(!this.getIsRecording()); // this works?
+            
+            this.setIsrecording(!this.getIsRecording()); 
 
             if (this.getIsRecording()) {
                 recordButton.setText("RECORDING...?");
@@ -44,7 +53,6 @@ public class RecordPage extends Page {
 
             }
             if (!this.getIsRecording()) {
-                // HERE WE WOULD OPEN THE NEW WINDOW
                 this.liveRecorder.stopRecording();
                 recordButton.setText("GOT VOICE");
 
@@ -52,13 +60,12 @@ public class RecordPage extends Page {
                     // make recipe
                     TextToRecipe t2R = new TextToRecipe(this.whisper.getResponse(), mealType, new Recipe());
                     t2R.createRecipeObj();
-                    SeeRecipePage SRP = new SeeRecipePage(600, 600);
+                    SeeRecipeFromRecording SRP = new SeeRecipeFromRecording(600, 600);
                     SRP.setRecipe(t2R.getRecipe());
 
                     // make a listener for recipeTitleView
                     RecipeTitleView recipeTitleView = new RecipeTitleView(t2R.getRecipe());
-                    //remove this ??
-                    //RecipeTitleListView.getInstance().getChildren().add(recipeTitleView); 
+                    
 
                     recipeTitleView.getRecipeTitleButton().setOnAction(e1 -> {
                         StageController stg = StageController.getInstance();
@@ -70,9 +77,7 @@ public class RecordPage extends Page {
                     stg.registerPage(t2R.getRecipe().getRecipeTitle(), SRP);
                     stg.changeTo(t2R.getRecipe().getRecipeTitle());
 
-//                    Stage stage = (Stage) this.getScene().getWindow();
-//                    stage.setScene(SRP.getScene());
-                    // System.out.println(rp.whisper.getResponse());
+
                 } catch (InterruptedException e1) {
                     e1.printStackTrace();
                 } catch (IOException e1) {
@@ -111,6 +116,7 @@ public class RecordPage extends Page {
             this.borderPane.setTop(this.paneHeader);
             this.borderPane.setCenter(this.center);
             this.borderPane.setBottom(this.paneFooter);
+
             this.borderPane.setStyle("-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #FFE4B5, #FFDEAD, #FFE4B5, #FFDEAD); " +
                     "-fx-border-color: #DEB887; " +
                     "-fx-border-width: 10; " +
@@ -123,7 +129,9 @@ public class RecordPage extends Page {
                     "-fx-border-radius: 20; " +
                     "-fx-background-radius: 20; " +
                     "-fx-padding: 5 15 5 15;");
+
             back = paneFooter.creatButton("Back", "-fx-background-color: #FFEBD7; " +
+
                     "-fx-text-fill: #8B4513; " +
                     "-fx-border-color: #8B4513; " +
                     "-fx-border-radius: 20; " +
