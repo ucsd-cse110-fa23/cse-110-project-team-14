@@ -17,6 +17,7 @@ import static com.mongodb.client.model.Sorts.descending;
 
 import static java.util.Arrays.asList;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 
@@ -30,6 +31,7 @@ public class DatabaseOPS {
 
     DatabaseOPS(String collectionName) {
         this.collectionName = collectionName;
+
 
     }
     
@@ -100,13 +102,36 @@ public class DatabaseOPS {
         }
     }
 
-    public void initializeRecipesToList() {
+
+    // Remove this and add it to the controller
+    public ArrayList<Recipe> initializeRecipesToList() {
         try (mongoClient) {
             MongoDatabase recipeDB = mongoClient.getDatabase("recipeDB");
             MongoCollection<Document> recipesCollection = recipeDB.getCollection(collectionName);
             
             // access all elements in the collection
             Iterator<Document> cursor = recipesCollection.find().iterator();
+            // while (cursor.hasNext()) {
+            //     Document doc = cursor.next();
+            //     String title = doc.getString("Title");
+            //     String ingredients = doc.getString("Ingredients");
+            //     String instructions = doc.getString("Instructions");
+            //     Recipe recipe = new Recipe();
+            //     recipe.setRecipeTitle(title);
+            //     recipe.setRecipeIngredients(ingredients);
+            //     recipe.setRecipeInstructions(instructions);
+            //     RecipeTitleView recipeTitleView = new RecipeTitleView(recipe); //<-- This should be UI
+            //     SeeRecipePage SRP = new SeeRecipePage(constants.width, constants.height); //<-- This should be UI
+            //     SRP.setRecipe(recipe);
+            //     recipeTitleView.getRecipeTitleButton().setOnAction(e1 -> {
+            //         StageController stg = StageController.getInstance();
+            //         stg.registerPage(recipe.getRecipeTitle(), SRP);
+            //         stg.changeTo(recipe.getRecipeTitle());
+            //     });
+            //     RecipeTitleListView.getInstance().getChildren().add(recipeTitleView);
+
+            // }
+            ArrayList<Recipe> recipes = new ArrayList<Recipe>();
             while (cursor.hasNext()) {
                 Document doc = cursor.next();
                 String title = doc.getString("Title");
@@ -116,17 +141,12 @@ public class DatabaseOPS {
                 recipe.setRecipeTitle(title);
                 recipe.setRecipeIngredients(ingredients);
                 recipe.setRecipeInstructions(instructions);
-                RecipeTitleView recipeTitleView = new RecipeTitleView(recipe);
-                SeeRecipePage SRP = new SeeRecipePage(constants.width, constants.height);
-                SRP.setRecipe(recipe);
-                recipeTitleView.getRecipeTitleButton().setOnAction(e1 -> {
-                    StageController stg = StageController.getInstance();
-                    stg.registerPage(recipe.getRecipeTitle(), SRP);
-                    stg.changeTo(recipe.getRecipeTitle());
-                });
-                RecipeTitleListView.getInstance().getChildren().add(recipeTitleView);
+                recipe.setRecipeIndex(Globals.recipeIndex); //Set the order when the recipe was created
+                Globals.recipeIndex++; //Add one more to the counter to keep track of the order
+                recipes.add(recipe);
 
             }
+            return recipes;
         }
     }
 }

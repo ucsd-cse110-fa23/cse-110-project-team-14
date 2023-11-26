@@ -44,9 +44,9 @@
 //             recipe_obj.setRecipeIngredients("TIngred" + i);
 //             recipe_obj.setRecipeInstructions("TInstr" + i);
 
-//             db2.insert(recipe_obj);
-//             db2 = new DatabaseOPS(COLLECTION_NAME);
-//             Document recipe = db2.findUno(recipe_obj);
+//             db.insert(recipe_obj);
+//             db = new DatabaseOPS(COLLECTION_NAME);
+//             Document recipe = db.findUno(recipe_obj);
 //             assertEquals(recipe_obj.getRecipeTitle(), recipe.get("Title"));
 //             assertEquals(recipe_obj.getRecipeIngredients(), recipe.get("Ingredients"));
 //             assertEquals(recipe_obj.getRecipeInstructions(), recipe.get("Instructions"));
@@ -54,7 +54,12 @@
 //             long size = recipesCollection.countDocuments();
 //             assertEquals(i + 1, size);
 //         }
+
 //     }
+
+    
 
 
 // }
+
+

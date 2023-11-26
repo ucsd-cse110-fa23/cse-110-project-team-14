@@ -8,6 +8,7 @@ public class Recipe {
     private String recipeInstructions; 
     private String recipeIngredients;
     private String mealType;
+    private int recipeIndex;  //Used in order to sort recipes by time created
 
     Recipe() {
     }
@@ -44,6 +45,14 @@ public class Recipe {
     @SuppressWarnings("unused")
     String getMealType() {
         return mealType;
+    }
+
+    void setRecipeIndex(int recipeIndex) {
+        this.recipeIndex = recipeIndex;
+    }
+
+    int getRecipeIndex() {
+        return recipeIndex;
     }
 
 }
