@@ -3,6 +3,7 @@ package com.pantrypal;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -139,7 +140,11 @@ public class SeeRecipePage extends Page implements ISeeRecipePage{
 
         mainContent.getChildren().addAll(ingredientLabel, detailLable);
         Header = new paneHeader();
-        this.center = mainContent;
+        ScrollPane recipePageScroller = new ScrollPane(mainContent);
+        recipePageScroller.setFitToWidth(true);
+        VBox scrollerMain = new VBox();
+        scrollerMain.getChildren().add(recipePageScroller);
+        this.center = scrollerMain;
         Footer = new paneFooter();
         titleText = new Text(title);
         Header.setTitleInMiddle(titleText);
