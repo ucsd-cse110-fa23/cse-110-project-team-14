@@ -4,6 +4,8 @@
 // import static org.junit.jupiter.api.Assertions.assertEquals;
 // import java.io.IOException;
 // import java.net.URISyntaxException;
+// import java.util.ArrayList;
+
 // import com.mongodb.client.MongoClient;
 // import com.mongodb.client.MongoClients;
 // import com.mongodb.client.MongoCollection;
@@ -44,9 +46,9 @@
 //             recipe_obj.setRecipeIngredients("TIngred" + i);
 //             recipe_obj.setRecipeInstructions("TInstr" + i);
 
-//             db.insert(recipe_obj);
-//             db = new DatabaseOPS(COLLECTION_NAME);
-//             Document recipe = db.findUno(recipe_obj);
+//             db2.insert(recipe_obj);
+//             db2 = new DatabaseOPS(COLLECTION_NAME);
+//             Document recipe = db2.findUno(recipe_obj);
 //             assertEquals(recipe_obj.getRecipeTitle(), recipe.get("Title"));
 //             assertEquals(recipe_obj.getRecipeIngredients(), recipe.get("Ingredients"));
 //             assertEquals(recipe_obj.getRecipeInstructions(), recipe.get("Instructions"));
@@ -56,6 +58,36 @@
 //         }
 
 //     }
+
+//     //Testing that the last one added is at the top of the list
+//     @Test
+//     public void testNewest(){
+//         ArrayList<Recipe> recipes = new ArrayList<Recipe>();
+//         DatabaseOPS db = new DatabaseOPS(COLLECTION_NAME);
+//         MongoDatabase recipeDB = mongoClient.getDatabase("recipeDB");
+//         MongoCollection<Document> recipesCollection = recipeDB.getCollection(COLLECTION_NAME);
+//         db.deleteAll();
+//         // Insert recipe_obj into recipesCollection using for loop and check the size everytime 
+//         for (int i = 0; i < 10; i++) {
+//             DatabaseOPS db2 = new DatabaseOPS(COLLECTION_NAME);
+//             Recipe recipe_obj = new Recipe();
+//             recipe_obj.setRecipeTitle("TR" + i);
+//             recipe_obj.setRecipeIngredients("TIngred" + i);
+//             recipe_obj.setRecipeInstructions("TInstr" + i);
+
+//             db2.insert(recipe_obj);
+//         }
+
+//         DatabaseOPS db3 = new DatabaseOPS(COLLECTION_NAME);
+//         recipes = db3.initializeRecipesToList();
+
+
+//         for(int i = 0; i < recipes.size(); i++){
+//             Recipe recipe = recipes.get(i);
+//             assertEquals(recipe.getRecipeIndex(), i);
+//         }
+//     }
+
 
     
 
