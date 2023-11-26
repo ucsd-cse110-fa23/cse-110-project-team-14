@@ -12,12 +12,34 @@ class mainPage extends Page {
     paneHeader paneHeader;
     paneFooter paneFooter;
     private Button addButton;
-
+    //private arraylist<recipe> recipes; which has all the recipes and we use it to sort 
     public mainPage(int width, int height) {
         super(width, height);
         // IntializeRecipeList.uploadRecipes();
         DatabaseOPS db = new DatabaseOPS("recipes");
-        db.initializeRecipesToList();
+        Globals.recipes = db.initializeRecipesToList(); //<-- this will return the arraylist
+        for (int i = Globals.recipes.size() - 1; i >= 0; i--) {
+            Recipe recipe = Globals.recipes.get(i);
+            RecipeTitleView recipeTitleView = new RecipeTitleView(recipe); //<-- This should be UI
+            SeeRecipePage SRP = new SeeRecipePage(constants.width, constants.height); //<-- This should be UI
+            SRP.setRecipe(recipe);
+            recipeTitleView.getRecipeTitleButton().setOnAction(e1 -> {
+                StageController stg = StageController.getInstance();
+                stg.registerPage(recipe.getRecipeTitle(), SRP);
+                stg.changeTo(recipe.getRecipeTitle());
+            });
+            RecipeTitleListView.getInstance().getChildren().add(recipeTitleView);
+        }
+
+        // RecipeTitleView recipeTitleView = new RecipeTitleView(recipe); //<-- This should be UI
+        //         SeeRecipePage SRP = new SeeRecipePage(constants.width, constants.height); //<-- This should be UI
+        //         SRP.setRecipe(recipe);
+        //         recipeTitleView.getRecipeTitleButton().setOnAction(e1 -> {
+        //             StageController stg = StageController.getInstance();
+        //             stg.registerPage(recipe.getRecipeTitle(), SRP);
+        //             stg.changeTo(recipe.getRecipeTitle());
+        //         });
+        //         RecipeTitleListView.getInstance().getChildren().add(recipeTitleView);
     }
     // pass garbage boolean
     // prevents initializing recipe list multiple times

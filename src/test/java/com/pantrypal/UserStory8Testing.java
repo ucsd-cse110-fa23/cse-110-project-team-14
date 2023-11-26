@@ -10,7 +10,7 @@ import static org.mockito.Mockito.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-public class UserStroy8Testing {
+public class UserStory8Testing {
     @Test
     public void testWhisper() {
         MockWhisper whisper = new MockWhisper();

@@ -3,6 +3,7 @@ package com.pantrypal;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -122,8 +123,8 @@ public class SeeRecipePage extends Page implements ISeeRecipePage{
 
     public void createView() {
 
-        VBox mainContent = new VBox();
-        mainContent.setAlignment(Pos.TOP_LEFT);
+        VBox recipeBox = new VBox();
+        recipeBox.setAlignment(Pos.TOP_LEFT);
 
         detailLable = new Label(detail);
         detailLable.setTextFill(Color.web("#8B4513"));
@@ -137,7 +138,15 @@ public class SeeRecipePage extends Page implements ISeeRecipePage{
         //changing font size so itll fit
         ingredientLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 20;");
 
-        mainContent.getChildren().addAll(ingredientLabel, detailLable);
+        recipeBox.getChildren().addAll(ingredientLabel, detailLable);
+        recipeBox.setStyle("-fx-background-color: #FFEBD7;");
+        ScrollPane recipePageScroller = new ScrollPane(recipeBox);
+        recipePageScroller.setPrefSize(1000, 1000);
+        recipePageScroller.setFitToWidth(true);
+        VBox mainContent = new VBox();
+        mainContent.minHeight(1000);
+        mainContent.minWidth(1000);
+        mainContent.getChildren().add(recipePageScroller);
         Header = new paneHeader();
         this.center = mainContent;
         Footer = new paneFooter();

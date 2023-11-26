@@ -77,10 +77,20 @@ public class SeeRecipeFromRecording extends Page implements ISeeRecipePage {
                 stg.changeTo(r.getRecipeTitle());
             });
     
-            RecipeTitleListView.getInstance().getChildren().add(recipeTitleView); 
+            
+
+            //Update the global counters
+            r.setRecipeIndex(Globals.recipeIndex);
+            Globals.recipeIndex++;
+
+            //Add recipe to the global recipe ArrayList
+            Globals.recipes.add(r);
+
+            // Add recipe to the recipe list 
+            //Add it to the top of the list
+            RecipeTitleListView.getInstance().getChildren().add(0, recipeTitleView);
             Stage stage = (Stage) this.getScene().getWindow();
             stage.setScene(new mainPage(width, height, false).getScene());
-           
         });
         
         editButton.setOnAction(e -> {
