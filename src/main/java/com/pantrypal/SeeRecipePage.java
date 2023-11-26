@@ -123,8 +123,8 @@ public class SeeRecipePage extends Page implements ISeeRecipePage{
 
     public void createView() {
 
-        VBox mainContent = new VBox();
-        mainContent.setAlignment(Pos.TOP_LEFT);
+        VBox recipeBox = new VBox();
+        recipeBox.setAlignment(Pos.TOP_LEFT);
 
         detailLable = new Label(detail);
         detailLable.setTextFill(Color.web("#8B4513"));
@@ -138,13 +138,17 @@ public class SeeRecipePage extends Page implements ISeeRecipePage{
         //changing font size so itll fit
         ingredientLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 20;");
 
-        mainContent.getChildren().addAll(ingredientLabel, detailLable);
-        Header = new paneHeader();
-        ScrollPane recipePageScroller = new ScrollPane(mainContent);
+        recipeBox.getChildren().addAll(ingredientLabel, detailLable);
+        recipeBox.setStyle("-fx-background-color: #FFEBD7;");
+        ScrollPane recipePageScroller = new ScrollPane(recipeBox);
+        recipePageScroller.setPrefSize(1000, 1000);
         recipePageScroller.setFitToWidth(true);
-        VBox scrollerMain = new VBox();
-        scrollerMain.getChildren().add(recipePageScroller);
-        this.center = scrollerMain;
+        VBox mainContent = new VBox();
+        mainContent.minHeight(1000);
+        mainContent.minWidth(1000);
+        mainContent.getChildren().add(recipePageScroller);
+        Header = new paneHeader();
+        this.center = mainContent;
         Footer = new paneFooter();
         titleText = new Text(title);
         Header.setTitleInMiddle(titleText);
