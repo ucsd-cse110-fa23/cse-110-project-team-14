@@ -18,7 +18,7 @@ public class RecordPage extends Page {
     private Button back;
 
     public LiveRecorder liveRecorder;
-    public Whisper whisper = new Whisper();
+    // Whisper whisper = Whisper.getInstance();
     private boolean isRecording;
     private String mealType;
 
@@ -58,7 +58,9 @@ public class RecordPage extends Page {
 
                 try {
                     // make recipe
-                    TextToRecipe t2R = new TextToRecipe(this.whisper.getResponse(), mealType, new Recipe(), new ChatGPT());
+                    String transcribedText = Whisper.getInstance().getResponse();
+                    TextToRecipe t2R = new TextToRecipe(transcribedText, mealType, new Recipe(), new ChatGPT());
+                    Whisper.getInstance().setText(transcribedText);
                     t2R.createRecipeObj();
                     SeeRecipeFromRecording SRP = new SeeRecipeFromRecording(constants.width, constants.height);
                     SRP.setRecipe(t2R.getRecipe());

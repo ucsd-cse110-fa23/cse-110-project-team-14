@@ -10,6 +10,22 @@ public class Whisper {
     private static final String TOKEN = "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";
     private static final String MODEL = "whisper-1";
     private static final String FILE_PATH = "recording.wav"; // path to audio TODO: 
+    private String currentText;
+
+    private static final Whisper instance = new Whisper();
+    public static Whisper getInstance() {
+        return instance;
+    }
+
+    public String getText(){
+        return currentText;
+    }
+    
+    public void setText(String s){
+        currentText = s;
+    }
+
+    
 
     private static void writeParameterToOutputStream(
             OutputStream outputStream,
