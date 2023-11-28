@@ -37,12 +37,11 @@ public class Recipe {
         return recipeInstructions;
     }
 
-    @SuppressWarnings("unused")
     void setMealType(String mealType) {
-        this.mealType = mealType;
+        //Capitalize the first letter of the mealtype
+        this.mealType = mealType.substring(0, 1).toUpperCase() + mealType.substring(1);;
     }
 
-    @SuppressWarnings("unused")
     String getMealType() {
         return mealType;
     }
