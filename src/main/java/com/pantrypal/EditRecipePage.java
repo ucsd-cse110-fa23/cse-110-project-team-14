@@ -80,7 +80,7 @@ public class EditRecipePage extends Page {
 
         //save button action
         saveButton.setOnAction(e -> {
-
+            int index = Globals.recipes.indexOf(r);
             r.setRecipeIngredients(ingredientLabel.getText());
             r.setRecipeInstructions(detailLable.getText());
             SRP.setRecipe(r);
@@ -92,9 +92,16 @@ public class EditRecipePage extends Page {
             if(fromRecording){
                 RecipeTitleListView.getInstance().getChildren().add(recipeTitleView); 
                 db.insert(r);
+                Globals.recipes.add(r);
             }
             else{
                 db.update(r);
+                if (index != -1){
+                    Globals.recipes.set(index, r);
+                }
+                else{
+                    System.out.println("ERROR: Recipe not found in Globals.recipes");
+                }
             }
             
             recipeTitleView.getRecipeTitleButton().setOnAction(e1 -> {

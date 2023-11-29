@@ -98,6 +98,7 @@ public class SeeRecipePage extends Page implements ISeeRecipePage{
 
             yesButton.setOnAction(e1 -> {
                 db.deleteUno(r);
+                Globals.recipes.remove(r);
                 for(Object e2 : RecipeTitleListView.getInstance().getChildren()){
                     if(e2 instanceof RecipeTitleView){
                         if( ((RecipeTitleView)e2).getRecipe().equals(this.r)){
