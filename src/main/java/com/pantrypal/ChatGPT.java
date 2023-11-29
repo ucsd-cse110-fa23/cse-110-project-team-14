@@ -81,22 +81,24 @@ public class ChatGPT {
             indexFirstCharacter++;
         }
         //If statement for a bug where chatGPT returns "Recipe:"
-        if(this.response.contains("Recipe:")){
+        String title_checker = this.response; //Use to check where does the title starts 
+        title_checker.toLowerCase();
+        if(this.response.contains("recipe:")){
             indexFirstCharacter += 8;
         }
-        else if (this.response.contains("Recipe")){
+        else if (this.response.contains("recipe")){
             indexFirstCharacter += 7;
         }
-        else if (this.response.contains("Recipe Title:")){
+        else if (this.response.contains("recipe title:")){
             indexFirstCharacter += 14;
         }
-        else if (this.response.contains("Recipe Title")){
+        else if (this.response.contains("recipe title")){
             indexFirstCharacter += 13;
         }
-        else if (this.response.contains("Title:")){
+        else if (this.response.contains("title:")){
             indexFirstCharacter += 7;
         }
-        else if (this.response.contains("Title")){
+        else if (this.response.contains("title")){
             indexFirstCharacter += 6;
         }
 
