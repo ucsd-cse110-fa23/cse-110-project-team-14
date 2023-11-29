@@ -1,6 +1,7 @@
 package com.pantrypal;
 import javafx.application.Application;
 import javafx.stage.Stage;
+
 public class Main extends Application {
     mainPage root = new mainPage(constants.width, constants.height);
     @Override
