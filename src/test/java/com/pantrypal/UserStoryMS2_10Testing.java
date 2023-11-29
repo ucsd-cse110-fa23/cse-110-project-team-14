@@ -26,8 +26,7 @@ public class UserStoryMS2_10Testing {
             count--;
             recipes.add(recipe_obj);
         }
-        Sort sort = new Sort();
-        recipes = sort.newToOldSort(recipes);
+        recipes = Sort.newToOldSort(recipes);
         int j = 9;
         for (int i = 0; i < 10; i++) {
             assertEquals("TInstr" + (j), recipes.get(i).getRecipeInstructions());
@@ -51,8 +50,7 @@ public class UserStoryMS2_10Testing {
             title++;
             recipes.add(recipe_obj);
         }
-        Sort sort = new Sort();
-        recipes = sort.oldToNewSort(recipes);
+        recipes = Sort.oldToNewSort(recipes);
         int j = 9;
         for (int i = 0; i < 10; i++) {
             assertEquals("TInstr" + (j), recipes.get(i).getRecipeInstructions());
@@ -75,8 +73,7 @@ public class UserStoryMS2_10Testing {
             title--;
             recipes.add(recipe_obj);
         }
-        Sort sort = new Sort();
-        recipes = sort.aToZSort(recipes);
+        recipes = Sort.aToZSort(recipes);
         title = 90;
         for (int i = 0; i < 10; i++) {
             assertEquals(title + "TR" + i, recipes.get(i).getRecipeTitle());
@@ -103,8 +100,7 @@ public class UserStoryMS2_10Testing {
             title++;
             recipes.add(recipe_obj);
         }
-        Sort sort = new Sort();
-        recipes = sort.zToASort(recipes);
+        recipes = Sort.zToASort(recipes);
         title = 65;
         for (int i = 0; i < 10; i++) {
             assertEquals(title + "TR" + i, recipes.get(i).getRecipeTitle());
@@ -146,13 +142,7 @@ public class UserStoryMS2_10Testing {
             e.printStackTrace();
         }
 
-        MockWhisper whisper3 = new MockWhisper();
 
-        String prompt = "Make me a dinner recipe using only these ingredients: chicken, rice. \n" +
-        "Please give me the recipe following this format:\n" +
-        "Recipe title\n" +
-        "Ingredients:\n" +
-        "Instructions:\n";
         TextToRecipe textToRecipe3 = new TextToRecipe(whisper.getResponse(0), "dinner", new Recipe(), new MockChatGPT());
         try {
             textToRecipe3.createRecipeObj();
@@ -167,8 +157,7 @@ public class UserStoryMS2_10Testing {
             e.printStackTrace();
         }
 
-        Sort sort = new Sort();
-        recipes = sort.aToZSort(recipes);
+        recipes = Sort.aToZSort(recipes);
         assertEquals("Baked Cinnamon Apple Crisp", recipes.get(2).getRecipeTitle());
         assertEquals("Chicken and Rice Casserole", recipes.get(1).getRecipeTitle());
         assertEquals("Egg Tortilla Breakfast Sandwich", recipes.get(0).getRecipeTitle());
