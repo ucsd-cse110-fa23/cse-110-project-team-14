@@ -34,6 +34,7 @@ public class RecordPage extends Page {
     {
         return this.mealType;
     }
+    
     public void addListeners() {
         // return to mainPage
         back.setOnAction(e -> {

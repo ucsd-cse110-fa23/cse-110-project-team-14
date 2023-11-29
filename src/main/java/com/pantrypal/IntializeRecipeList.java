@@ -15,8 +15,10 @@ public class IntializeRecipeList {
                 String name = parts[0];
                 String ingredients = parts[1];
                 String instructions = parts[2];
+                // String mealType = parts[3];
                 System.out.println(name + ";" + ingredients + ";" + instructions);
                 Recipe recipe = new Recipe();
+                // recipe.setMealType(mealType);
                 recipe.setRecipeTitle(name);
                 recipe.setRecipeIngredients(ingredients);
                 recipe.setRecipeInstructions(instructions);

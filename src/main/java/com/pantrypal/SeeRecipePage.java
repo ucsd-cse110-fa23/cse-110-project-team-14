@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 public class SeeRecipePage extends Page implements ISeeRecipePage{
 
     private String title;
+    private String mealType;
     private String detail;
     private String ingredients;
     private Button back;
@@ -34,9 +35,14 @@ public class SeeRecipePage extends Page implements ISeeRecipePage{
 
     final private String COLLECTION_NAME = "recipes";
             
-
     public SeeRecipePage(int width, int height) {
         super(width, height);
+        this.db = new DatabaseOPS(COLLECTION_NAME);
+    }
+
+    public SeeRecipePage(int width, int height, Recipe r) {
+        super(width, height);
+        // setRecipe(r);
         this.db = new DatabaseOPS(COLLECTION_NAME);
     }
 
@@ -44,6 +50,7 @@ public class SeeRecipePage extends Page implements ISeeRecipePage{
         this.r = r;
         this.recipeTitleView = new RecipeTitleView(r);
         this.title = r.getRecipeTitle();
+        this.mealType = r.getMealType();
         this.detail = r.getRecipeInstructions();
         this.ingredients = r.getRecipeIngredients();
         detailLable.setText(detail);
@@ -151,7 +158,7 @@ public class SeeRecipePage extends Page implements ISeeRecipePage{
         Header = new paneHeader();
         this.center = mainContent;
         Footer = new paneFooter();
-        titleText = new Text(title);
+        titleText = new Text(mealType + ": " + title);
         Header.setTitleInMiddle(titleText);
         this.back = Footer.creatButton("Back to Home", "-fx-background-color: #FFEBD7; " +
                 "-fx-text-fill: #8B4513; " +

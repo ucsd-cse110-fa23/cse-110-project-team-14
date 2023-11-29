@@ -16,7 +16,7 @@ public class RecipeTitleView extends HBox {
 
         // Edit to correct width to fill in up to borders
         // Change colors of text and box
-        this.recipeName = new Button(recipe.getRecipeTitle()); // create recipeTitle name recipeTitle field
+        this.recipeName = new Button(recipe.getMealType() + ": " + recipe.getRecipeTitle()); // create recipeTitle name recipeTitle field
         recipeName.setPrefSize(1000, 40); // set size of the recipeTitle button
         recipeName.setStyle("-fx-background-color: #FFEBD7; ; -fx-text-fill: #8B4513; -fx-font-size: 30; -fx-border-width: 0;"); // set background color of recipefield
              
