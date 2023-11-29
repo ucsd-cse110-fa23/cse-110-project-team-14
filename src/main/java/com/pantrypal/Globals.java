@@ -8,4 +8,8 @@ import java.util.ArrayList;
 public class Globals {
     public static ArrayList<Recipe> recipes = new ArrayList<Recipe>();
     public static int recipeIndex = 0;
+    enum SortingState {
+        NEWTOOLD, OLDTONEW, ATOZ, ZTOA
+    }
+    public static SortingState sortingState = SortingState.NEWTOOLD;
 }
