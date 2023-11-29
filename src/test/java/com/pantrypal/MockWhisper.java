@@ -33,6 +33,12 @@ public class MockWhisper {
         else if(response == 6){
             return "bread, egg, tortilla";
         }
+        else if (response == 7){
+            return "chicken, rice";
+        }
+        else if (response == 8){
+            return "chicken, ricee";
+        }
         
         return "chicken, rice";
     }
