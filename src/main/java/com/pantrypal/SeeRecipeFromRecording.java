@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 public class SeeRecipeFromRecording extends Page implements ISeeRecipePage {
 
     private String title;
+    private String mealType;
     private String detail;
     private String ingredients;
     private Button back;
@@ -47,6 +48,7 @@ public class SeeRecipeFromRecording extends Page implements ISeeRecipePage {
         this.r = r;
         this.recipeTitleView = new RecipeTitleView(r);
         this.title = r.getRecipeTitle();
+        this.mealType = r.getMealType();
         this.detail = r.getRecipeInstructions();
         this.ingredients = r.getRecipeIngredients();
 
@@ -135,7 +137,7 @@ public class SeeRecipeFromRecording extends Page implements ISeeRecipePage {
         Header = new paneHeader();
         this.center = mainContent;
         Footer = new paneFooter();
-        titleText = new Text(title);
+        titleText = new Text(mealType + ": " + title);
         Header.setTitleInMiddle(titleText);
         this.back = Footer.creatButton("Cancel", "-fx-background-color: #FFEBD7; " +
                 "-fx-text-fill: #8B4513; " +

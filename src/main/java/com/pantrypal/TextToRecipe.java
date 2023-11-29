@@ -25,6 +25,8 @@ public class TextToRecipe {
 
     void createRecipeObj() throws IOException,
             InterruptedException, URISyntaxException {
+        //Fill Recipe Type        
+        recipe.setMealType(mealType);
 
         //String oldPrompt = "Make me a "+mealType+ " recipe using only these ingredients: " + this.ingredients;
         String prompt = "Make me a "+mealType+ " recipe using only these ingredients: "
@@ -45,6 +47,7 @@ public class TextToRecipe {
 
         //Fill recipe instructions
         recipe.setRecipeInstructions(chatGPT.parseRecipeInstructions());
+        
 
     }
 
