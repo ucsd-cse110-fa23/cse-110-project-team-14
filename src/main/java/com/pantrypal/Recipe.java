@@ -1,4 +1,7 @@
 package com.pantrypal;
+
+import static com.mongodb.client.model.Filters.in;
+
 /*
  * Recipe class to store recipe information
  * This is what is shown once you clicked on the recipe list
@@ -39,7 +42,12 @@ public class Recipe {
 
     void setMealType(String mealType) {
         //Capitalize the first letter of the mealtype
-        this.mealType = mealType.substring(0, 1).toUpperCase() + mealType.substring(1);;
+        if(mealType != null){
+            this.mealType = mealType.substring(0, 1).toUpperCase() + mealType.substring(1);
+        }
+        else{
+            this.mealType = mealType;
+        }
     }
 
     String getMealType() {
