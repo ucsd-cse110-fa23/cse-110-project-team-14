@@ -1,5 +1,8 @@
 package com.pantrypal;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -19,7 +22,7 @@ public class SeeRecipeFromRecording extends Page implements ISeeRecipePage {
     private Button back;
     private Button saveButton;
     private Button editButton;
-    private Button deleteButton;
+    private Button regenButton;
     
     private paneHeader Header;
     private VBox center;
@@ -46,6 +49,7 @@ public class SeeRecipeFromRecording extends Page implements ISeeRecipePage {
         this.title = r.getRecipeTitle();
         this.detail = r.getRecipeInstructions();
         this.ingredients = r.getRecipeIngredients();
+
         detailLable.setText(detail);
         ingredientLabel.setText(ingredients);
         titleText.setText(title);
@@ -102,7 +106,9 @@ public class SeeRecipeFromRecording extends Page implements ISeeRecipePage {
             stg.changeTo(r.getRecipeTitle());       
             });
 
-       
+        regenButton.setOnAction(e -> {
+            remakeRecipe();
+        });
         }
 
     // Implementation of the createView method from Page
@@ -148,13 +154,21 @@ public class SeeRecipeFromRecording extends Page implements ISeeRecipePage {
             "-fx-padding: 5 15 5 15;");  
             Footer.getChildren().add(saveButton);
         
-        this.editButton = Footer.creatButton("Edit Button", "-fx-background-color: #FFEBD7; " +
+        this.editButton = Footer.creatButton("Edit", "-fx-background-color: #FFEBD7; " +
                 "-fx-text-fill: #8B4513; " +
                 "-fx-border-color: #8B4513; " +
                 "-fx-border-radius: 20; " +
                 "-fx-background-radius: 20; " +
                 "-fx-padding: 5 15 5 15;");    
                 Footer.getChildren().add(editButton);
+        
+        this.regenButton = Footer.creatButton("Regenerate", "-fx-background-color: #FFEBD7; " +
+                "-fx-text-fill: #8B4513; " +
+                "-fx-border-color: #8B4513; " +
+                "-fx-border-radius: 20; " +
+                "-fx-background-radius: 20; " +
+                "-fx-padding: 5 15 5 15;");    
+                Footer.getChildren().add(regenButton);
         
         // this.deleteButton = Footer.creatButton("Delete Button", "-fx-background-color: #FFEBD7; " +
         //         "-fx-text-fill: #8B4513; " +
@@ -178,4 +192,37 @@ public class SeeRecipeFromRecording extends Page implements ISeeRecipePage {
         addListeners();
 
     }
+
+    //creates a new page which will hold the regenerated recipe
+    public void addRecipeToScreen(TextToRecipe t2R, SeeRecipeFromRecording SRP){
+        RecipeTitleView recipeTitleView = new RecipeTitleView(t2R.getRecipe());
+        recipeTitleView.getRecipeTitleButton().setOnAction(e1 -> {
+                    StageController stg = StageController.getInstance();
+                    stg.registerPage(t2R.getRecipe().getRecipeTitle(), SRP);
+                    stg.changeTo(t2R.getRecipe().getRecipeTitle());
+                });
+
+        StageController stg = StageController.getInstance();
+        stg.registerPage(t2R.getRecipe().getRecipeTitle(), SRP);
+        stg.changeTo(t2R.getRecipe().getRecipeTitle());
+    }
+    
+    // creates the newly generated recipe using the same instance of whisper that was originally said
+    public void remakeRecipe(){
+            try {
+                // from whisper gets previous text (avoids reading from recording.wav again)
+                TextToRecipe t2R = new TextToRecipe(Whisper.getInstance().getText(), this.getRecipe().getMealType(), new Recipe(), new ChatGPT());
+                t2R.createRecipeObj();
+                SeeRecipeFromRecording SRP = new SeeRecipeFromRecording(constants.width, constants.height);
+                SRP.setRecipe(t2R.getRecipe());
+                // call helper method to set up page and titleView button
+                addRecipeToScreen(t2R, SRP);
+
+            } catch (IOException | InterruptedException | URISyntaxException e1) {
+                e1.printStackTrace();
+            }  
+
+    }
+
+
 }
