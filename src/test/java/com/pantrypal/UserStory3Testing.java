@@ -35,11 +35,7 @@ public class UserStory3Testing {
     public void testUserStory3_2()  {
         MockWhisper whisper = new MockWhisper();
 
-        String prompt = "Make me a dinner recipe using only these ingredients: chicken, rice. \n" +
-        "Please give me the recipe following this format:\n" +
-        "Recipe title\n" +
-        "Ingredients:\n" +
-        "Instructions:\n";
+        
         TextToRecipe textToRecipe = new TextToRecipe(whisper.getResponse(0), "dinner", new Recipe(), new MockChatGPT());
         try {
             textToRecipe.createRecipeObj();
