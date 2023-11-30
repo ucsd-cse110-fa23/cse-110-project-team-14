@@ -25,7 +25,7 @@ public class DatabaseOPS {
     
     private String uri = "mongodb+srv://team14:team14onTop@cluster0.pqup4sj.mongodb.net/?retryWrites=true&w=majority"; // TEAM 14 Database managed by Aidan
     // INSERT BACK --> "mongodb+srv://jarredondo:Lab6Connection@cluster0.qpdv67p.mongodb.net/?retryWrites=true&w=majority";
-    final private String collectionName;
+    private String collectionName;
 
     final private MongoClient mongoClient = MongoClients.create(uri);
 
@@ -151,5 +151,15 @@ public class DatabaseOPS {
             }
             return recipes;
         }
+    }
+
+    //Get collection name
+    public String getCollectionName() {
+        return collectionName;
+    }
+
+    //Set Collection name
+    public void setCollectionName(String collectionName) {
+        this.collectionName = collectionName;
     }
 }
