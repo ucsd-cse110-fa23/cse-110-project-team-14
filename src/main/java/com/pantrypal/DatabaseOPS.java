@@ -209,4 +209,12 @@ public class DatabaseOPS {
     public void setCollectionName(String collectionName) {
         this.collectionName = collectionName;
     }
+
+    //Delete all usernames
+    public void deleteAllUsers() {
+        MongoClient mongoClient = MongoDBConnection.getInstance();
+        MongoDatabase PantryPal = mongoClient.getDatabase("PantryPal");
+        MongoCollection<Document> usersCollection = PantryPal.getCollection(collectionName);
+        usersCollection.deleteMany(new Document());
+    }
 }

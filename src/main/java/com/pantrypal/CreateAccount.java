@@ -1,9 +1,10 @@
 package com.pantrypal;
 
+
+import javafx.scene.chart.PieChart.Data;
+
 /*
  * This class should use the following DatabaseOPS methods:
- * - boolean collectionExists(String collectionName) --> Not implemented yet
- * - boolean createCollection(String collectionName) --> Not implemented yet
  * 
  * 
  * This class should create a collection with the name of the user's username using the DatabaseOPS class.
@@ -19,7 +20,44 @@ package com.pantrypal;
  * 
  * FOR MS2-US 4 (automatic login): We can create a local file with the login information (so it is stored locally as required by the professor) and
  * we just grab the information from that file and send it to this method to verify it
+ * 
+ * 
+ * -->Database 
+ * ------>Collection 1: Credientals/login
+ * --------Document: user/password
+ * --------Document: user/password
+ * ------->Collection 2:Frankie
+ * ----------->recipe 1
+ * ----------->recipe 2
+ * ------->Collection 3: Ivan
+ * ----------->recipe 1
+ * ----------->recipe 2
  */
 public class CreateAccount {
-    
+    DatabaseOPS db;
+    String collectionName = "users";
+
+    /**
+    * Creates a new account with the given username and password.
+    * 
+    * @param username The username for the new account.
+    * @param password The password for the new account.
+    * @return True if the account is successfully created, false otherwise.
+    */
+    public boolean createAccount(String username, String password) {
+        db = new DatabaseOPS(collectionName);
+        // Check if username already exists
+        if (db.findUno(username) != null) {
+            // Throw error stating username already exists
+            return false;
+        }
+        // Create new collection with the name of the username
+        db.insert(username, password);
+        return true;
+    }
+
+    public void setCollectionName(String collectionName) {
+        this.collectionName = collectionName;
+    }
+
 }
