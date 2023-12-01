@@ -32,7 +32,7 @@ public class RecordPage extends BorderPane {
 
         this.setStyle("-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #FFE4B5, #FFDEAD, #FFE4B5, #FFDEAD); " +
                 "-fx-border-color: #DEB887; " +
-                "-fx-border-width: 10; " +
+                "-fx-border-WIDTH: 10; " +
                 "-fx-border-radius: 15; " +
                 "-fx-background-radius: 15;");
 

@@ -1,6 +1,8 @@
 package com.pantrypal.controller;
 
+import com.pantrypal.constants.Constants;
 import com.pantrypal.view.pages.MainPageView;
+import com.pantrypal.view.pages.MealTypePageView;
 import javafx.event.ActionEvent;
 
 public class MainPageController extends Controller{
@@ -11,9 +13,7 @@ public class MainPageController extends Controller{
         this.mainPageView = mainPageView;
         this.mainPageView.setAddButtonAction(this::handleAddButton);
     }
-
-
     private void handleAddButton(ActionEvent event) {
-        stg.changeTo("MealTypePage");
+        stg.changeTo(Constants.MEALTYPE_PAGE_NAME);
     }
 }

@@ -1,5 +1,7 @@
 package com.pantrypal;
 
+import com.pantrypal.model.ChatGPT;
+
 import java.io.IOException;
 import java.net.URISyntaxException;
 

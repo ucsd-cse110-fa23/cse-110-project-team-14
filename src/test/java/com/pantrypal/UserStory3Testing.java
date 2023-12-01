@@ -1,5 +1,7 @@
 package com.pantrypal;
 
+import com.pantrypal.model.Recipe;
+import com.pantrypal.model.TextToRecipe;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

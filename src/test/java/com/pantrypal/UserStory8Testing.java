@@ -1,6 +1,9 @@
 package com.pantrypal;
 
 
+import com.pantrypal.model.Recipe;
+import com.pantrypal.model.TextToRecipe;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 

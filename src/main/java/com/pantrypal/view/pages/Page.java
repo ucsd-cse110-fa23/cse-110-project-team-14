@@ -1,5 +1,7 @@
 package com.pantrypal.view.pages;
 
+import com.pantrypal.view.components.PaneFooter;
+import com.pantrypal.view.components.PaneHeader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 
@@ -8,6 +10,8 @@ public abstract class Page {
     protected BorderPane borderPane; // using BorderPane
     protected int width;
     protected int height;
+    PaneFooter paneFooter;
+    PaneHeader paneHeader;
     protected String style;
 
     public Page(int width, int height) {
@@ -15,6 +19,8 @@ public abstract class Page {
         this.height = height;
         this.borderPane = new BorderPane();
         this.scene = new Scene(borderPane, width, height);
+        paneFooter = new PaneFooter();
+        paneHeader = new PaneHeader();
         createView();
     }
 

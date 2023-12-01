@@ -1,5 +1,7 @@
 package com.pantrypal.view.pages;
 
+import com.pantrypal.controller.MainPageController;
+import com.pantrypal.controller.StageController;
 import com.pantrypal.view.components.PaneFooter;
 import com.pantrypal.view.components.PaneHeader;
 import javafx.event.ActionEvent;
@@ -12,29 +14,53 @@ import javafx.scene.text.Text;
 public class MainPageView extends Page{
 
     Button addButton;
-    com.pantrypal.view.components.PaneHeader paneHeader;
-    com.pantrypal.view.components.PaneFooter paneFooter;
+
     public MainPageView(int width, int height) {
         super(width, height);
+        if(StageController.getInstance().fetchDB)
+        {
+            /////fetch from db
+
+        }
+        else {
+            /////do not fetch from db, and reset the flag
+            StageController.getInstance().fetchDB = true;
+        }
+//TODO: Database things
+
+//        DatabaseOPS db = new DatabaseOPS("recipes");
+//        Globals.recipes = db.initializeRecipesToList(); //<-- this will return the arraylist
+//        for (int i = Globals.recipes.size() - 1; i >= 0; i--) {
+//            Recipe recipe = Globals.recipes.get(i);
+//            RecipeTitleView recipeTitleView = new RecipeTitleView(recipe); //<-- This should be UI
+//            SeeRecipePageView SRP = new SeeRecipePageView(constants.width, constants.height); //<-- This should be UI
+//            SRP.setRecipe(recipe);
+//            recipeTitleView.getRecipeTitleButton().setOnAction(e1 -> {
+//                StageController stg = StageController.getInstance();
+//                stg.registerPage(recipe.getRecipeTitle(), SRP);
+//                stg.changeTo(recipe.getRecipeTitle());
+//            });
+//            RecipeTitleListView.getInstance().getChildren().add(recipeTitleView);
+//TODO: Database things
     }
 
     public Button getAddButton() {
         return this.addButton;
     }
+    MainPageController mainPageController;
 
     @Override
     protected void createView() {
-
         paneHeader = new PaneHeader();
+        paneFooter = new PaneFooter();
         paneHeader.setTitleInMiddle(new Text("PantryPal: The best Recipe manager"));
+//TODO: title things
 
 //        ScrollPane scroll = new ScrollPane(RecipeTitleListView.getInstance());
 //        scroll.setPrefSize(1000, 1000);
 //        scroll.setFitToWidth(true);
 //        scroll.setFitToHeight(true);
-
-        paneFooter = new PaneFooter();
-
+//TODO: title things
         VBox mainContent = new VBox();
         mainContent.minHeight(1000);
         mainContent.minWidth(1000);
@@ -61,6 +87,7 @@ public class MainPageView extends Page{
                 "-fx-border-radius: 15; " +
                 "-fx-background-radius: 15;");
 
+        mainPageController = new MainPageController(this);
     }
     public void setAddButtonAction(EventHandler<ActionEvent> eventHandler) {
         addButton.setOnAction(eventHandler);

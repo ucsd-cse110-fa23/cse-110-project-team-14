@@ -11,7 +11,7 @@ public class StageController {
 
     private Stage primaryStage;
     private final Map<String, Page> pages = new HashMap<>();
-
+    public boolean fetchDB = true;
     private StageController() {
 
     }
@@ -35,11 +35,18 @@ public class StageController {
             return;
         }
         page.update();
-        primaryStage.setScene(page.getScene());
-        primaryStage.show();
+        System.out.println("Changing to page " + key);
+        this.primaryStage.setScene(page.getScene());
+        this.primaryStage.show();
     }
-
+    public void storePrimaryStage(Stage stage) {
+        this.primaryStage = stage;
+    }
+    public Stage getPrimaryStage() {
+        return this.primaryStage;
+    }
     public Page getPage(String key) {
         return pages.get(key);
     }
+
 }

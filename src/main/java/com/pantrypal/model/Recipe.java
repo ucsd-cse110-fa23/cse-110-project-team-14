@@ -10,40 +10,40 @@ public class Recipe {
     private String mealType;
     private int recipeIndex;  //Used in order to sort recipes by time created
 
-    Recipe() {
+    public Recipe() {
     }
     
-    void setRecipeTitle(String recipeTitle) {
+    public void setRecipeTitle(String recipeTitle) {
         this.recipeTitle = recipeTitle;
     }
 
-    String getRecipeTitle() {
+    public String getRecipeTitle() {
         return recipeTitle;
     }
     
-    void setRecipeIngredients(String recipeIngredients) {
+    public void setRecipeIngredients(String recipeIngredients) {
         this.recipeIngredients = recipeIngredients;
     }
 
-    String getRecipeIngredients() {
+    public String getRecipeIngredients() {
         return recipeIngredients;
     }
 
-    void setRecipeInstructions(String recipeInstructions) {
+    public void setRecipeInstructions(String recipeInstructions) {
         this.recipeInstructions = recipeInstructions;
     }
 
-    String getRecipeInstructions() {
+    public String getRecipeInstructions() {
         return recipeInstructions;
     }
 
     @SuppressWarnings("unused")
-    void setMealType(String mealType) {
+    public void setMealType(String mealType) {
         this.mealType = mealType;
     }
 
     @SuppressWarnings("unused")
-    String getMealType() {
+    public String getMealType() {
         return mealType;
     }
 

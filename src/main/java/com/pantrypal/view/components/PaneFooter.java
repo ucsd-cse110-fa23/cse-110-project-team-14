@@ -42,16 +42,32 @@ public class PaneFooter extends HBox {
         this.getChildren().add(ButtonList.get(bt.getText()));
         this.setAlignment(Pos.CENTER);
     }
+    public void setButton(String name) {
+
+        this.getChildren().add(ButtonList.get(name));
+        this.setAlignment(Pos.CENTER);
+    }
 
     // gets Button 
     // returns null if no matching name
     public Button getButton(String name) {
-        return ButtonList.get(name);
+
+         if(ButtonList.get(name)!=null)
+         {
+             return ButtonList.get(name);
+         }
+         else
+         {
+             System.out.println("Button not found");
+             return  null;
+         }
     }
 
     // creates Button and adds to list of buttons on footer.
     public Button creatButton(String name, String style) {
         Button button = new Button(name);
+        System.out.println("in PaneFooter.creatButton");
+        System.out.println(button.getText()+", ID:" + System.identityHashCode(button));
         button.setStyle(style);
         ButtonList.put(name, button);
         return button;
