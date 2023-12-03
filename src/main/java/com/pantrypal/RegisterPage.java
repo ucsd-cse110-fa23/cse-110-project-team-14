@@ -2,6 +2,7 @@ package com.pantrypal;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -11,7 +12,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 
-public class RegisterPageView extends Page {
+public class RegisterPage extends Page {
     private paneHeader paneHeader;
     private paneFooter paneFooter;
     private VBox center;
@@ -24,7 +25,7 @@ public class RegisterPageView extends Page {
     boolean match = false;
     private CreateAccount accountCreater = new CreateAccount();
 
-    public RegisterPageView(int width, int height) {
+    public RegisterPage(int width, int height) {
         super(width, height);
     }
 
@@ -49,7 +50,6 @@ public class RegisterPageView extends Page {
             confirmPassword = new PasswordField();
             isPassWordsMatch = new Label();
             userTaken = new Label();
-            
 
             userName.setPromptText("Enter Username:");
             password.setPromptText("Enter Password:");
