@@ -63,7 +63,7 @@ public class UserStory1Testing {
 
     @Test
     void testCreateRecipeObj() throws IOException, InterruptedException, URISyntaxException {
-        TextToRecipe textToRecipe = new TextToRecipe("pasta, chicken, tomatoes", "lunch", new Recipe(), new MockChatGPT());
+        TextToRecipe textToRecipe = new TextToRecipe("pasta, chicken, tomatoes", "lunch", new Recipe(), new MockChatGPT(), new MockImageCreation());
         try {
             textToRecipe.createRecipeObj();
             assertEquals("Stovetop Baked Chicken Tomato Pasta", textToRecipe.getRecipe().getRecipeTitle());

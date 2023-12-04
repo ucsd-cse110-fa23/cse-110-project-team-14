@@ -243,7 +243,7 @@ public class SeeRecipeFromRecording extends Page implements ISeeRecipePage {
     public void remakeRecipe(){
             try {
                 // from whisper gets previous text (avoids reading from recording.wav again)
-                TextToRecipe t2R = new TextToRecipe(Whisper.getInstance().getText(), this.getRecipe().getMealType(), new Recipe(), new ChatGPT());
+                TextToRecipe t2R = new TextToRecipe(Whisper.getInstance().getText(), this.getRecipe().getMealType(), new Recipe(), new ChatGPT(), new ImageCreation());
                 t2R.createRecipeObj();
                 SeeRecipeFromRecording SRP = new SeeRecipeFromRecording(constants.width, constants.height);
                 SRP.setRecipe(t2R.getRecipe());

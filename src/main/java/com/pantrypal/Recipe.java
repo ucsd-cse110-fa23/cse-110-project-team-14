@@ -1,6 +1,5 @@
 package com.pantrypal;
 
-import static com.mongodb.client.model.Filters.in;
 
 /*
  * Recipe class to store recipe information

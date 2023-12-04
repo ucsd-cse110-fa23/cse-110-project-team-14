@@ -60,7 +60,7 @@ public class RecordPage extends Page {
                 try {
                     // make recipe
                     String transcribedText = Whisper.getInstance().getResponse();
-                    TextToRecipe t2R = new TextToRecipe(transcribedText, mealType, new Recipe(), new ChatGPT());
+                    TextToRecipe t2R = new TextToRecipe(transcribedText, mealType, new Recipe(), new ChatGPT(), new ImageCreation());
                     Whisper.getInstance().setText(transcribedText);
                     t2R.createRecipeObj();
                     

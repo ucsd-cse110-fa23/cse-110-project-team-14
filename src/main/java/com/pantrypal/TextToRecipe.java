@@ -14,13 +14,15 @@ public class TextToRecipe {
     private String mealType; //Grabbed from first whisper
     private Recipe recipe;
     private ChatGPT chatGPT;
+    private ImageCreation imageCreation;
     // String generatedText = responseJson.getString("text"); --> use this to grab the user's speech as text
 
-    TextToRecipe(String ingredients, String mealType, Recipe recipe, ChatGPT chatGPT) {
+    TextToRecipe(String ingredients, String mealType, Recipe recipe, ChatGPT chatGPT, ImageCreation imageCreation) {
         this.ingredients = ingredients;
         this.mealType = mealType;
         this.recipe = recipe;
         this.chatGPT = chatGPT;
+        this.imageCreation = imageCreation;
     }
 
     void createRecipeObj() throws IOException,
@@ -49,7 +51,7 @@ public class TextToRecipe {
         recipe.setRecipeInstructions(chatGPT.parseRecipeInstructions());
         
         // Use recipe title to generate image url and set the recipe url
-        String imageURL = ImageCreation.generateImageURL(recipe.getRecipeTitle());
+        String imageURL = imageCreation.generateImageURL(recipe.getRecipeTitle());
         recipe.setRecipeImageURL(imageURL);
     }
 

@@ -14,7 +14,7 @@ public class UserStory3Testing {
     @Test
     public void testUserStory3(){
         MockWhisper whisper = new MockWhisper();
-        TextToRecipe textToRecipe = new TextToRecipe(whisper.getResponse(1), "dinner", new Recipe(), new MockChatGPT());
+        TextToRecipe textToRecipe = new TextToRecipe(whisper.getResponse(1), "dinner", new Recipe(), new MockChatGPT(), new MockImageCreation());
         try {
             textToRecipe.createRecipeObj();
             assertEquals("Baked Cinnamon Apple Crisp", textToRecipe.getRecipe().getRecipeTitle());
@@ -36,7 +36,7 @@ public class UserStory3Testing {
         MockWhisper whisper = new MockWhisper();
 
         
-        TextToRecipe textToRecipe = new TextToRecipe(whisper.getResponse(0), "dinner", new Recipe(), new MockChatGPT());
+        TextToRecipe textToRecipe = new TextToRecipe(whisper.getResponse(0), "dinner", new Recipe(), new MockChatGPT(), new MockImageCreation());
         try {
             textToRecipe.createRecipeObj();
             assertEquals("Chicken and Rice Casserole", textToRecipe.getRecipe().getRecipeTitle());

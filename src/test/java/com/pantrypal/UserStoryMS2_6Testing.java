@@ -16,7 +16,7 @@ public class UserStoryMS2_6Testing {
         ChatGPT chatgpt = new MockChatGPT2();
         MockWhisper whisper = new MockWhisper();
         int temp = (Math.random() <= 0.5) ? 7 : 8; //random generator
-        TextToRecipe textToRecipe = new TextToRecipe(whisper.getResponse(temp), whisper.getResponse(4), new Recipe(), chatgpt);
+        TextToRecipe textToRecipe = new TextToRecipe(whisper.getResponse(temp), whisper.getResponse(4), new Recipe(), chatgpt, new MockImageCreation());
         try {
             textToRecipe.createRecipeObj();
             if (temp == 7){

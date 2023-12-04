@@ -19,7 +19,7 @@ public class ImageCreation {
     private static final String API_KEY = "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";
     private static final String MODEL = "dall-e-2";
     
-    public static String generateImageURL(String prompt)  throws IOException, InterruptedException, URISyntaxException {
+    public String generateImageURL(String prompt)  throws IOException, InterruptedException, URISyntaxException {
         // Set request parameters
         // This prompt will be the recipe title of the recipe we generate (before even saving it)
         // Once we save this recipe, add this image to the database and the seeRecipePage

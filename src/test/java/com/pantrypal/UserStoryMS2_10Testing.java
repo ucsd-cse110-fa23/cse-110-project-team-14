@@ -114,7 +114,7 @@ public class UserStoryMS2_10Testing {
     @Test
     public void sortingAtoZAndGPT(){
         MockWhisper whisper = new MockWhisper();
-        TextToRecipe textToRecipe = new TextToRecipe(whisper.getResponse(6), whisper.getResponse(2), new Recipe(), new MockChatGPT());
+        TextToRecipe textToRecipe = new TextToRecipe(whisper.getResponse(6), whisper.getResponse(2), new Recipe(), new MockChatGPT(), new MockImageCreation());
         ArrayList<Recipe> recipes = new ArrayList<Recipe>();
         try {
             textToRecipe.createRecipeObj();
@@ -129,7 +129,7 @@ public class UserStoryMS2_10Testing {
         }
 
         MockWhisper whisper2 = new MockWhisper();
-        TextToRecipe textToRecipe2 = new TextToRecipe(whisper2.getResponse(1), "dinner", new Recipe(), new MockChatGPT());
+        TextToRecipe textToRecipe2 = new TextToRecipe(whisper2.getResponse(1), "dinner", new Recipe(), new MockChatGPT(), new MockImageCreation());
         try {
             textToRecipe2.createRecipeObj();
             assertEquals("Baked Cinnamon Apple Crisp", textToRecipe2.getRecipe().getRecipeTitle());
@@ -143,7 +143,7 @@ public class UserStoryMS2_10Testing {
         }
 
 
-        TextToRecipe textToRecipe3 = new TextToRecipe(whisper.getResponse(0), "dinner", new Recipe(), new MockChatGPT());
+        TextToRecipe textToRecipe3 = new TextToRecipe(whisper.getResponse(0), "dinner", new Recipe(), new MockChatGPT(), new MockImageCreation());
         try {
             textToRecipe3.createRecipeObj();
             assertEquals("Chicken and Rice Casserole", textToRecipe3.getRecipe().getRecipeTitle());
