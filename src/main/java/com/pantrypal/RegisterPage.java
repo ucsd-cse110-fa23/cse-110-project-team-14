@@ -17,6 +17,7 @@ public class RegisterPage extends Page {
     private paneFooter paneFooter;
     private VBox center;
     private Button createAccount;
+    private Button backToLogin;
     private TextField userName; 
     private PasswordField password;
     private PasswordField confirmPassword;
@@ -117,7 +118,15 @@ public class RegisterPage extends Page {
                     "-fx-background-radius: 20; " +
                     "-fx-padding: 5 15 5 15;");
 
+            this.backToLogin = paneFooter.creatButton("Back to Login", "-fx-background-color: #FFEBD7; " +
+                    "-fx-text-fill: #8B4513; " +
+                    "-fx-border-color: #8B4513; " +
+                    "-fx-border-radius: 20; " +
+                    "-fx-background-radius: 20; " +
+                    "-fx-padding: 5 15 5 15;");
+
             this.paneFooter.setButton(createAccount);
+            this.paneFooter.setButton(backToLogin);
             
             addListeners();
         }
@@ -135,9 +144,14 @@ public class RegisterPage extends Page {
                 // redirect to login page? 
                 else{
                     StageController stg = StageController.getInstance();
-                    stg.changeTo("LoginPage"); //hasnt been made yet
+                    stg.changeTo("LoginPage");
                 }
             }
+        });
+
+        this.backToLogin.setOnAction(e -> {
+            StageController stg = StageController.getInstance();
+            stg.changeTo("LoginPage");
         });
     }
 

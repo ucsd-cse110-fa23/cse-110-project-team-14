@@ -3,10 +3,13 @@ package com.pantrypal;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
@@ -16,11 +19,12 @@ class mainPage extends Page {
     paneHeader paneHeader;
     paneFooter paneFooter;
     private Button addButton;
+    private Button signOutButton;
     //private arraylist<recipe> recipes; which has all the recipes and we use it to sort 
     public mainPage(int width, int height) {
         super(width, height);
         // IntializeRecipeList.uploadRecipes();
-        DatabaseOPS db = new DatabaseOPS("recipes");
+        DatabaseOPS db = new DatabaseOPS(Globals.username);
         Globals.recipes = db.initializeRecipesToList(); //<-- this will return the arraylist
         if(Globals.sortingState == Globals.SortingState.NEWTOOLD) {
             Globals.recipes = Sort.newToOldSort(Globals.recipes);
@@ -70,11 +74,24 @@ class mainPage extends Page {
             stgController.changeTo("MealTypePage");
 
         });
+        
+        signOutButton.setOnAction(e -> {
+            // swap to record page
+            StageController stgController = StageController.getInstance();
+            Globals.username = "recipes";
+
+            stgController.changeTo("LoginPage");
+
+        });
     }
 
     // gets the addButton 
     public Button getAddButton() {
         return this.addButton;
+    }
+
+    public Button getSignOutButton() {
+        return this.signOutButton;
     }
 
     // SET UP MAIN PAGE VIEW
@@ -132,7 +149,34 @@ class mainPage extends Page {
                 System.out.println("Selected: " + selectedOption);
         });
 
-        VBox vBox = new VBox(comboBox);
+        HBox pageSettings = new HBox();
+        this.signOutButton = new Button("Sign Out");
+        this.signOutButton.setStyle("-fx-background-color: #FFEBD7; " +
+                "-fx-text-fill: #8B4513; " +
+                "-fx-border-color: #8B4513; " +
+                "-fx-border-radius: 20; " +
+                "-fx-background-radius: 20; " +
+                "-fx-padding: 5 15 5 15;");
+        
+        pageSettings.setPadding(new Insets(10)); // Add padding for better visibility
+
+        // Set the spacing between buttons
+        pageSettings.setSpacing(width - 300);
+
+        // Set the left button to grow horizontally to the left
+        HBox.setHgrow(comboBox, javafx.scene.layout.Priority.ALWAYS);
+
+        // Add buttons to the HBox
+        pageSettings.getChildren().addAll(comboBox, signOutButton);
+
+        // Set alignment for the buttons
+        pageSettings.setMargin(signOutButton, new Insets(0, 0, 0, 10)); // Add margin to the right button
+        pageSettings.setAlignment(javafx.geometry.Pos.CENTER); // Align buttons to the right
+
+
+        //pageSettings.getChildren().add(comboBox);
+        // Add the spacing between this comboBox and the signOut button
+        //pageSettings.getChildren().add(signOutButton);
         
         ScrollPane scroll = new ScrollPane(RecipeTitleListView.getInstance());
         scroll.setPrefSize(1000, 1000);
@@ -146,7 +190,7 @@ class mainPage extends Page {
         mainContent.minWidth(1000);
         mainContent.setSpacing(15);
         mainContent.setAlignment(Pos.CENTER);
-        mainContent.getChildren().add(vBox); // may have to redo
+        mainContent.getChildren().add(pageSettings); // may have to redo
         mainContent.getChildren().add(scroll);
         
         this.borderPane.setTop(paneHeader);
@@ -172,7 +216,7 @@ class mainPage extends Page {
 
     public void update(){
         RecipeTitleListView.getInstance().getChildren().clear();
-        DatabaseOPS db = new DatabaseOPS("recipes");
+        DatabaseOPS db = new DatabaseOPS(Globals.username);
         Globals.recipes = db.initializeRecipesToList(); //<-- this will return the arraylist
         if(Globals.sortingState == Globals.SortingState.NEWTOOLD) {
             Globals.recipes = Sort.newToOldSort(Globals.recipes);

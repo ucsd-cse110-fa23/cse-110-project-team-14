@@ -35,7 +35,7 @@ public class SeeRecipeFromRecording extends Page implements ISeeRecipePage {
     private DatabaseOPS db;
     RecipeTitleView recipeTitleView; 
 
-    final private String COLLECTION_NAME = "recipes";
+    final private String COLLECTION_NAME = Globals.username;
             
 
     public SeeRecipeFromRecording(int width, int height) {

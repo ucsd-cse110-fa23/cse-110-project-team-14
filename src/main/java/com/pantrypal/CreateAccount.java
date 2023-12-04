@@ -35,6 +35,7 @@ import javafx.scene.chart.PieChart.Data;
  */
 public class CreateAccount {
     DatabaseOPS db;
+    CreateUserCollection userCollection = new CreateUserCollection();
     String collectionName = "users";
 
     /**
@@ -53,6 +54,7 @@ public class CreateAccount {
         }
         // Create new collection with the name of the username
         db.insert(username, password);
+        userCollection.createUserCollection(username);
         return true;
     }
 

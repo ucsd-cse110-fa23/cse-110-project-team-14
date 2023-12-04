@@ -119,6 +119,7 @@ public class LoginPage extends Page {
             else{
                 // change to main page
                 StageController stg = StageController.getInstance();
+                Globals.username = userName.getText().toString();
                 stg.changeTo("mainPage"); //hasnt been made yet
                 if(this.autologin.selectedProperty().getValue()){
                     try (BufferedWriter myWriter = new BufferedWriter(new FileWriter("autologin.txt"))) {

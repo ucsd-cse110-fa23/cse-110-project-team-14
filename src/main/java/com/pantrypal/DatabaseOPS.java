@@ -31,16 +31,21 @@ public class DatabaseOPS {
 
     DatabaseOPS(String collectionName) {
         this.collectionName = collectionName;
-        
     }
     
     /* Recipe Database Methods */
+    // Create a collection
+    public void createCollection() {
+        MongoClient mongoClient = MongoDBConnection.getInstance();
+        MongoDatabase PantryPal = mongoClient.getDatabase("PantryPal");
+        PantryPal.createCollection(collectionName);
+    }
 
     // Add Recipe to database
     public void insert(Recipe recipe_obj){
         MongoClient mongoClient = MongoDBConnection.getInstance();
-        MongoDatabase recipeDB = mongoClient.getDatabase("recipeDB");
-        MongoCollection<Document> recipesCollection = recipeDB.getCollection(collectionName);
+        MongoDatabase PantryPal = mongoClient.getDatabase("PantryPal");
+        MongoCollection<Document> recipesCollection = PantryPal.getCollection(collectionName);
         // No need to worry about duplicate recipes as per the project requirements
         Document recipe = new Document("Title", recipe_obj.getRecipeTitle());
         recipe.append("Ingredients", recipe_obj.getRecipeIngredients())
@@ -55,8 +60,8 @@ public class DatabaseOPS {
     // Read/Find Recipe from database and return the one you search for
     public Document findUno(Recipe recipe_obj){
         MongoClient mongoClient = MongoDBConnection.getInstance();
-        MongoDatabase recipeDB = mongoClient.getDatabase("recipeDB");
-        MongoCollection<Document> recipesCollection = recipeDB.getCollection(collectionName);
+        MongoDatabase PantryPal = mongoClient.getDatabase("PantryPal");
+        MongoCollection<Document> recipesCollection = PantryPal.getCollection(collectionName);
         Document recipe = recipesCollection.find(eq("Title", recipe_obj.getRecipeTitle())).first();
         return recipe;
     }
@@ -64,8 +69,8 @@ public class DatabaseOPS {
     // Update Recipe in database
     public void update(Recipe recipe_obj){
         MongoClient mongoClient = MongoDBConnection.getInstance();
-        MongoDatabase recipeDB = mongoClient.getDatabase("recipeDB");
-        MongoCollection<Document> recipesCollection = recipeDB.getCollection(collectionName);
+        MongoDatabase PantryPal = mongoClient.getDatabase("PantryPal");
+        MongoCollection<Document> recipesCollection = PantryPal.getCollection(collectionName);
         recipesCollection.updateOne(eq("Title", recipe_obj.getRecipeTitle()), new Document("$set", new Document("Ingredients", recipe_obj.getRecipeIngredients())));
         recipesCollection.updateOne(eq("Title", recipe_obj.getRecipeTitle()), new Document("$set", new Document("Instructions", recipe_obj.getRecipeInstructions())));
 
@@ -75,8 +80,8 @@ public class DatabaseOPS {
     // Delete one Recipe in database (If you deleteOne, may override recipesCollection)
     public void deleteUno(Recipe recipe_obj){
         MongoClient mongoClient = MongoDBConnection.getInstance();
-        MongoDatabase recipeDB = mongoClient.getDatabase("recipeDB");
-        MongoCollection<Document> recipesCollection = recipeDB.getCollection(collectionName);
+        MongoDatabase PantryPal = mongoClient.getDatabase("PantryPal");
+        MongoCollection<Document> recipesCollection = PantryPal.getCollection(collectionName);
         recipesCollection.deleteOne(eq("Title", recipe_obj.getRecipeTitle()));
     
     }
@@ -85,8 +90,8 @@ public class DatabaseOPS {
     // Delete all Recipes in database
     public void deleteAll() {
         MongoClient mongoClient = MongoDBConnection.getInstance();
-        MongoDatabase recipeDB = mongoClient.getDatabase("recipeDB");
-        MongoCollection<Document> recipesCollection = recipeDB.getCollection(collectionName);
+        MongoDatabase PantryPal = mongoClient.getDatabase("PantryPal");
+        MongoCollection<Document> recipesCollection = PantryPal.getCollection(collectionName);
         recipesCollection.deleteMany(new Document());
     
     }
@@ -141,8 +146,8 @@ public class DatabaseOPS {
     // Remove this and add it to the controller
     public ArrayList<Recipe> initializeRecipesToList() {
         MongoClient mongoClient = MongoDBConnection.getInstance();
-        MongoDatabase recipeDB = mongoClient.getDatabase("recipeDB");
-        MongoCollection<Document> recipesCollection = recipeDB.getCollection(collectionName);
+        MongoDatabase PantryPal = mongoClient.getDatabase("PantryPal");
+        MongoCollection<Document> recipesCollection = PantryPal.getCollection(collectionName);
         
         // access all elements in the collection
         Iterator<Document> cursor = recipesCollection.find().iterator();
@@ -193,8 +198,8 @@ public class DatabaseOPS {
     // Get collection size
     public long getCollectionSize() {
         MongoClient mongoClient = MongoDBConnection.getInstance();
-        MongoDatabase recipeDB = mongoClient.getDatabase("recipeDB");
-        MongoCollection<Document> recipesCollection = recipeDB.getCollection(collectionName);
+        MongoDatabase PantryPal = mongoClient.getDatabase("PantryPal");
+        MongoCollection<Document> recipesCollection = PantryPal.getCollection(collectionName);
         System.out.println("Size of collection: " + recipesCollection.countDocuments());
         return recipesCollection.countDocuments();
     
