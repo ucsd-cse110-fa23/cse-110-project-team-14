@@ -66,8 +66,10 @@ public class SeeRecipePage extends Page implements ISeeRecipePage{
     public void addListeners() {
         back.setOnAction(e -> {
             // go back to main page
-            Stage stage = (Stage) this.getScene().getWindow();
-            stage.setScene(new mainPage(width, height, false).getScene());
+            //Stage stage = (Stage) this.getScene().getWindow();
+            StageController stg = StageController.getInstance();
+            //stage.setScene(new mainPage(width, height, false).getScene());
+            stg.changeTo("mainPage");
             System.out.println("SWITCHED TO MAIN PAGE");
         });
 
