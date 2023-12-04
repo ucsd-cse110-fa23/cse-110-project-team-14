@@ -48,7 +48,9 @@ public class TextToRecipe {
         //Fill recipe instructions
         recipe.setRecipeInstructions(chatGPT.parseRecipeInstructions());
         
-
+        // Use recipe title to generate image url and set the recipe url
+        String imageURL = ImageCreation.generateImageURL(recipe.getRecipeTitle());
+        recipe.setRecipeImageURL(imageURL);
     }
 
     Recipe getRecipe() {

@@ -1,3 +1,5 @@
+package com.pantrypal;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
@@ -14,14 +16,14 @@ import org.json.JSONObject;
 public class ImageCreation {
     // TODO: Add class implementation here
     private static final String API_ENDPOINT = "https://api.openai.com/v1/images/generations"; 
-    private static final String API_KEY = "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"; 
+    private static final String API_KEY = "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";
     private static final String MODEL = "dall-e-2";
     
-    public static void main(String[] args)  throws IOException, InterruptedException, URISyntaxException {
+    public static String generateImageURL(String prompt)  throws IOException, InterruptedException, URISyntaxException {
         // Set request parameters
         // This prompt will be the recipe title of the recipe we generate (before even saving it)
         // Once we save this recipe, add this image to the database and the seeRecipePage
-        String recipePrompt = "A monkey eating a banana"; // Change this prompt to be the recipe title for specific recipe of specific user
+        String recipePrompt = prompt; // Change this prompt to be the recipe title for specific recipe of specific user
         int n = 1;
 
 
@@ -33,7 +35,7 @@ public class ImageCreation {
         // String imageWidth = constants.width/3;
         // String imageHeight = constants.height/3;
         // String imageDims = imageWidth + "x" + imageHeight;
-        requestBody.put("size", "100x100"); // Change size of generated image
+        requestBody.put("size", "256x256"); // Change size of generated image
 
 
         // Create the HTTP client
@@ -61,25 +63,16 @@ public class ImageCreation {
 
         JSONObject responseJson = new JSONObject(responseBody);
 
-        JSONArray choices = responseJson.getJSONArray("data");//<--
+        JSONArray choices = responseJson.getJSONArray("data");
         
-        // TODO: Process the response
         String generatedImageURL = choices.getJSONObject(0).getString("url");
-        
-        System.out.println("DALL-E Response:");
-        System.out.println(generatedImageURL);
-
-
+        // try(
+        //     InputStream in = new URI(generatedImageURL).toURL().openStream()
+        // )
+        // {
+        //     Files.copy(in, Paths.get("image.jpg"));
+        // }
+        return generatedImageURL;
         // Save the image to the mongodb directly and just load it from there
-
-
-        // Download the Generated Image to Current Directory
-        // If we do not handle the path correctly, we will get an error
-        try(
-            InputStream in = new URI(generatedImageURL).toURL().openStream()
-        )
-        {
-            Files.copy(in, Paths.get("image.jpg"));
-        }
     }
 }

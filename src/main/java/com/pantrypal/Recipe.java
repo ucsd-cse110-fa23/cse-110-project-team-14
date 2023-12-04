@@ -11,6 +11,7 @@ public class Recipe {
     private String recipeInstructions; 
     private String recipeIngredients;
     private String mealType;
+    private String recipeImageURL;
     private int recipeIndex;  //Used in order to sort recipes by time created
 
     Recipe() {
@@ -38,6 +39,14 @@ public class Recipe {
 
     String getRecipeInstructions() {
         return recipeInstructions;
+    }
+
+    void setRecipeImageURL(String recipeImageURL) {
+        this.recipeImageURL = recipeImageURL;
+    }
+
+    String getRecipeImageURL() {
+        return recipeImageURL;
     }
 
     void setMealType(String mealType) {

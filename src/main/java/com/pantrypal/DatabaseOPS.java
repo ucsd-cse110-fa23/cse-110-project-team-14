@@ -50,7 +50,8 @@ public class DatabaseOPS {
         Document recipe = new Document("Title", recipe_obj.getRecipeTitle());
         recipe.append("Ingredients", recipe_obj.getRecipeIngredients())
                 .append("Instructions", recipe_obj.getRecipeInstructions())
-                .append("Meal Type", recipe_obj.getMealType()); // Instructions list
+                .append("Meal Type", recipe_obj.getMealType())
+                .append("ImageURL", recipe_obj.getRecipeImageURL()); // Instructions list
     
         recipesCollection.insertOne(recipe);
         // Get size of collection
@@ -178,11 +179,13 @@ public class DatabaseOPS {
             String ingredients = doc.getString("Ingredients");
             String instructions = doc.getString("Instructions");
             String mealType = doc.getString("Meal Type");
+            String imageURL = doc.getString("ImageURL");
             Recipe recipe = new Recipe();
             recipe.setRecipeTitle(title);
             recipe.setMealType(mealType);
             recipe.setRecipeIngredients(ingredients);
             recipe.setRecipeInstructions(instructions);
+            recipe.setRecipeImageURL(imageURL);
             recipe.setRecipeIndex(Globals.recipeIndex); //Set the order when the recipe was created
             Globals.recipeIndex++; //Add one more to the counter to keep track of the order
             recipes.add(recipe);
