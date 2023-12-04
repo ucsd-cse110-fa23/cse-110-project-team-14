@@ -38,8 +38,10 @@ public class RecordPage extends Page {
     public void addListeners() {
         // return to mainPage
         back.setOnAction(e -> {
-            Stage stage = (Stage) this.getScene().getWindow();
-            stage.setScene(new mainPage(width, height, false).getScene());
+            //Stage stage = (Stage) this.getScene().getWindow();
+            //stage.setScene(new mainPage(width, height, false).getScene());
+            StageController stageController = StageController.getInstance();
+            stageController.changeTo("mainPage");
         });
 
         // initialize recording

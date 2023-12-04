@@ -95,8 +95,8 @@ public class SeeRecipeFromRecording extends Page implements ISeeRecipePage {
             // Add recipe to the recipe list 
             //Add it to the top of the list
             RecipeTitleListView.getInstance().getChildren().add(0, recipeTitleView);
-            Stage stage = (Stage) this.getScene().getWindow();
-            stage.setScene(new mainPage(width, height, false).getScene());
+            StageController stageController = StageController.getInstance();
+            stageController.changeTo("mainPage");
         });
         
         editButton.setOnAction(e -> {

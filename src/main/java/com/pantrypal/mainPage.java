@@ -60,9 +60,9 @@ class mainPage extends Page {
     }
     // pass garbage boolean
     // prevents initializing recipe list multiple times
-     public mainPage(int width, int height, boolean initialized) {
+    public mainPage(int width, int height, boolean initialized) {
         super(width, height);
-        
+        System.out.println("Me la pelas");
     }
 
     //Change to use a helper method

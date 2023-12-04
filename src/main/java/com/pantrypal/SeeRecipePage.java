@@ -62,8 +62,10 @@ public class SeeRecipePage extends Page implements ISeeRecipePage{
     public void addListeners() {
         back.setOnAction(e -> {
             // go back to main page
-            Stage stage = (Stage) this.getScene().getWindow();
-            stage.setScene(new mainPage(width, height, false).getScene());
+            //Stage stage = (Stage) this.getScene().getWindow();
+            //stage.setScene(new mainPage(width, height, false).getScene());
+            StageController stageController = StageController.getInstance();
+            stageController.changeTo("mainPage");
             System.out.println("SWITCHED TO MAIN PAGE");
         });
 
@@ -116,7 +118,10 @@ public class SeeRecipePage extends Page implements ISeeRecipePage{
                 }
 
                 confirmDelete.hide();
-                stage.setScene(new mainPage(width, height, false).getScene());
+                //Stage stage = (Stage) this.getScene().getWindow();
+                //stage.setScene(new mainPage(width, height, false).getScene());
+                StageController stageController = StageController.getInstance();
+                stageController.changeTo("mainPage");
             });
 
             noButton.setOnAction(e1 -> {
