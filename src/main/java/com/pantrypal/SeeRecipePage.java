@@ -122,7 +122,9 @@ public class SeeRecipePage extends Page implements ISeeRecipePage{
                 }
 
                 confirmDelete.hide();
-                stage.setScene(new mainPage(width, height, false).getScene());
+                //stage.setScene(new mainPage(width, height, false).getScene());
+                StageController stageController = StageController.getInstance();
+                stageController.changeTo("mainPage");
             });
 
             noButton.setOnAction(e1 -> {
