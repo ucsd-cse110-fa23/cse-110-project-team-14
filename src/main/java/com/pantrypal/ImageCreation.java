@@ -30,10 +30,10 @@ public class ImageCreation {
         requestBody.put("model", MODEL);
         requestBody.put("prompt", recipePrompt);
         requestBody.put("n", n);
-        String imageWidth = constants.width/3;
-        String imageHeight = constants.height/3;
-        String imageDims = imageWidth + "x" + imageHeight;
-        requestBody.put("size", imageDims); // Change size of generated image
+        // String imageWidth = constants.width/3;
+        // String imageHeight = constants.height/3;
+        // String imageDims = imageWidth + "x" + imageHeight;
+        requestBody.put("size", "100x100"); // Change size of generated image
 
 
         // Create the HTTP client
