@@ -6,6 +6,9 @@ import java.net.URISyntaxException;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -20,6 +23,7 @@ public class SeeRecipeFromRecording extends Page implements ISeeRecipePage {
     private String mealType;
     private String detail;
     private String ingredients;
+    private String imageURL;
     private Button back;
     private Button saveButton;
     private Button editButton;
@@ -51,6 +55,7 @@ public class SeeRecipeFromRecording extends Page implements ISeeRecipePage {
         this.mealType = r.getMealType();
         this.detail = r.getRecipeInstructions();
         this.ingredients = r.getRecipeIngredients();
+        this.imageURL = r.getRecipeImageURL();
 
         detailLable.setText(detail);
         ingredientLabel.setText(ingredients);
@@ -65,8 +70,8 @@ public class SeeRecipeFromRecording extends Page implements ISeeRecipePage {
     public void addListeners() {
         back.setOnAction(e -> {
             // go back to main page
-            Stage stage = (Stage) this.getScene().getWindow();
-            stage.setScene(new mainPage(width, height, false).getScene());
+            StageController stageController = StageController.getInstance();
+            stageController.changeTo("mainPage");
         });
         
      
@@ -95,8 +100,8 @@ public class SeeRecipeFromRecording extends Page implements ISeeRecipePage {
             // Add recipe to the recipe list 
             //Add it to the top of the list
             RecipeTitleListView.getInstance().getChildren().add(0, recipeTitleView);
-            Stage stage = (Stage) this.getScene().getWindow();
-            stage.setScene(new mainPage(width, height, false).getScene());
+            StageController stageController = StageController.getInstance();
+            stageController.changeTo("mainPage");
         });
         
         editButton.setOnAction(e -> {
@@ -133,7 +138,32 @@ public class SeeRecipeFromRecording extends Page implements ISeeRecipePage {
         //changing font size so itll fit
         ingredientLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 20;");
 
-        mainContent.getChildren().addAll(ingredientLabel, detailLable);
+        VBox recipeBox = new VBox();
+        recipeBox.setAlignment(Pos.TOP_LEFT);
+        recipeBox.setStyle("-fx-background-color: #FFEBD7;");
+
+        if(imageURL == null){
+            recipeBox.getChildren().addAll(ingredientLabel, detailLable);
+        }
+        else{
+            // Access the Recipe image from the URL
+            ImageView imageView = new ImageView();
+
+            // Load an image from a URL
+            String imageUrl = imageURL;
+            Image image = new Image(imageUrl);
+
+            // Set the image in the ImageView
+            imageView.setImage(image);
+            recipeBox.getChildren().addAll(ingredientLabel, detailLable, imageView);
+        }
+
+        ScrollPane recipePageScroller = new ScrollPane(recipeBox);
+        recipePageScroller.setPrefSize(1000, 1000);
+        recipePageScroller.setFitToWidth(true);
+        mainContent.minHeight(1000);
+        mainContent.minWidth(1000);
+        mainContent.getChildren().add(recipePageScroller);
         Header = new paneHeader();
         this.center = mainContent;
         Footer = new paneFooter();
@@ -213,7 +243,7 @@ public class SeeRecipeFromRecording extends Page implements ISeeRecipePage {
     public void remakeRecipe(){
             try {
                 // from whisper gets previous text (avoids reading from recording.wav again)
-                TextToRecipe t2R = new TextToRecipe(Whisper.getInstance().getText(), this.getRecipe().getMealType(), new Recipe(), new ChatGPT());
+                TextToRecipe t2R = new TextToRecipe(Whisper.getInstance().getText(), this.getRecipe().getMealType(), new Recipe(), new ChatGPT(), new ImageCreation());
                 t2R.createRecipeObj();
                 SeeRecipeFromRecording SRP = new SeeRecipeFromRecording(constants.width, constants.height);
                 SRP.setRecipe(t2R.getRecipe());

@@ -38,8 +38,9 @@ public class RecordPage extends Page {
     public void addListeners() {
         // return to mainPage
         back.setOnAction(e -> {
-            Stage stage = (Stage) this.getScene().getWindow();
-            stage.setScene(new mainPage(width, height, false).getScene());
+            //Stage stage = (Stage) this.getScene().getWindow();
+            StageController stageController = StageController.getInstance();
+            stageController.changeTo("mainPage");
         });
 
         // initialize recording
@@ -60,9 +61,10 @@ public class RecordPage extends Page {
                 try {
                     // make recipe
                     String transcribedText = Whisper.getInstance().getResponse();
-                    TextToRecipe t2R = new TextToRecipe(transcribedText, mealType, new Recipe(), new ChatGPT());
+                    TextToRecipe t2R = new TextToRecipe(transcribedText, mealType, new Recipe(), new ChatGPT(), new ImageCreation());
                     Whisper.getInstance().setText(transcribedText);
                     t2R.createRecipeObj();
+                    
                     SeeRecipeFromRecording SRP = new SeeRecipeFromRecording(constants.width, constants.height);
                     SRP.setRecipe(t2R.getRecipe());
 

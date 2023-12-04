@@ -30,7 +30,7 @@ public class UserStoryMS2_7Testing {
     @Test
     public void testUserStoryMS2_7BDD(){
         MockWhisper whisper = new MockWhisper();
-        TextToRecipe textToRecipe = new TextToRecipe(whisper.getResponse(6), whisper.getResponse(2), new Recipe(), new MockChatGPT());
+        TextToRecipe textToRecipe = new TextToRecipe(whisper.getResponse(6), whisper.getResponse(2), new Recipe(), new MockChatGPT(), new MockImageCreation());
         try {
             textToRecipe.createRecipeObj();
             assertEquals("Breakfast", textToRecipe.getRecipe().getMealType());

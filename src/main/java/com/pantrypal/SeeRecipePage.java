@@ -4,6 +4,8 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -19,6 +21,7 @@ public class SeeRecipePage extends Page implements ISeeRecipePage{
     private String mealType;
     private String detail;
     private String ingredients;
+    private String imageURL;
     private Button back;
     private Button editButton;
     private Button deleteButton; 
@@ -53,6 +56,7 @@ public class SeeRecipePage extends Page implements ISeeRecipePage{
         this.mealType = r.getMealType();
         this.detail = r.getRecipeInstructions();
         this.ingredients = r.getRecipeIngredients();
+        this.imageURL = r.getRecipeImageURL();
         detailLable.setText(detail);
         ingredientLabel.setText(ingredients);
         titleText.setText(title);
@@ -62,8 +66,10 @@ public class SeeRecipePage extends Page implements ISeeRecipePage{
     public void addListeners() {
         back.setOnAction(e -> {
             // go back to main page
-            Stage stage = (Stage) this.getScene().getWindow();
-            stage.setScene(new mainPage(width, height, false).getScene());
+            //Stage stage = (Stage) this.getScene().getWindow();
+            StageController stg = StageController.getInstance();
+            //stage.setScene(new mainPage(width, height, false).getScene());
+            stg.changeTo("mainPage");
             System.out.println("SWITCHED TO MAIN PAGE");
         });
 
@@ -116,7 +122,9 @@ public class SeeRecipePage extends Page implements ISeeRecipePage{
                 }
 
                 confirmDelete.hide();
-                stage.setScene(new mainPage(width, height, false).getScene());
+                //stage.setScene(new mainPage(width, height, false).getScene());
+                StageController stageController = StageController.getInstance();
+                stageController.changeTo("mainPage");
             });
 
             noButton.setOnAction(e1 -> {
@@ -146,7 +154,21 @@ public class SeeRecipePage extends Page implements ISeeRecipePage{
         //changing font size so itll fit
         ingredientLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 20;");
 
-        recipeBox.getChildren().addAll(ingredientLabel, detailLable);
+        if(imageURL == null){
+            recipeBox.getChildren().addAll(ingredientLabel, detailLable);
+        }
+        else{
+            // Access the Recipe image from the URL
+            ImageView imageView = new ImageView();
+
+            // Load an image from a URL
+            String imageUrl = imageURL;
+            Image image = new Image(imageUrl);
+
+            // Set the image in the ImageView
+            imageView.setImage(image);
+            recipeBox.getChildren().addAll(ingredientLabel, detailLable, imageView);
+        }
         recipeBox.setStyle("-fx-background-color: #FFEBD7;");
         ScrollPane recipePageScroller = new ScrollPane(recipeBox);
         recipePageScroller.setPrefSize(1000, 1000);

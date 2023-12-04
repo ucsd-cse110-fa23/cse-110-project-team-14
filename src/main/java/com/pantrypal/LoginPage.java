@@ -107,7 +107,7 @@ public class LoginPage extends Page {
             addListeners();
         }
     }
-
+    
     private void addListeners(){
         this.loginButton.setOnAction(e -> {
             // check if credientals are valid
