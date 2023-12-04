@@ -33,6 +33,7 @@ public class Server {
 
         // Context for handling file download
         server.createContext("/download", new FileDownloadHandler(data));
+        server.createContext("/share", new URLShareHandler());
         server.setExecutor(threadPoolExecutor);
         server.start();
     
