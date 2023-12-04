@@ -28,7 +28,7 @@ public class ImageCreation {
         // Create a request body which you will pass into request object
         JSONObject requestBody = new JSONObject();
         requestBody.put("model", MODEL);
-        requestBody.put("prompt", prompt);
+        requestBody.put("prompt", recipePrompt);
         requestBody.put("n", n);
         String imageWidth = constants.width/3;
         String imageHeight = constants.height/3;
