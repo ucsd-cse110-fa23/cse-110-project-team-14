@@ -33,7 +33,7 @@ public class SeeRecipePage extends Page implements ISeeRecipePage{
     private DatabaseOPS db;
     RecipeTitleView recipeTitleView; 
 
-    final private String COLLECTION_NAME = "recipes";
+    final private String COLLECTION_NAME = Globals.username;
             
     public SeeRecipePage(int width, int height) {
         super(width, height);

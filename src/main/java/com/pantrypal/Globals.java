@@ -12,4 +12,5 @@ public class Globals {
         NEWTOOLD, OLDTONEW, ATOZ, ZTOA
     }
     public static SortingState sortingState = SortingState.NEWTOOLD;
+    public static String username = "recipes";
 }

@@ -34,7 +34,7 @@ public class EditRecipePage extends Page {
     private SeeRecipePage SRP;
     
 
-    final private String COLLECTION_NAME = "recipes";
+    final private String COLLECTION_NAME = Globals.username;
             
 
     private boolean fromRecording = false;
