@@ -66,8 +66,8 @@ public class PaneFooter extends HBox {
     // creates Button and adds to list of buttons on footer.
     public Button creatButton(String name, String style) {
         Button button = new Button(name);
-        System.out.println("in PaneFooter.creatButton");
-        System.out.println(button.getText()+", ID:" + System.identityHashCode(button));
+        // System.out.println("in PaneFooter.creatButton");
+        // System.out.println(button.getText()+", ID:" + System.identityHashCode(button));
         button.setStyle(style);
         ButtonList.put(name, button);
         return button;

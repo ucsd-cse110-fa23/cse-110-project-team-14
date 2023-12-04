@@ -2,6 +2,7 @@ package com.pantrypal.model;
 
 import java.io.*;
 import java.net.*;
+import java.nio.charset.StandardCharsets;
 
 import com.pantrypal.constants.Constants;
 import org.json.*;
@@ -12,6 +13,7 @@ public class WhisperModel {
     private static final String MODEL = Constants.WHISPER_MODEL;
     private static final String FILE_PATH = Constants.FILE_PATH; // path to audio TODO:
     private String currentText;
+    private Client model = new Client();
 
     private static final WhisperModel instance = new WhisperModel();
     public static WhisperModel getInstance() {
@@ -26,7 +28,6 @@ public class WhisperModel {
         currentText = s;
     }
 
-    
 
     private static void writeParameterToOutputStream(
             OutputStream outputStream,
@@ -99,6 +100,9 @@ public class WhisperModel {
     }
 
     public String getResponse() throws IOException, URISyntaxException {
+        // String encodedFileId = URLEncoder.encode("recording.wav", StandardCharsets.UTF_8.toString());
+        String downloadResult = model.downloadFile("recording1.wav");
+        System.out.println(downloadResult);
         File file = new File(FILE_PATH);
 
         // Set up HTTP connection

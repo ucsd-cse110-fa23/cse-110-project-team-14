@@ -1,4 +1,4 @@
-package com.pantrypal;
+package com.pantrypal.view.pages;
 
 import javafx.geometry.Insets;
 import javafx.scene.layout.VBox;

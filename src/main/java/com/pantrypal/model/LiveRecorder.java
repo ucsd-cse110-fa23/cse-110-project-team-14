@@ -2,6 +2,7 @@ package com.pantrypal.model;
 
 import com.pantrypal.constants.Constants;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 
 import javax.sound.sampled.AudioFileFormat;
@@ -14,8 +15,10 @@ import javax.sound.sampled.TargetDataLine;
 public class LiveRecorder {
     private AudioFormat audioFormat;
     private TargetDataLine targetDataLine;
+    Client client;
     public LiveRecorder(){
         audioFormat = getAudioFormat();
+        client = new Client();
     }
     
       private AudioFormat getAudioFormat() {
@@ -65,12 +68,14 @@ public class LiveRecorder {
                             targetDataLine);
 
                     // the file that will contain the audio data
-                    File audioFile = new File(Constants.FILE_PATH);
+                    File audioFile = new File("recording.wav");
                     AudioSystem.write(
                             audioInputStream,
                             AudioFileFormat.Type.WAVE,
                             audioFile);
                     // recordingLabel.setVisible(false);
+                    // upload file
+                   client.sendPOST();
                 } 
                 catch (Exception ex) {
                     ex.printStackTrace();

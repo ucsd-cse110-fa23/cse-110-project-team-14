@@ -1,4 +1,4 @@
-package com.pantrypal;
+package com.pantrypal.view.pages;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;

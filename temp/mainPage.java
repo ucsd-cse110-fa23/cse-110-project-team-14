@@ -1,4 +1,16 @@
-package com.pantrypal;
+package temp;
+
+import com.pantrypal.Globals;
+import com.pantrypal.constants.Constants;
+import com.pantrypal.controller.StageController;
+import com.pantrypal.model.DatabaseOPS;
+import com.pantrypal.model.Recipe;
+import com.pantrypal.view.components.PaneFooter;
+import com.pantrypal.view.components.PaneHeader;
+import com.pantrypal.view.pages.Page;
+import com.pantrypal.view.pages.RecipeTitleListView;
+import com.pantrypal.view.pages.RecipeTitleView;
+import com.pantrypal.view.pages.SeeRecipePageView;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -7,10 +19,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 class mainPage extends Page {
-
-
-    paneHeader paneHeader;
-    paneFooter paneFooter;
+    private PaneHeader paneHeader;
+    private PaneFooter paneFooter;
     private Button addButton;
     //private arraylist<recipe> recipes; which has all the recipes and we use it to sort 
     public mainPage(int width, int height) {
@@ -21,7 +31,7 @@ class mainPage extends Page {
         for (int i = Globals.recipes.size() - 1; i >= 0; i--) {
             Recipe recipe = Globals.recipes.get(i);
             RecipeTitleView recipeTitleView = new RecipeTitleView(recipe); //<-- This should be UI
-            SeeRecipePage SRP = new SeeRecipePage(constants.width, constants.height); //<-- This should be UI
+            SeeRecipePageView SRP = new SeeRecipePageView(Constants.WIDTH, Constants.HEIGHT); //<-- This should be UI
             SRP.setRecipe(recipe);
             recipeTitleView.getRecipeTitleButton().setOnAction(e1 -> {
                 StageController stg = StageController.getInstance();
@@ -30,16 +40,6 @@ class mainPage extends Page {
             });
             RecipeTitleListView.getInstance().getChildren().add(recipeTitleView);
         }
-
-        // RecipeTitleView recipeTitleView = new RecipeTitleView(recipe); //<-- This should be UI
-        //         SeeRecipePage SRP = new SeeRecipePage(constants.width, constants.height); //<-- This should be UI
-        //         SRP.setRecipe(recipe);
-        //         recipeTitleView.getRecipeTitleButton().setOnAction(e1 -> {
-        //             StageController stg = StageController.getInstance();
-        //             stg.registerPage(recipe.getRecipeTitle(), SRP);
-        //             stg.changeTo(recipe.getRecipeTitle());
-        //         });
-        //         RecipeTitleListView.getInstance().getChildren().add(recipeTitleView);
     }
     // pass garbage boolean
     // prevents initializing recipe list multiple times
@@ -67,7 +67,7 @@ class mainPage extends Page {
     @Override
     protected void createView() {
 
-        paneHeader = new paneHeader();
+        paneHeader = new PaneHeader();
         paneHeader.setTitleInMiddle(new Text("PantryPal: The best Recipe manager"));
         
         ScrollPane scroll = new ScrollPane(RecipeTitleListView.getInstance());
@@ -75,7 +75,7 @@ class mainPage extends Page {
         scroll.setFitToWidth(true);
         scroll.setFitToHeight(true);
 
-        paneFooter = new paneFooter();
+        paneFooter = new PaneFooter();
         
         VBox mainContent = new VBox();
         mainContent.minHeight(1000);

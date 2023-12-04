@@ -19,7 +19,7 @@ public class RecordPageView extends Page {
 
     private Button back;
 
-    public LiveRecorder liveRecorder;
+    // public LiveRecorder liveRecorder;
     // Whisper whisper = Whisper.getInstance();
     private boolean isRecording;
     private String mealType;
@@ -85,14 +85,16 @@ public class RecordPageView extends Page {
             this.paneFooter.setButton(recordButton);
             paneFooter.setButton(back);
             isRecording = false;
+            // this.liveRecorder = new LiveRecorder();
+            
             recordPageController = new RecordPageController(this);
-            this.liveRecorder = new LiveRecorder();
 
         }
     }
     public void setRecordButtonAction(EventHandler<ActionEvent> eventHandler) {
         recordButton.setOnAction(eventHandler);
     }
+
     public void setBackButtonAction(EventHandler<ActionEvent> eventHandler) {
         back.setOnAction(eventHandler);
     }
@@ -102,7 +104,7 @@ public class RecordPageView extends Page {
         return recordButton;
     }
 
-    public LiveRecorder getLiveRecorder() {
-        return liveRecorder;
-    }
+    // public LiveRecorder getLiveRecorder() {
+    //     return liveRecorder;
+    // }
 }
