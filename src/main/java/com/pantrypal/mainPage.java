@@ -26,6 +26,9 @@ class mainPage extends Page {
         // IntializeRecipeList.uploadRecipes();
         DatabaseOPS db = new DatabaseOPS(Globals.username);
         Globals.recipes = db.initializeRecipesToList(); //<-- this will return the arraylist
+        //Add the recipes to the filter list
+        Globals.recipesWithFilter = Globals.recipes;
+
         if(Globals.sortingState == Globals.SortingState.NEWTOOLD) {
             Globals.recipes = Sort.newToOldSort(Globals.recipes);
         } else if(Globals.sortingState == Globals.SortingState.OLDTONEW) {
