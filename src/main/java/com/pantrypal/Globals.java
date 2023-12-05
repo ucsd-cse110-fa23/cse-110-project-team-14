@@ -7,10 +7,17 @@ import java.util.ArrayList;
  */
 public class Globals {
     public static ArrayList<Recipe> recipes = new ArrayList<Recipe>();
+    public static ArrayList<Recipe> recipesWithFilter = new ArrayList<Recipe>();
     public static int recipeIndex = 0;
     enum SortingState {
         NEWTOOLD, OLDTONEW, ATOZ, ZTOA
     }
+    enum FilterType {
+        NONE, BREAKFAST, LUNCH, DINNER
+    }
+    public static FilterType filterType = FilterType.NONE;
     public static SortingState sortingState = SortingState.NEWTOOLD;
     public static String username = "recipes";
+    public static double appWidth = 600;
+    public static double appHeight = 600;
 }
