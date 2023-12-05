@@ -172,7 +172,7 @@ class mainPage extends Page {
                 // TODO:  Put into a helper method for refactoring purposes
                 
                 // Get the selected item
-                String selectedOption = sortBox.getValue();
+                String selectedOption = filterMealTypeBox.getValue();
                 // do a switch case to check between firs
                 switch(selectedOption) {
                     case "None":
@@ -280,6 +280,7 @@ class mainPage extends Page {
             Globals.recipes = Filters.filterByLunch(Globals.recipes);
         } else if(Globals.filterType == Globals.FilterType.DINNER){
             Globals.recipes = Filters.filterByDinner(Globals.recipes);
+            System.out.println("DINNER");
         }
 
         // Sort the recipes
