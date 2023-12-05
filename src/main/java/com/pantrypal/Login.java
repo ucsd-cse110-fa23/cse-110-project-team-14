@@ -53,4 +53,10 @@ public class Login {
         }
     }
 
+    public void unsetAutomaticLogin(){
+        Preferences pref = Preferences.userRoot();
+        pref.put("username", "");
+        pref.put("password", "");
+    }
+
 }
