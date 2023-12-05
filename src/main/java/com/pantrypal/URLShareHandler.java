@@ -46,7 +46,7 @@ public void handle(HttpExchange exchange) throws IOException {
                                 "<p>Ingredients: " + ingredients + "</p>" +
                                 "<p>Instructions: " + instructions + "</p>" +
                                 "<p>Meal Type: " + mealType + "</p>" +
-                                "<img src=" + imgUrl + ">" + "</img>" + 
+                                "<img src=\"" + imgUrl + "\" alt=\"Recipe Image\">" +
                                 "</body></html>";
 
                         // Set the response headers
