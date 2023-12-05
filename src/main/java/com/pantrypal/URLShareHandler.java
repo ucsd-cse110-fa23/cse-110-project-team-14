@@ -121,10 +121,10 @@ public void handle(HttpExchange exchange) throws IOException {
                        "   height: auto;" +  // Maintain aspect ratio
                        "}" +
                        "</style></head><body>" +
-                       "<h1>" + title + "</h1>" +
-                       "<p>" + ingredients + "</p>" +
-                       "<p>" + instructions + "</p>" +
-                       "<p>" + mealType + "</p>" +
+                       "<h1>Title: " + title + "</h1>" +
+                       "<p>Ingredients: " + ingredients + "</p>" +
+                       "<p>Instructions: " + instructions + "</p>" +
+                       "<p>Meal Type: " + mealType + "</p>" +
                        "<img src=\"" + imgUrl + "\" alt=\"Recipe Image\">" +
                        "</body></html>";
                         // Set the response headers
