@@ -27,7 +27,14 @@ class mainPage extends Page {
         DatabaseOPS db = new DatabaseOPS(Globals.username);
         Globals.recipes = db.initializeRecipesToList(); //<-- this will return the arraylist
         //Add the recipes to the filter list
-        Globals.recipesWithFilter = Globals.recipes;
+        if(Globals.filterType == Globals.FilterType.BREAKFAST){
+            Globals.recipes = Filters.filterByBreakfast(Globals.recipes);
+        } else if(Globals.filterType == Globals.FilterType.LUNCH){
+            Globals.recipes = Filters.filterByLunch(Globals.recipes);
+        } else if(Globals.filterType == Globals.FilterType.DINNER){
+            Globals.recipes = Filters.filterByDinner(Globals.recipes);
+        }
+
 
         if(Globals.sortingState == Globals.SortingState.NEWTOOLD) {
             Globals.recipes = Sort.newToOldSort(Globals.recipes);
@@ -103,23 +110,33 @@ class mainPage extends Page {
         paneHeader = new paneHeader();
         paneHeader.setTitleInMiddle(new Text("PantryPal: The best Recipe manager"));
 
-        ComboBox<String> comboBox = new ComboBox<>();
+        ComboBox<String> sortBox = new ComboBox<>();
+        ComboBox<String> filterMealTypeBox = new ComboBox<>();
 
-        // Add items to the ComboBox
-        ObservableList<String> items = FXCollections.observableArrayList(
+        // Add sort to the ComboBox
+        ObservableList<String> sort = FXCollections.observableArrayList(
                 "Newest to Oldest",
                 "Oldest to Newest",
                 "A to Z",
                 "Z to A"
         );
 
-        comboBox.setItems(items);
+        // Add filter to the ComboBox
+        ObservableList<String> filterMealType = FXCollections.observableArrayList(
+                "None",
+                "Breakfast",
+                "Lunch",
+                "Dinner"
+        );
+        
+        sortBox.setItems(sort);
+        filterMealTypeBox.setItems(filterMealType);
 
-        comboBox.setOnAction(e -> {
+        sortBox.setOnAction(e -> {
                 // TODO:  Put into a helper method for refactoring purposes
                 
                 // Get the selected item
-                String selectedOption = comboBox.getValue();
+                String selectedOption = sortBox.getValue();
                 // do a switch case to check between "Newest to Oldest", "Oldest to Newest", "A to Z", "Z to A"
                 switch(selectedOption) {
                     case "Newest to Oldest":
@@ -151,6 +168,40 @@ class mainPage extends Page {
                 System.out.println("Selected: " + selectedOption);
         });
 
+        filterMealTypeBox.setOnAction(e -> {
+                // TODO:  Put into a helper method for refactoring purposes
+                
+                // Get the selected item
+                String selectedOption = sortBox.getValue();
+                // do a switch case to check between firs
+                switch(selectedOption) {
+                    case "None":
+                        //Filter by none
+                        Globals.filterType = Globals.FilterType.NONE;
+                        update();
+                        break;
+                    case "Breakfast":
+                        // Filter by breakfast
+                        Globals.filterType = Globals.FilterType.BREAKFAST;
+                        update();
+                        break;
+                    case "Lunch":
+                        // Filter by lunch
+                        Globals.filterType = Globals.FilterType.LUNCH;
+                        update();
+                        break;
+                    case "Dinner":
+                        // Filter by dinner
+                        Globals.filterType = Globals.FilterType.DINNER;
+                        update();
+                        break;
+                }
+                // Add your functionality here
+                System.out.println("Selected: " + selectedOption);
+        });
+
+
+        /* Create the pageSettings subheader for adding the two drop downs and the signout option */
         HBox pageSettings = new HBox();
         this.signOutButton = new Button("Sign Out");
         this.signOutButton.setStyle("-fx-background-color: #FFEBD7; " +
@@ -163,16 +214,17 @@ class mainPage extends Page {
         pageSettings.setPadding(new Insets(10)); // Add padding for better visibility
 
         // Set the spacing between buttons
-        pageSettings.setSpacing(width - 300);
+        // pageSettings.setSpacing(width - 300);
 
         // Set the left button to grow horizontally to the left
-        HBox.setHgrow(comboBox, javafx.scene.layout.Priority.ALWAYS);
+        //HBox.setHgrow(sortBox, javafx.scene.layout.Priority.ALWAYS);
+        //HBox.setHgrow(filterMealTypeBox, javafx.scene.layout.Priority.ALWAYS);
 
-        // Add buttons to the HBox
-        pageSettings.getChildren().addAll(comboBox, signOutButton);
+        // Add the dropdowns and the signout button to the HBox pageSettings subheader
+        pageSettings.getChildren().addAll(sortBox, filterMealTypeBox, signOutButton);
 
         // Set alignment for the buttons
-        pageSettings.setMargin(signOutButton, new Insets(0, 0, 0, 10)); // Add margin to the right button
+        // pageSettings.setMargin(signOutButton, new Insets(0, 0, 0, 10)); // Add margin to the right button
         pageSettings.setAlignment(javafx.geometry.Pos.CENTER); // Align buttons to the right
 
 
@@ -220,6 +272,17 @@ class mainPage extends Page {
         RecipeTitleListView.getInstance().getChildren().clear();
         DatabaseOPS db = new DatabaseOPS(Globals.username);
         Globals.recipes = db.initializeRecipesToList(); //<-- this will return the arraylist
+
+        // Add the recipes to the filter list
+        if(Globals.filterType == Globals.FilterType.BREAKFAST){
+            Globals.recipes = Filters.filterByBreakfast(Globals.recipes);
+        } else if(Globals.filterType == Globals.FilterType.LUNCH){
+            Globals.recipes = Filters.filterByLunch(Globals.recipes);
+        } else if(Globals.filterType == Globals.FilterType.DINNER){
+            Globals.recipes = Filters.filterByDinner(Globals.recipes);
+        }
+
+        // Sort the recipes
         if(Globals.sortingState == Globals.SortingState.NEWTOOLD) {
             Globals.recipes = Sort.newToOldSort(Globals.recipes);
         } else if(Globals.sortingState == Globals.SortingState.OLDTONEW) {

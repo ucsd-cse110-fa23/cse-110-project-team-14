@@ -8,7 +8,10 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("PantryPal");
-        primaryStage.setResizable(false);
+        primaryStage.setResizable(true);
+        // Get the current appWidth of the app to set the width of the recipes
+        Globals.appWidth = primaryStage.getWidth();
+        
         primaryStage.setScene(root.getScene());
         StageController stgControl = StageController.getInstance();
         stgControl.init(primaryStage);

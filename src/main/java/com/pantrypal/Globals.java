@@ -18,4 +18,6 @@ public class Globals {
     public static FilterType filterType = FilterType.NONE;
     public static SortingState sortingState = SortingState.NEWTOOLD;
     public static String username = "recipes";
+    public static double appWidth = 600;
+    public static double appHeight = 600;
 }
