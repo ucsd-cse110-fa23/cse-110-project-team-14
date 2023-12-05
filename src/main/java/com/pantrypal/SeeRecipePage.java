@@ -4,6 +4,8 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.Clipboard;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -26,6 +28,7 @@ public class SeeRecipePage extends Page implements ISeeRecipePage{
     private String mealType;
     private String detail;
     private String ingredients;
+    private String imageURL;
     private Button back;
     private Button editButton;
     private Button deleteButton; 
@@ -61,6 +64,7 @@ public class SeeRecipePage extends Page implements ISeeRecipePage{
         this.mealType = r.getMealType();
         this.detail = r.getRecipeInstructions();
         this.ingredients = r.getRecipeIngredients();
+        this.imageURL = r.getRecipeImageURL();
         detailLable.setText(detail);
         ingredientLabel.setText(ingredients);
         titleText.setText(title);
@@ -171,9 +175,22 @@ public class SeeRecipePage extends Page implements ISeeRecipePage{
         ingredientLabel.setWrapText(true);
         //changing font size so itll fit
         ingredientLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 20;");
-
-        recipeBox.getChildren().addAll(ingredientLabel, detailLable);
         recipeBox.setStyle("-fx-background-color: #FFEBD7;");
+        if(imageURL == null){
+            recipeBox.getChildren().addAll(ingredientLabel, detailLable);
+        }
+        else{
+            // Access the Recipe image from the URL
+            ImageView imageView = new ImageView();
+
+            // Load an image from a URL
+            String imageUrl = imageURL;
+            Image image = new Image(imageUrl);
+
+            // Set the image in the ImageView
+            imageView.setImage(image);
+            recipeBox.getChildren().addAll(ingredientLabel, detailLable, imageView);
+        }
         ScrollPane recipePageScroller = new ScrollPane(recipeBox);
         recipePageScroller.setPrefSize(1000, 1000);
         recipePageScroller.setFitToWidth(true);
