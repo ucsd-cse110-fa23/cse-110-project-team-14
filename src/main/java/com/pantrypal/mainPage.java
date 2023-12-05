@@ -1,5 +1,7 @@
 package com.pantrypal;
 
+import javafx.scene.control.Label;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -214,14 +216,23 @@ class mainPage extends Page {
         pageSettings.setPadding(new Insets(10)); // Add padding for better visibility
 
         // Set the spacing between buttons
-        // pageSettings.setSpacing(width - 300);
+        pageSettings.setSpacing(5);
 
         // Set the left button to grow horizontally to the left
         //HBox.setHgrow(sortBox, javafx.scene.layout.Priority.ALWAYS);
         //HBox.setHgrow(filterMealTypeBox, javafx.scene.layout.Priority.ALWAYS);
 
         // Add the dropdowns and the signout button to the HBox pageSettings subheader
-        pageSettings.getChildren().addAll(sortBox, filterMealTypeBox, signOutButton);
+        
+        Label filterLabel = new Label("Filter:");
+        Label sortLabel = new Label("Sort:");
+        sortLabel.setStyle("-fx-text-fill: #8B4513; " +
+                "-fx-font-size: 20px; " +
+                "-fx-font-weight: bold;");
+        filterLabel.setStyle("-fx-text-fill: #8B4513; " + 
+                "-fx-font-size: 20px; " +
+                "-fx-font-weight: bold;");
+        pageSettings.getChildren().addAll(sortLabel, sortBox, filterLabel, filterMealTypeBox, signOutButton);
 
         // Set alignment for the buttons
         // pageSettings.setMargin(signOutButton, new Insets(0, 0, 0, 10)); // Add margin to the right button
