@@ -12,3 +12,4 @@ build
 recording.wav
 *.wav
 recording.wav
+.vscode/launch.json
