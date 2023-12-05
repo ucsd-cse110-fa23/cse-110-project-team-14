@@ -6,12 +6,19 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.Clipboard;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
+import java.awt.datatransfer.StringSelection;
+import java.awt.Toolkit;
+
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
 
 // SeeRecipePage now extends the abstract Page class 
 //SeeRecipePage uses an Interface to allow it to work with SeeRecipeFromRecording
@@ -25,6 +32,7 @@ public class SeeRecipePage extends Page implements ISeeRecipePage{
     private Button back;
     private Button editButton;
     private Button deleteButton; 
+    private Button shareButton;
     
     private paneHeader Header;
     private VBox center;
@@ -66,11 +74,8 @@ public class SeeRecipePage extends Page implements ISeeRecipePage{
     public void addListeners() {
         back.setOnAction(e -> {
             // go back to main page
-            //Stage stage = (Stage) this.getScene().getWindow();
-            StageController stg = StageController.getInstance();
-            //stage.setScene(new mainPage(width, height, false).getScene());
-            stg.changeTo("mainPage");
-            System.out.println("SWITCHED TO MAIN PAGE");
+            StageController stageController = StageController.getInstance();
+            stageController.changeTo("mainPage");
         });
 
          
@@ -122,14 +127,31 @@ public class SeeRecipePage extends Page implements ISeeRecipePage{
                 }
 
                 confirmDelete.hide();
-                //stage.setScene(new mainPage(width, height, false).getScene());
-                StageController stageController = StageController.getInstance();
-                stageController.changeTo("mainPage");
+                stage.setScene(new mainPage(width, height, false).getScene());
             });
 
             noButton.setOnAction(e1 -> {
                 confirmDelete.hide();
             });
+        });
+
+        this.shareButton.setOnAction(e -> {
+            shareButton.setText("Copied To Clipboard");
+            Toolkit toolkit = Toolkit.getDefaultToolkit();
+
+            // Create a StringSelection object containing the text to be copied
+            String toCopy = "http://localhost:8100/share/" + Globals.username + "/" + this.title;
+            StringSelection selection = new StringSelection(toCopy);
+
+            // Set the contents of the clipboard to the StringSelection
+            toolkit.getSystemClipboard().setContents(selection, null);
+
+            // Display message for 5 seconds
+            Timeline timeline = new Timeline(new KeyFrame(
+                    Duration.seconds(5),
+                    event -> shareButton.setText("Share button"))); // Set the original text here
+            timeline.setCycleCount(1);
+            timeline.play();
         });
         }
 
@@ -153,7 +175,7 @@ public class SeeRecipePage extends Page implements ISeeRecipePage{
         ingredientLabel.setWrapText(true);
         //changing font size so itll fit
         ingredientLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 20;");
-
+        recipeBox.setStyle("-fx-background-color: #FFEBD7;");
         if(imageURL == null){
             recipeBox.getChildren().addAll(ingredientLabel, detailLable);
         }
@@ -169,7 +191,6 @@ public class SeeRecipePage extends Page implements ISeeRecipePage{
             imageView.setImage(image);
             recipeBox.getChildren().addAll(ingredientLabel, detailLable, imageView);
         }
-        recipeBox.setStyle("-fx-background-color: #FFEBD7;");
         ScrollPane recipePageScroller = new ScrollPane(recipeBox);
         recipePageScroller.setPrefSize(1000, 1000);
         recipePageScroller.setFitToWidth(true);
@@ -206,6 +227,13 @@ public class SeeRecipePage extends Page implements ISeeRecipePage{
             "-fx-padding: 5 15 5 15;");    
                 Footer.getChildren().add(deleteButton);
         
+        this.shareButton = Footer.creatButton("Share Button", "-fx-background-color: #FFEBD7; " +
+            "-fx-text-fill: #8B4513; " +
+            "-fx-border-color: #8B4513; " +
+            "-fx-border-radius: 20; " +
+            "-fx-background-radius: 20; " +
+            "-fx-padding: 5 15 5 15;");    
+                Footer.getChildren().add(shareButton);
         
         this.borderPane.setTop(Header);
         this.borderPane.setCenter(this.center);

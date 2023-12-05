@@ -22,6 +22,7 @@ class mainPage extends Page {
     paneFooter paneFooter;
     private Button addButton;
     private Button signOutButton;
+    private Login login =  new Login();
     //private arraylist<recipe> recipes; which has all the recipes and we use it to sort 
     public mainPage(int width, int height) {
         super(width, height);
@@ -90,6 +91,7 @@ class mainPage extends Page {
             // swap to record page
             StageController stgController = StageController.getInstance();
             Globals.username = "recipes";
+            login.unsetAutomaticLogin();
 
             stgController.changeTo("LoginPage");
 
