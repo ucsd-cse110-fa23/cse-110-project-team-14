@@ -1,5 +1,7 @@
 package com.pantrypal;
+
 import org.bson.Document;
+import java.util.prefs.*;
 
 public class Login {
     DatabaseOPS db;
@@ -27,7 +29,28 @@ public class Login {
         return false;
     }
 
+    public boolean setAutomaticLogin(String username, String password){
+        Preferences pref = Preferences.userRoot();
+        pref.put("username", username);
+        pref.put("password", password);
+        return true;
+    }
+
     public void setCollectionName(String collectionName) {
         this.collectionName = collectionName;
     }
+
+    public void checkAutomaticLogin(){
+        Preferences pref = Preferences.userRoot();
+        String username = pref.get("username", null);
+        String password = pref.get("password", null);
+        if(username != null && password != null){
+            if(checkCredentials(username, password)){
+                Globals.username = username;
+                StageController stg = StageController.getInstance();
+                stg.changeTo("mainPage");
+            }
+        }
+    }
+
 }
