@@ -19,12 +19,12 @@ import static com.mongodb.client.model.Sorts.descending;
 public class UserStory4Testing {
     private String uri = "mongodb+srv://team14:team14onTop@cluster0.pqup4sj.mongodb.net/?retryWrites=true&w=majority";
     final private MongoClient mongoClient = MongoClients.create(uri);
-    final private String COLLECTION_NAME = "test";
+    final private String COLLECTION_NAME = "collection_specifically_designed_for_testing_with_a_long_name";
 
     @Test
     public void testDeleteAll() throws IOException, URISyntaxException {
         DatabaseOPS db = new DatabaseOPS(COLLECTION_NAME);
-        MongoDatabase recipeDB = mongoClient.getDatabase("recipeDB");
+        MongoDatabase recipeDB = mongoClient.getDatabase("PantryPal");
         MongoCollection<Document> recipesCollection = recipeDB.getCollection(COLLECTION_NAME);
         db.deleteAll();
         long size = recipesCollection.countDocuments();
@@ -35,7 +35,7 @@ public class UserStory4Testing {
     public void testInsert() throws IOException, URISyntaxException {
         
         DatabaseOPS db = new DatabaseOPS(COLLECTION_NAME);
-        MongoDatabase recipeDB = mongoClient.getDatabase("recipeDB");
+        MongoDatabase recipeDB = mongoClient.getDatabase("PantryPal");
         MongoCollection<Document> recipesCollection = recipeDB.getCollection(COLLECTION_NAME);
         db.deleteAll();
         // Insert recipe_obj into recipesCollection using for loop and check the size everytime 
@@ -64,7 +64,7 @@ public class UserStory4Testing {
     public void testNewest(){
         ArrayList<Recipe> recipes = new ArrayList<Recipe>();
         DatabaseOPS db = new DatabaseOPS(COLLECTION_NAME);
-        MongoDatabase recipeDB = mongoClient.getDatabase("recipeDB");
+        MongoDatabase recipeDB = mongoClient.getDatabase("PantryPal");
         MongoCollection<Document> recipesCollection = recipeDB.getCollection(COLLECTION_NAME);
         db.deleteAll();
         // Insert recipe_obj into recipesCollection using for loop and check the size everytime 
