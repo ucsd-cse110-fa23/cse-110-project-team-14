@@ -107,4 +107,40 @@ public class UserStoryMS2_9Testing {
             assertEquals("Dinner", filtered_recipes.get(i).getMealType());
         }
     }
+
+    /*
+     * Test with sort and filter
+     */
+    @Test
+    public void testFilterByBreakfastAndSortByTitle(){
+        ArrayList<Recipe> recipes = new ArrayList<Recipe>();
+        char title = 65;
+        for (int i = 0; i < 10; i++) {
+            Recipe recipe_obj = new Recipe();
+            recipe_obj.setRecipeTitle(title + "TR" + i);
+            recipe_obj.setRecipeIngredients("TIngred" + i);
+            recipe_obj.setRecipeInstructions("TInstr" + i);
+            recipe_obj.setRecipeIndex(i);
+            title++;
+            if(i%3 == 0){
+                recipe_obj.setMealType("Breakfast");
+            }
+            else if(i%3 == 1){
+                recipe_obj.setMealType("Lunch");
+            }
+            else{
+                recipe_obj.setMealType("Dinner");
+            }
+            recipes.add(recipe_obj);
+        }
+
+        ArrayList<Recipe> filtered_recipes = Filters.filterByBreakfast(recipes);
+        filtered_recipes = Sort.aToZSort(filtered_recipes);
+        title = 65;
+        for (int i = 0; i < filtered_recipes.size(); i++) {
+            assertEquals("Breakfast", filtered_recipes.get(i).getMealType());
+            assertEquals(title + "TR" + i, recipes.get(i).getRecipeTitle());
+            title++;
+        }
+    }
 }
