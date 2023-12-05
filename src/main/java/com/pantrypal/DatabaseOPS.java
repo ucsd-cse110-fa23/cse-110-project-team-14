@@ -74,6 +74,7 @@ public class DatabaseOPS {
         MongoCollection<Document> recipesCollection = PantryPal.getCollection(collectionName);
         recipesCollection.updateOne(eq("Title", recipe_obj.getRecipeTitle()), new Document("$set", new Document("Ingredients", recipe_obj.getRecipeIngredients())));
         recipesCollection.updateOne(eq("Title", recipe_obj.getRecipeTitle()), new Document("$set", new Document("Instructions", recipe_obj.getRecipeInstructions())));
+        recipesCollection.updateOne(eq("Title", recipe_obj.getRecipeTitle()), new Document("$set", new Document("ImageURL", recipe_obj.getRecipeImageURL())));
 
     }
 

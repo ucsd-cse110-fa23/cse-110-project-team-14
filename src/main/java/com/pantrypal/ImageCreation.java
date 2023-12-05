@@ -2,8 +2,10 @@ package com.pantrypal;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -12,6 +14,9 @@ import java.nio.file.Paths;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class ImageCreation {
     // TODO: Add class implementation here
@@ -74,5 +79,31 @@ public class ImageCreation {
         // }
         return generatedImageURL;
         // Save the image to the mongodb directly and just load it from there
+    }
+
+    public boolean isValidURL(String imageURL) {
+        try {
+            // Open a connection to the image URL
+            HttpURLConnection connection = (HttpURLConnection) new URL(imageURL).openConnection();
+            connection.setRequestMethod("HEAD");
+
+            // Check if the response code indicates success (e.g., 200 OK)
+            return connection.getResponseCode() == HttpURLConnection.HTTP_OK;
+        } catch (Exception e) {
+            // Handle any exceptions (e.g., IOException, MalformedURLException)
+            return false;
+        }
+    }
+
+    public String regenerateImageURL(String prompt, Recipe r) {
+        try {
+            String imageURL = generateImageURL(prompt);
+            r.setRecipeImageURL(imageURL);
+            DatabaseOPS db = new DatabaseOPS(Globals.username);
+            db.update(r);
+            return imageURL;
+        } catch (Exception e) {
+            return null;
+        }
     }
 }
