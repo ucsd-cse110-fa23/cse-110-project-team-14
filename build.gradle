@@ -33,6 +33,7 @@ dependencies {
     testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
     // This provides the TestEngine to actually run the tests.
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
+    implementation 'org.jsoup:jsoup:1.14.3' // Use the latest version available
 
     
 
