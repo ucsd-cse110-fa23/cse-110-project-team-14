@@ -30,6 +30,9 @@ public class Main extends Application {
 
         stgControl.registerPage("RecordPage", new RecordPage(constants.width, constants.height));
         primaryStage.show();
+      
+        root.checkAutomaticLogin();
+
         // Schedule a task to check the server status every 5 seconds
         
         ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
