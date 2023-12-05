@@ -29,7 +29,7 @@ public class DatabaseOPS {
     private final MongoClient mongoClient = MongoClients.create(uri);
     
 
-    DatabaseOPS(String collectionName) {
+    public DatabaseOPS(String collectionName) {
         this.collectionName = collectionName;
     }
     
