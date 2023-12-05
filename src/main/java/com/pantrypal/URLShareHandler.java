@@ -94,39 +94,53 @@ public void handle(HttpExchange exchange) throws IOException {
                     String instructions = d.get("Instructions").toString();    
                     String mealType = d.get("Meal Type").toString(); 
                     String imgUrl = d.get("ImageURL").toString();
-                       // Prepare the HTML response
-                       String htmlResponse = "<html><head><style>" +
-                       "body {" +
-                       "   font-family: helvetica, sans-serif;" +
-                       "   margin: 0 auto;" +
-                       "   max-width: 600px;" +
-                       "   background: #f4f4f4;" +  // Light background color
-                       "}" +
-                       "h1 {" +
-                       "   text-align: center;" +
-                       "   font-size: 24px;" +  // Adjust the font size
-                       "   color: #333;" +  // Dark text color
-                       "   margin: 20px 0;" +
-                       "}" +
-                       "p {" +
-                       "   color: #333;" +  // Dark text color
-                       "   background: #fff;" +  // White background for paragraphs
-                       "   padding: 10px;" +
-                       "   margin: 10px 0;" +
-                       "}" +
-                       "img {" +
-                       "   display: block;" +
-                       "   margin: 0 auto;" +
-                       "   max-width: 100%;" +  // Make sure the image doesn't exceed the container width
-                       "   height: auto;" +  // Maintain aspect ratio
-                       "}" +
-                       "</style></head><body>" +
-                       "<h1>Title: " + title + "</h1>" +
-                       "<p>Ingredients: " + ingredients + "</p>" +
-                       "<p>Instructions: " + instructions + "</p>" +
-                       "<p>Meal Type: " + mealType + "</p>" +
-                       "<img src=\"" + imgUrl + "\" alt=\"Recipe Image\">" +
-                       "</body></html>";
+                    
+                    // Process the instructions to make a list of steps, rather than just one long string
+                    String formattedInstructions = instructions.replaceAll("(\\d+\\.)", "<br>$1");
+                    String formattedIngs = ingredients.replaceAll("(\\d+\\s*\\w+)", "$1<br>");
+                    String updatedOutput = formattedIngs.replaceAll("Ingredients: ", "Ingredients:<br>");
+                    // Prepare the HTML response
+                       String htmlResponse = "<html>" +
+                        "<head>" +
+                        "<style>" +
+                        "    body {" +
+                        "        font-family: 'Arial', sans-serif;" +
+                        "        margin: 0 auto;" +
+                        "        max-width: 700px;" +
+                        "        background: #FFEBD7;" +  // Match the background color of your JavaFX application
+                        "    }" +
+                        "" +
+                        "    h1 {" +
+                        "        text-align: center;" +
+                        "        font-size: 24px;" +
+                        "        color: #8B4513;" +  // Adjust the text color to match your JavaFX application
+                        "        margin: 20px 0;" +
+                        "    }" +
+                        "" +
+                        "    p {" +
+                        "        color: #8B4513;" +  // Adjust the text color to match your JavaFX application
+                        "        background: #FFEBD7;" +  // Match the background color of your JavaFX application
+                        "        padding: 10px;" +
+                        "        margin: 10px 0;" +
+                        "    }" +
+                        "" +
+                        "    img {" +
+                        "        display: block;" +
+                        "        margin: 0 auto;" +
+                        "        max-width: 100%;" +
+                        "        height: auto;" +
+                        "    }" +
+                        "</style>" +
+                        "</head>" +
+                        "<body>" +
+                        "    <h1>" + title + "</h1>" +
+                        "    <p>" + updatedOutput + "</p>" +
+                        "    <p>" + formattedInstructions + "</p>" +
+                        "    <p>Meal Type: " + mealType + "</p>" +
+                        "    <img src=\"" + imgUrl + "\" alt=\"Recipe Image\">" +
+                        "</body>" +
+                        "</html>";
+
                         // Set the response headers
                         exchange.sendResponseHeaders(200, htmlResponse.length());
 
