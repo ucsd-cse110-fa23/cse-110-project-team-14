@@ -50,7 +50,7 @@ public void handle(HttpExchange exchange) throws IOException {
                 "</style></head><body>" +
                 "<h1>" + user + "'s Recipes" + "</h1>";
         ArrayList<Recipe> rs = db.initializeRecipesToList();
-        for (int i = 0; i < rs.size(); i++) {
+        for (int i = rs.size() - 1; i >= 0; i--) {
             String title = rs.get(i).getRecipeTitle();
             String link = "http://localhost:8100/share/" + user + "/" + title;
             htmlResponse += "<a href=\"" + link + "\">" + title + "</a>";
@@ -121,10 +121,10 @@ public void handle(HttpExchange exchange) throws IOException {
                        "   height: auto;" +  // Maintain aspect ratio
                        "}" +
                        "</style></head><body>" +
-                       "<h1>Title: " + title + "</h1>" +
-                       "<p>Ingredients: " + ingredients + "</p>" +
-                       "<p>Instructions: " + instructions + "</p>" +
-                       "<p>Meal Type: " + mealType + "</p>" +
+                       "<h1>" + title + "</h1>" +
+                       "<p>" + ingredients + "</p>" +
+                       "<p>" + instructions + "</p>" +
+                       "<p>" + mealType + "</p>" +
                        "<img src=\"" + imgUrl + "\" alt=\"Recipe Image\">" +
                        "</body></html>";
                         // Set the response headers
