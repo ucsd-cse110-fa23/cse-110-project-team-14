@@ -27,18 +27,35 @@ public void handle(HttpExchange exchange) throws IOException {
             if (db.findUno(user) != null) {
                 // Do something with the user
                 db.setCollectionName(user);
-                String htmlResponse = "<html><body>";
-                htmlResponse = "<h1>" + user + "'s Recipes" + "</h1>";
-                ArrayList<Recipe> rs = db.initializeRecipesToList();
-                for(int i = 0; i < rs.size(); i++){
-                    String title = rs.get(i).getRecipeTitle();
-                    String link = "http://localhost:8100/share/" + user + "/" + title;
-                    htmlResponse = htmlResponse +
-                    "<a href=\"" + link + "\">" + title + "</a>" +
-                    "<br/>";  // Add a newline between each link
-                }
-                htmlResponse = htmlResponse +
-                "</body></html>";
+                String htmlResponse = "<html><head><style>" +
+                "body {" +
+                "   font-family: helvetica, sans-serif;" +
+                "   margin: 0 auto;" +
+                "   max-width: 600px;" +
+                "   background: #f4f4f4;" +  // Light background color
+                "}" +
+                "h1 {" +
+                "   text-align: center;" +
+                "   font-size: 24px;" +  // Adjust the font size
+                "   color: #333;" +  // Dark text color
+                "   margin: 20px 0;" +
+                "}" +
+                "a {" +
+                "   display: block;" +
+                "   text-decoration: none;" +
+                "   color: #007bff;" +  // Link color
+                "   padding: 10px 0;" +
+                "   border-bottom: 1px solid #ccc;" +  // Border between links
+                "}" +
+                "</style></head><body>" +
+                "<h1>" + user + "'s Recipes" + "</h1>";
+        ArrayList<Recipe> rs = db.initializeRecipesToList();
+        for (int i = 0; i < rs.size(); i++) {
+            String title = rs.get(i).getRecipeTitle();
+            String link = "http://localhost:8100/share/" + user + "/" + title;
+            htmlResponse += "<a href=\"" + link + "\">" + title + "</a>";
+        }
+        htmlResponse += "</body></html>";
                 // Set the response headers
                 exchange.sendResponseHeaders(200, htmlResponse.length());
 
@@ -78,48 +95,38 @@ public void handle(HttpExchange exchange) throws IOException {
                     String mealType = d.get("Meal Type").toString(); 
                     String imgUrl = d.get("ImageURL").toString();
                        // Prepare the HTML response
-           // Prepare the HTML response
-           String htmlResponse = "<html><head>" +
-           "<style>" +
-           "body {" +
-           "  font-family: helvetica, sans-serif;" +
-           "  margin: 0 auto;" +
-           "  max-width: 600px;" +
-           "  background: #232323;" +
-           "}" +
-           "h1 {" +
-           "  text-align: center;" +
-           "  font-family: 'Londrina Shadow', cursive;" +
-           "  font-size: 70px;" +
-           "  color: #aaaaaa;" +
-           "  margin: 60px 0 0 0;" +
-           "}" +
-           "p {" +
-           "  color: rgba(255,255,255,1);" +
-           "  background: black;" +
-           "  background: linear-gradient(bottom, rgba(0,0,0,1), rgba(0,0,0,.4));" +
-           "  background: -webkit-linear-gradient(bottom, rgba(0,0,0,1), rgba(0,0,0,.4));" +
-           "  background: -moz-linear-gradient(bottom, rgba(0,0,0,1), rgba(0,0,0,.4));" +
-           "  padding: 10px;" +
-           "  line-height: 28px;" +
-           "  text-align: justify;" +
-        //    "  position: absolute;" +
-           "  bottom: 0;" +
-           "  margin: 0;" +
-           "  height: 30px;" +
-           "}" +
-           "</style>" +
-           "</head><body>" +
-           "<h1>Title: " + title + "</h1>" +
-           "<p>Ingredients: " + ingredients + "</p>" +
-           "<br>" + 
-           "<p>Instructions: " + instructions + "</p>" +
-           "<br>" + 
-           "<p>Meal Type: " + mealType + "</p>" +
-           "<br>" + 
-           "<img src=\"" + imgUrl + "\" alt=\"Recipe Image\">" +
-           "<br>" + 
-           "</body></html>";
+                       String htmlResponse = "<html><head><style>" +
+                       "body {" +
+                       "   font-family: helvetica, sans-serif;" +
+                       "   margin: 0 auto;" +
+                       "   max-width: 600px;" +
+                       "   background: #f4f4f4;" +  // Light background color
+                       "}" +
+                       "h1 {" +
+                       "   text-align: center;" +
+                       "   font-size: 24px;" +  // Adjust the font size
+                       "   color: #333;" +  // Dark text color
+                       "   margin: 20px 0;" +
+                       "}" +
+                       "p {" +
+                       "   color: #333;" +  // Dark text color
+                       "   background: #fff;" +  // White background for paragraphs
+                       "   padding: 10px;" +
+                       "   margin: 10px 0;" +
+                       "}" +
+                       "img {" +
+                       "   display: block;" +
+                       "   margin: 0 auto;" +
+                       "   max-width: 100%;" +  // Make sure the image doesn't exceed the container width
+                       "   height: auto;" +  // Maintain aspect ratio
+                       "}" +
+                       "</style></head><body>" +
+                       "<h1>Title: " + title + "</h1>" +
+                       "<p>Ingredients: " + ingredients + "</p>" +
+                       "<p>Instructions: " + instructions + "</p>" +
+                       "<p>Meal Type: " + mealType + "</p>" +
+                       "<img src=\"" + imgUrl + "\" alt=\"Recipe Image\">" +
+                       "</body></html>";
                         // Set the response headers
                         exchange.sendResponseHeaders(200, htmlResponse.length());
 

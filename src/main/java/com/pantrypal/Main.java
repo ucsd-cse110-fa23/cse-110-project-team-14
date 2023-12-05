@@ -37,8 +37,8 @@ public class Main extends Application {
         root.checkAutomaticLogin();
         // for testing
         // returns some 404 error when recipe not found.
-        // Client c = new Client("ivan", "Crispy Chicken Rice");
-        // c.sendRequest();
+        Client c = new Client("ivan", "Crispy Chicken Rice");
+        c.sendRequest();
 
         // Schedule a task to check the server status every 5 seconds
         
