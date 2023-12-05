@@ -11,6 +11,9 @@ public class Globals {
     enum SortingState {
         NEWTOOLD, OLDTONEW, ATOZ, ZTOA
     }
+    enum FilterType {
+        BREAKFAST, LUNCH, DINNER
+    }
     public static SortingState sortingState = SortingState.NEWTOOLD;
     public static String username = "recipes";
 }
