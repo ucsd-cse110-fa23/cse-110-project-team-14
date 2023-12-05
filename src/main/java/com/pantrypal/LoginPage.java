@@ -121,14 +121,6 @@ public class LoginPage extends Page {
                 Globals.username = userName.getText().toString();
                 stg.changeTo("mainPage"); //hasnt been made yet
                 if(this.autologin.selectedProperty().getValue()){
-                    // try (BufferedWriter myWriter = new BufferedWriter(new FileWriter("autologin.txt"))) {
-                    //     myWriter.write(userName.getText().toString());
-                    //     myWriter.newLine();  // Add a new line separator
-                    //     myWriter.write(password.getText().toString());
-                    //     // No need to explicitly close, as try-with-resources will handle it
-                    // } catch (IOException e1) {
-                    //     e1.printStackTrace();
-                    // }
                     login.setAutomaticLogin(userName.getText().toString(), password.getText().toString());
                 }
             }
