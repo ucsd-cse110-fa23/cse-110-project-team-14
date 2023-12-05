@@ -20,6 +20,7 @@ public class Main extends Application {
 
         stgControl.registerPage("RecordPage", new RecordPage(constants.width, constants.height));
         primaryStage.show();
+        root.checkAutomaticLogin();
     }
 
     public static void main(String[] args) {

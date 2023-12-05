@@ -39,7 +39,6 @@ public class LoginPage extends Page {
     @Override
     protected void createView() {
         {
-
             VBox mainContent = new VBox();
             mainContent.setSpacing(15);
             mainContent.setAlignment(Pos.CENTER);
@@ -122,14 +121,7 @@ public class LoginPage extends Page {
                 Globals.username = userName.getText().toString();
                 stg.changeTo("mainPage"); //hasnt been made yet
                 if(this.autologin.selectedProperty().getValue()){
-                    try (BufferedWriter myWriter = new BufferedWriter(new FileWriter("autologin.txt"))) {
-                        myWriter.write(userName.getText().toString());
-                        myWriter.newLine();  // Add a new line separator
-                        myWriter.write(password.getText().toString());
-                        // No need to explicitly close, as try-with-resources will handle it
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
-                    }
+                    login.setAutomaticLogin(userName.getText().toString(), password.getText().toString());
                 }
             }
         });
@@ -167,5 +159,9 @@ public class LoginPage extends Page {
                 }
             }
         });
+    }
+
+    public void checkAutomaticLogin(){
+        login.checkAutomaticLogin();
     }
 }
