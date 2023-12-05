@@ -10,6 +10,7 @@ public class StageController {
 
     private Stage primaryStage;
     private final Map<String, Page> pages = new HashMap<>();
+    private String currentPage;
 
     private StageController() {
 
@@ -36,9 +37,15 @@ public class StageController {
         page.update();
         primaryStage.setScene(page.getScene());
         primaryStage.show();
+        currentPage = key;
     }
 
     public Page getPage(String key) {
         return pages.get(key);
     }
+
+    public String getCurrentPage(){
+        return currentPage;
+    }
+
 }
