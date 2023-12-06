@@ -1,4 +1,7 @@
 package com.pantrypal;
+import com.pantrypal.model.CreateAccount;
+import com.pantrypal.model.DatabaseOPS;
+import com.pantrypal.model.Login;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;

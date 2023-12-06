@@ -4,6 +4,7 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.pantrypal.Globals;
+
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
@@ -76,6 +77,7 @@ public class DatabaseOPS {
         recipesCollection.updateOne(eq("Title", recipe_obj.getRecipeTitle()), new Document("$set", new Document("Ingredients", recipe_obj.getRecipeIngredients())));
         recipesCollection.updateOne(eq("Title", recipe_obj.getRecipeTitle()), new Document("$set", new Document("Instructions", recipe_obj.getRecipeInstructions())));
         recipesCollection.updateOne(eq("Title", recipe_obj.getRecipeTitle()), new Document("$set", new Document("ImageURL", recipe_obj.getRecipeImageURL())));
+
     }
 
     
@@ -115,7 +117,7 @@ public class DatabaseOPS {
     // }
     public void insert(String username, String password){
         MongoClient mongoClient = MongoDBConnection.getInstance();
-        MongoDatabase PantryPal = mongoClient.getDatabase("PantryPal");
+        MongoDatabase PantryPal = mongoClient.getDatabase("Users");
         MongoCollection<Document> usersCollection = PantryPal.getCollection(collectionName);
         Document user = new Document("username", username);
         user.append("password", password);
@@ -137,7 +139,7 @@ public class DatabaseOPS {
 
     public Document findUno(String username){
         MongoClient mongoClient = MongoDBConnection.getInstance();
-        MongoDatabase PantryPal = mongoClient.getDatabase("PantryPal");
+        MongoDatabase PantryPal = mongoClient.getDatabase("Users");
         MongoCollection<Document> usersCollection = PantryPal.getCollection(collectionName);
         Document user = usersCollection.find(eq("username", username)).first();
         return user;
@@ -222,7 +224,7 @@ public class DatabaseOPS {
     //Delete all usernames
     public void deleteAllUsers() {
         MongoClient mongoClient = MongoDBConnection.getInstance();
-        MongoDatabase PantryPal = mongoClient.getDatabase("PantryPal");
+        MongoDatabase PantryPal = mongoClient.getDatabase("Users");
         MongoCollection<Document> usersCollection = PantryPal.getCollection(collectionName);
         usersCollection.deleteMany(new Document());
     }
