@@ -167,6 +167,79 @@ public class UserStoryMS2_10Testing {
         assertEquals("Egg Tortilla Breakfast Sandwich", recipes.get(0).getRecipeTitle());
         
     }
+
+    @Test
+    public void testMS2_10BDD(){
+        MockWhisper whisper = new MockWhisper();
+        TextToRecipe textToRecipe = new TextToRecipe(whisper.getResponse(6), whisper.getResponse(2), new Recipe(), new MockChatGPT(), new MockImageCreation());
+        ArrayList<Recipe> recipes = new ArrayList<Recipe>();
+        try {
+            textToRecipe.createRecipeObj();
+            assertEquals("Egg Tortilla Breakfast Sandwich", textToRecipe.getRecipe().getRecipeTitle());
+            recipes.add(textToRecipe.getRecipe());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+
+        MockWhisper whisper2 = new MockWhisper();
+        TextToRecipe textToRecipe2 = new TextToRecipe(whisper2.getResponse(1), "dinner", new Recipe(), new MockChatGPT(), new MockImageCreation());
+        try {
+            textToRecipe2.createRecipeObj();
+            assertEquals("Baked Cinnamon Apple Crisp", textToRecipe2.getRecipe().getRecipeTitle());
+            recipes.add(textToRecipe2.getRecipe());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+
+
+        TextToRecipe textToRecipe3 = new TextToRecipe(whisper.getResponse(0), "dinner", new Recipe(), new MockChatGPT(), new MockImageCreation());
+        try {
+            textToRecipe3.createRecipeObj();
+            assertEquals("Chicken and Rice Casserole", textToRecipe3.getRecipe().getRecipeTitle());
+            recipes.add(textToRecipe3.getRecipe());
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        //Check before applying filter that there are 3 recipes
+        assertEquals(3, recipes.size());
+
+        assertEquals("Egg Tortilla Breakfast Sandwich", recipes.get(0).getRecipeTitle());
+        assertEquals("Breakfast", recipes.get(0).getMealType()); //This recipe will get filtered out
+
+        assertEquals("Baked Cinnamon Apple Crisp", recipes.get(1).getRecipeTitle());
+
+        assertEquals("Chicken and Rice Casserole", recipes.get(2).getRecipeTitle());
+
+        recipes = Filters.filterByDinner(recipes);
+        assertEquals(2, recipes.size());
+
+        //Only 2 recipes should be left after filtering, because the first recipe is breakfast and the others are dinner
+        assertEquals("Baked Cinnamon Apple Crisp", recipes.get(0).getRecipeTitle());
+        assertEquals("Chicken and Rice Casserole", recipes.get(1).getRecipeTitle());
+
+        recipes = Sort.aToZSort(recipes); //Sorts the recipes alphabetically having the first recipe at the end of the list
+        assertEquals(2, recipes.size());
+        assertEquals("Chicken and Rice Casserole", recipes.get(0).getRecipeTitle());
+        assertEquals("Baked Cinnamon Apple Crisp", recipes.get(1).getRecipeTitle());
+
+        recipes = Sort.zToASort(recipes); //Sorts the recipes alphabetically having the first recipe at the beginning of the list
+        assertEquals(2, recipes.size());    
+        assertEquals("Baked Cinnamon Apple Crisp", recipes.get(0).getRecipeTitle());
+        assertEquals("Chicken and Rice Casserole", recipes.get(1).getRecipeTitle());
+    }
 }
 
 
