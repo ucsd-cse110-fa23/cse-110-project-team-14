@@ -10,7 +10,7 @@ public class MockChatGPT2 extends ChatGPT {
     private int maxTokens;
     private String response;
     
-    void generatedRecipe(int maxTokens, String prompt) {
+    protected void generatedRecipe(int maxTokens, String prompt) {
         // TEST: 1
         // implemnet file reader? 
         //TODO: PROMPT CHANGED?
@@ -45,7 +45,7 @@ public class MockChatGPT2 extends ChatGPT {
 
     }
 
-    String parseTitle() {
+    protected String parseTitle() {
         int indexFirstCharacter = 0;
         while(this.response.charAt(indexFirstCharacter) == '\n'){
             indexFirstCharacter++;
@@ -59,7 +59,7 @@ public class MockChatGPT2 extends ChatGPT {
     /**
      * Parses the response from the API call to get the ingredients of the recipe
      */
-    String parseRecipeIngredients() {
+    protected String parseRecipeIngredients() {
         int indexOfIngredients = this.response.indexOf("Ingredients:");
 
         //Check if the ChatGPT Ingredients did not had semicolons
@@ -81,7 +81,7 @@ public class MockChatGPT2 extends ChatGPT {
     /**
      * Parses the response from the API call to get the instructions of the recipe
      */
-    String parseRecipeInstructions() {
+    protected String parseRecipeInstructions() {
         int indexOfInstructions = this.response.indexOf("Instructions:");
 
         //Check if the ChatGPT Instructions did not had semicolons
