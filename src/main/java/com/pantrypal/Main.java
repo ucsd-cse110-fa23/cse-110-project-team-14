@@ -62,7 +62,7 @@ public class Main extends Application {
     }
 
     private static boolean isServerRunning() {
-        String SERVER_HOSTNAME = "localhost";
+        String SERVER_HOSTNAME = Globals.ip; 
         String SERVER_PORT = "8100";
     
         try {

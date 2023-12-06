@@ -22,4 +22,5 @@ public class Globals {
     public static String username = "recipes";
     public static double appWidth = 600;
     public static double appHeight = 600;
+    public static String ip = "192.168.1.69"; //marcos ip address so server works on other device
 }

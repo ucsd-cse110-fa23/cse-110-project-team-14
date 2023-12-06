@@ -6,6 +6,7 @@ import java.io.OutputStream;
 import org.bson.Document;
 import java.util.ArrayList;
 
+import com.pantrypal.Globals;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
@@ -52,7 +53,7 @@ public void handle(HttpExchange exchange) throws IOException {
         ArrayList<Recipe> rs = db.initializeRecipesToList();
         for (int i = rs.size() - 1; i >= 0; i--) {
             String title = rs.get(i).getRecipeTitle();
-            String link = "http://localhost:8100/share/" + user + "/" + title;
+            String link = "http://" + Globals.ip + ":8100/share/" + user + "/" + title;
             htmlResponse += "<a href=\"" + link + "\">" + title + "</a>";
         }
         htmlResponse += "</body></html>";
