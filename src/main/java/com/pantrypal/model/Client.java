@@ -16,6 +16,10 @@ import java.net.http.HttpResponse;
 public class Client {
     private String user;
     private String recipeName;
+    private String title;
+    private String ingredients;
+    private String instructions;
+    
 
     public Client(String user, String recipeName) {
         // have to encode raw strings in case they have special charaacters
@@ -53,9 +57,9 @@ public class Client {
                 Document doc = Jsoup.parse(response.body());
 
                 // Extract information from the HTML
-                String title = doc.select("h1").text();
-                String ingredients = doc.select("p:contains(Ingredients)").text();
-                String instructions = doc.select("p:contains(Instructions)").text();
+                title = doc.select("h1").text();
+                ingredients = doc.select("p:contains(Ingredients)").text();
+                instructions = doc.select("p:contains(Instructions)").text();
                 String mealType = doc.select("p:contains(Meal Type)").text();
                 String imgUrl = doc.select("img").attr("src");
 
@@ -73,4 +77,17 @@ public class Client {
             System.err.println("Exception occurred: " + e.getMessage());
         }
     }
+
+    public String getRecipeTitle(){
+        return title;
+    }
+
+    public String getRecipeIngredients(){
+        return ingredients;
+    }
+
+    public String getRecipeInstructions(){
+        return instructions;
+    }
+
 }
