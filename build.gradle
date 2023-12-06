@@ -35,9 +35,6 @@ dependencies {
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
     implementation 'org.jsoup:jsoup:1.14.3' // Use the latest version available
 
-
-    
-
     implementation 'org.mongodb:mongodb-driver-sync:4.11.0'
 
     implementation group: 'org.json', name: 'json', version: '20230227'

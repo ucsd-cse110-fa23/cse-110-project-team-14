@@ -1,21 +1,20 @@
 package com.pantrypal.model;
 
-
 /*
  * Recipe class to store recipe information
  * This is what is shown once you clicked on the recipe list
  */
 public class Recipe {
     private String recipeTitle;
-    private String recipeInstructions; 
+    private String recipeInstructions;
     private String recipeIngredients;
     private String mealType;
     private String recipeImageURL;
-    private int recipeIndex;  //Used in order to sort recipes by time created
+    private int recipeIndex; // Used in order to sort recipes by time created
 
     public Recipe() {
     }
-    
+
     /**
      * Sets the title of the recipe.
      *
@@ -33,7 +32,7 @@ public class Recipe {
     public String getRecipeTitle() {
         return recipeTitle;
     }
-    
+
     /**
      * Sets the ingredients of the recipe.
      *
@@ -94,11 +93,10 @@ public class Recipe {
      * @param mealType the meal type of the recipe
      */
     public void setMealType(String mealType) {
-        //Capitalize the first letter of the mealtype
-        if(mealType != null){
+        // Capitalize the first letter of the mealtype
+        if (mealType != null) {
             this.mealType = mealType.substring(0, 1).toUpperCase() + mealType.substring(1);
-        }
-        else{
+        } else {
             this.mealType = mealType;
         }
     }
