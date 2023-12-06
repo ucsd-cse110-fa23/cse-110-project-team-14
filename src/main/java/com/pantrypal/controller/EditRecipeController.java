@@ -31,7 +31,7 @@ public class EditRecipeController {
                 stage.setScene(erp.SRP.getScene());
             }
     }
-
+    //contains the actions for the save button
     public void handleSaveButton(ActionEvent event){
         int index = Globals.recipes.indexOf(erp.r);
         erp.r.setRecipeIngredients(erp.ingredientLabel.getText());

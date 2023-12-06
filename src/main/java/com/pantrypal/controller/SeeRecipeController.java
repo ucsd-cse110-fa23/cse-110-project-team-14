@@ -35,14 +35,14 @@ public class SeeRecipeController {
         this.srp.setDeleteButtonAction(this::handleDelete);
         this.srp.setShareButtonAction(this::handleShare);
     }
-
+    //contains actions for back button
     public void handleBackButton(ActionEvent event)
     {
          // go back to main page
             StageController stageController = StageController.getInstance();
             stageController.changeTo("mainPage");
     }
-
+    //contains actions for edit button
     public void handleEdit(ActionEvent event)
     {
         //OPEN EDIT PAGE
@@ -51,7 +51,7 @@ public class SeeRecipeController {
         stg.registerPage(srp.r.getRecipeTitle(), ERP);
         stg.changeTo(srp.r.getRecipeTitle());   
     }
-
+    //contains actions for delete button
     public void handleDelete(ActionEvent event)
     {
         // Delete recipe from database
