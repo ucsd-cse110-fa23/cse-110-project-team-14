@@ -9,7 +9,7 @@ public class Whisper {
     private static final String API_ENDPOINT = "https://api.openai.com/v1/audio/transcriptions";
     private static final String TOKEN = "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";
     private static final String MODEL = "whisper-1";
-    private static final String FILE_PATH = "recording.wav"; // path to audio TODO: 
+    private static final String FILE_PATH = "recording.wav";
     private String currentText;
 
     private static final Whisper instance = new Whisper();

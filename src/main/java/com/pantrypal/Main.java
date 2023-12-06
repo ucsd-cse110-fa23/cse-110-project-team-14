@@ -23,7 +23,7 @@ public class Main extends Application {
     public static StageController stgControl = StageController.getInstance();
     public static boolean wasError;
     private static String lastSuccessfulPage;
-
+    
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("PantryPal");
@@ -42,8 +42,7 @@ public class Main extends Application {
         stgControl.registerPage("RecordPage", new RecordPage(constants.width, constants.height));
         primaryStage.show();
       
-        root.checkAutomaticLogin();
-
+        root.checkAutomaticLogin();        
         // Schedule a task to check the server status every 5 seconds
         
         ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();

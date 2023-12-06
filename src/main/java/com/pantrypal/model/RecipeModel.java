@@ -67,8 +67,21 @@ public class RecipeModel {
         }
     }
 
+    /**
+     * Handles the initialization of recipes, loading data from the database and updating the UI.
+     * This method performs the following steps:
+     * 1. Initializes a connection to the "recipes" database using DatabaseOPS.
+     * 2. Retrieves a list of recipes from the database.
+     * 3. Populates the Globals.recipes ArrayList with the retrieved data.
+     * 4. Iterates through the list of recipes in reverse order.
+     * 5. For each recipe, creates a RecipeTitleView UI element and a SeeRecipePage UI element.
+     * 6. Associates the UI elements with the corresponding recipe data.
+     * 7. Sets up an action on the RecipeTitleButton to navigate to the detailed view of the recipe.
+     * 8. Registers the SeeRecipePage with the StageController and adds the RecipeTitleView to the UI.
+     *
+     * Note: The loaded recipes are assumed to be displayed in a vertical list using RecipeTitleListView.
+     */
     public void handleInitRecipes(){
-        System.out.println("hi");
         // perform database operations to load recieps
         DatabaseOPS db = new DatabaseOPS("recipes");
         Globals.recipes = db.initializeRecipesToList(); //<-- this will return the arraylist

@@ -12,6 +12,7 @@ import javax.sound.sampled.TargetDataLine;
 public class LiveRecorder {
     private AudioFormat audioFormat;
     private TargetDataLine targetDataLine;
+    private double silenceThreshold = 0.05; // You can adjust this threshold as needed
     public LiveRecorder(){
         audioFormat = getAudioFormat();
     }
@@ -68,8 +69,7 @@ public class LiveRecorder {
                             audioInputStream,
                             AudioFileFormat.Type.WAVE,
                             audioFile);
-                    // recordingLabel.setVisible(false);
-                } 
+                }
                 catch (Exception ex) {
                     ex.printStackTrace();
                 }
@@ -81,5 +81,22 @@ public class LiveRecorder {
     public void stopRecording() {
         targetDataLine.stop();
         targetDataLine.close();
+    }
+
+    private double calculateRMSLevel(byte[] audioData) {
+        long lSum = 0;
+        for (byte anAudioData : audioData) {
+            lSum = lSum + anAudioData;
+        }
+
+        double dAvg = lSum / audioData.length;
+
+        double sumMeanSquare = 0d;
+        for (byte anAudioData : audioData) {
+            sumMeanSquare = sumMeanSquare + Math.pow(anAudioData - dAvg, 2d);
+        }
+
+        double averageMeanSquare = sumMeanSquare / audioData.length;
+        return Math.sqrt(averageMeanSquare);
     }
 }
