@@ -46,6 +46,7 @@ public class RecipeModel {
             String transcribedText = whisper.getResponse();
             Whisper.getInstance().setText(transcribedText);
             
+            System.out.println(transcribedText);
             t2R = new TextToRecipe(transcribedText, recordPageController.getRecordPageView().getMealType(), new Recipe(), new ChatGPT(), new ImageCreation());
             t2R.createRecipeObj();
 

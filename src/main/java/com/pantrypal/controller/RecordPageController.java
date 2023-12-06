@@ -37,7 +37,7 @@ public class RecordPageController{
             //stop recording
             recordPageView.getRecordButton().setText("GOT VOICE");
             liveRecorder.stopRecording(); 
-
+            
             model.handleCreateRecipe();
         }
     }

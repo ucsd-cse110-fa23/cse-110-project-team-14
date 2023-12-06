@@ -44,7 +44,7 @@ public class IntializeRecipeList {
             System.out.println("Could not open recipes file");
         }
     }
-
+    
     public static void saveRecipe(Recipe recipe) {
         try {
             File recipeFile = new File("recipes.txt");
