@@ -1,6 +1,9 @@
 package com.pantrypal;
 
 import org.junit.jupiter.api.Test;
+
+import com.pantrypal.model.Recipe;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;

@@ -2,6 +2,8 @@ package com.pantrypal;
 
 import java.util.ArrayList;
 
+import com.pantrypal.model.Recipe;
+
 
 public class Filters {
     public static ArrayList<Recipe> filterByBreakfast(ArrayList<Recipe> recipes) {

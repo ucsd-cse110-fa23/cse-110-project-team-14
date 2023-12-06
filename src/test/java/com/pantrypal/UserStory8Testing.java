@@ -3,6 +3,8 @@ package com.pantrypal;
 
 import org.junit.jupiter.api.Test;
 
+import com.pantrypal.model.Recipe;
+import com.pantrypal.model.TextToRecipe;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

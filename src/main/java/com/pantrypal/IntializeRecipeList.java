@@ -3,6 +3,12 @@ package com.pantrypal;
 import java.io.*;
 import java.util.Scanner;
 
+import com.pantrypal.model.Recipe;
+import com.pantrypal.view.RecipeTitleListView;
+import com.pantrypal.view.RecipeTitleView;
+import com.pantrypal.view.SeeRecipePage;
+import com.pantrypal.view.StageController;
+
 public class IntializeRecipeList {
 
     public static void uploadRecipes() {
@@ -38,7 +44,7 @@ public class IntializeRecipeList {
             System.out.println("Could not open recipes file");
         }
     }
-
+    
     public static void saveRecipe(Recipe recipe) {
         try {
             File recipeFile = new File("recipes.txt");

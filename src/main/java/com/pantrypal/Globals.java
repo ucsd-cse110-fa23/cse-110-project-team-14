@@ -2,6 +2,8 @@ package com.pantrypal;
 
 import java.util.ArrayList;
 
+import com.pantrypal.model.Recipe;
+
 /*
  * This class is used to store global variables that are used in the project
  */
@@ -9,10 +11,10 @@ public class Globals {
     public static ArrayList<Recipe> recipes = new ArrayList<Recipe>();
     public static ArrayList<Recipe> recipesWithFilter = new ArrayList<Recipe>();
     public static int recipeIndex = 0;
-    enum SortingState {
+    public enum SortingState {
         NEWTOOLD, OLDTONEW, ATOZ, ZTOA
     }
-    enum FilterType {
+    public enum FilterType {
         NONE, BREAKFAST, LUNCH, DINNER
     }
     public static FilterType filterType = FilterType.NONE;

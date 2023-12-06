@@ -6,6 +6,14 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import com.pantrypal.model.ErrorPage;
+import com.pantrypal.view.LoginPage;
+import com.pantrypal.view.MealTypePage;
+import com.pantrypal.view.RecordPage;
+import com.pantrypal.view.RegisterPage;
+import com.pantrypal.view.StageController;
+import com.pantrypal.view.mainPage;
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
@@ -15,7 +23,7 @@ public class Main extends Application {
     public static StageController stgControl = StageController.getInstance();
     public static boolean wasError;
     private static String lastSuccessfulPage;
-
+    
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("PantryPal");
@@ -34,8 +42,7 @@ public class Main extends Application {
         stgControl.registerPage("RecordPage", new RecordPage(constants.width, constants.height));
         primaryStage.show();
       
-        root.checkAutomaticLogin();
-
+        root.checkAutomaticLogin();        
         // Schedule a task to check the server status every 5 seconds
         
         ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();

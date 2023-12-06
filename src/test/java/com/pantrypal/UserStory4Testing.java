@@ -1,5 +1,8 @@
 package com.pantrypal;
 
+import com.pantrypal.model.DatabaseOPS;
+import com.pantrypal.model.Recipe;
+
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.io.IOException;

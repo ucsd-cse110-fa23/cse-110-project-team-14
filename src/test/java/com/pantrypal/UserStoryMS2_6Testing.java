@@ -7,6 +7,10 @@ import java.net.URISyntaxException;
 
 import org.junit.jupiter.api.Test;
 
+import com.pantrypal.model.ChatGPT;
+import com.pantrypal.model.Recipe;
+import com.pantrypal.model.TextToRecipe;
+
 public class UserStoryMS2_6Testing {
     /*
      * This test tests the functionality of the regen recipe by creating a new recipe based on the same prompt using our mock chatgpt

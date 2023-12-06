@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import com.pantrypal.model.Recipe;
+
 public class Sort {
     //TODO check if this works and it is not backwards
     public static ArrayList<Recipe> newToOldSort(ArrayList<Recipe> recipes) {
