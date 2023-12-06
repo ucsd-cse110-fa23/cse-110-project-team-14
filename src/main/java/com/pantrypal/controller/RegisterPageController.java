@@ -7,6 +7,8 @@ import com.pantrypal.view.StageController;
 
 import javafx.event.ActionEvent;
 
+
+//class to creating a new account page
 public class RegisterPageController {
     private RegisterPage rp;
     public RegisterPageController(RegisterPage rp){

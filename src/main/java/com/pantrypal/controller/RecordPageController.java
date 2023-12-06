@@ -12,7 +12,12 @@ import com.pantrypal.view.StageController;
 
 import javafx.event.ActionEvent;
 
-public class RecordPageController{
+/**
+ * The RecordPageController class acts as a controller managing interactions and events for the RecordPage view.
+ * It coordinates between the RecordPage view, the RecipeModel, and other necessary components to handle
+ * recording functionalities, navigation, and updating views.
+ */
+public class RecordPageController {
     private RecipeModel model;
     private RecordPage recordPageView;
     private LiveRecorder liveRecorder = new LiveRecorder(); // model
@@ -27,17 +32,17 @@ public class RecordPageController{
     }
 
     public void handRecordButton(ActionEvent event) {
-        recordPageView.setIsrecording(!recordPageView.getIsRecording());
+        recordPageView.setIsRecording(!recordPageView.getIsRecording());
         if (recordPageView.getIsRecording()) {
-            //start recording
-            recordPageView.getRecordButton().setText("RECORDING...?");
-            liveRecorder.startRecording(); 
+            // start recording
+            recordPageView.getRecordButton().setText("RECORDING");
+            liveRecorder.startRecording();
             // call to model method called startRecording
         } else {
-            //stop recording
-            recordPageView.getRecordButton().setText("GOT VOICE");
-            liveRecorder.stopRecording(); 
-            
+            // stop recording
+            recordPageView.getRecordButton().setText("mic");
+            liveRecorder.stopRecording();
+
             model.handleCreateRecipe();
         }
     }
@@ -46,11 +51,11 @@ public class RecordPageController{
         stg.changeTo(constants.MEALTYPE_PAGE_NAME);
     }
 
-    public RecordPage getRecordPageView(){
+    public RecordPage getRecordPageView() {
         return this.recordPageView;
     }
 
-    public void updateView(TextToRecipe t2R, SeeRecipeFromRecording SRV){
+    public void updateView(TextToRecipe t2R, SeeRecipeFromRecording SRV) {
         stg = StageController.getInstance();
         stg.registerPage(t2R.getRecipe().getRecipeTitle(), SRV);
         stg.changeTo(t2R.getRecipe().getRecipeTitle());

@@ -19,8 +19,12 @@ import org.json.JSONObject;
 
 import com.pantrypal.Globals;
 
+/**
+ * The ImageCreation class handles the generation and validation of image URLs using an external API (OpenAI).
+ * It provides methods to generate image URLs based on prompts, validate image URLs, and regenerate image URLs
+ * associated with recipe instances.
+ */
 public class ImageCreation {
-    // TODO: Add class implementation here
     private static final String API_ENDPOINT = "https://api.openai.com/v1/images/generations"; 
     private static final String API_KEY = "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";
     private static final String MODEL = "dall-e-2";

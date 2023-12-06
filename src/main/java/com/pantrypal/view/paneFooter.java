@@ -43,7 +43,7 @@ public class paneFooter extends HBox {
         this.setAlignment(Pos.CENTER);
     }
 
-    // gets Button 
+    // gets Button
     // returns null if no matching name
     public Button getButton(String name) {
         return ButtonList.get(name);
@@ -56,6 +56,5 @@ public class paneFooter extends HBox {
         ButtonList.put(name, button);
         return button;
     }
-
 
 }

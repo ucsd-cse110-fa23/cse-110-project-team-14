@@ -9,7 +9,7 @@ import javafx.scene.text.Text;
 // pre formatted header class
 public class paneHeader extends HBox {
     private Text titleText;
-    
+
     public paneHeader() {
         this.setPrefSize(1000, 60);
         this.setStyle("-fx-background-color: #F5DEB3; -fx-border-radius: 15 15 0 0; -fx-background-radius: 15 15 0 0;");
@@ -20,17 +20,17 @@ public class paneHeader extends HBox {
         this.setEffect(ds);
     }
 
-    // centers Texts for Header
-    public void setTitleInMiddle(Text title){
+    // centers Text for Header
+    public void setTitleInMiddle(Text title) {
         this.titleText = title;
-        titleText.setFill(Color.web("#8B4513"));  // Saddle Brown
+        titleText.setFill(Color.web("#8B4513")); // Saddle Brown
         titleText.setStyle("-fx-font-weight: bold; -fx-font-size: 26;");
         this.getChildren().add(titleText);
         this.setAlignment(Pos.CENTER);
     }
 
-    // gets Texst at Header
-    public Text getTitleText(){
+    // gets Text at Header
+    public Text getTitleText() {
         return titleText;
     }
 }

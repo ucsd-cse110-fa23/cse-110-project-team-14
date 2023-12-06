@@ -1,4 +1,5 @@
 package com.pantrypal.view;
+
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 
@@ -18,16 +19,17 @@ public abstract class Page {
         createView();
     }
 
-    protected abstract void createView(); 
+    protected abstract void createView();
 
     public Scene getScene() {
         return scene;
     }
 
-    public void update()
-    {
+    public void update() {
+        // Creates the new view when we update the Model
         createView();
     }
+
     public BorderPane getBorderPane() {
         return borderPane;
     }

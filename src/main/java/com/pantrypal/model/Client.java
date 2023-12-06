@@ -17,11 +17,14 @@ public class Client {
     private String user;
     private String recipeName;
     private String title;
+    private String ingredients;
+    private String instructions;
+    
 
-    public Client(String user, String recipeName){
+    public Client(String user, String recipeName) {
         // have to encode raw strings in case they have special charaacters
         // most commonly a space in the recipe
-         try {
+        try {
             this.user = URLEncoder.encode(user, "UTF-8");
             this.recipeName = URLEncoder.encode(recipeName, "UTF-8");
             // Replace '+' with '%20' for spaces
@@ -37,29 +40,29 @@ public class Client {
             // Replace with the actual URL
             String url = "http://localhost:8100/share/" + user + "/" + recipeName;
             System.out.println(url);
-    
+
             // Perform HTTP GET request
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(url))
                     .GET()
                     .build();
-    
+
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-    
+
             // Check the HTTP status code
             int statusCode = response.statusCode();
             if (statusCode == 200) {
                 // Parse HTML response using Jsoup
                 Document doc = Jsoup.parse(response.body());
-    
+
                 // Extract information from the HTML
-                String title = doc.select("h1").text();
-                String ingredients = doc.select("p:contains(Ingredients)").text();
-                String instructions = doc.select("p:contains(Instructions)").text();
+                title = doc.select("h1").text();
+                ingredients = doc.select("p:contains(Ingredients)").text();
+                instructions = doc.select("p:contains(Instructions)").text();
                 String mealType = doc.select("p:contains(Meal Type)").text();
                 String imgUrl = doc.select("img").attr("src");
-    
+
                 // Display the extracted information (you can use this data as needed)
                 System.out.println("Title: " + title);
                 System.out.println("Ingredients: " + ingredients);
@@ -75,7 +78,16 @@ public class Client {
         }
     }
 
-    public String getTitle(){
-        return this.title;
+    public String getRecipeTitle(){
+        return title;
     }
+
+    public String getRecipeIngredients(){
+        return ingredients;
+    }
+
+    public String getRecipeInstructions(){
+        return instructions;
+    }
+
 }

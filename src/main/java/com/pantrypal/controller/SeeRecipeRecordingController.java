@@ -21,7 +21,9 @@ import javafx.event.ActionEvent;
 import com.pantrypal.view.StageController;
 
 public class SeeRecipeRecordingController {
+    // Instance variable for managing a recipe from recording
     private SeeRecipeFromRecording srf;
+    // Instance variable for stage control in the application's UI
     StageController stg;
 
     public SeeRecipeRecordingController(SeeRecipeFromRecording srf){
@@ -33,7 +35,7 @@ public class SeeRecipeRecordingController {
         this.srf.setBackButtonAction(this::handleBackButton);
         
     }
-
+    //changes to edit page when button is pressed
     public void handleEditButton(ActionEvent event) {
         //OPEN EDIT PAGE
             EditRecipePage ERP = new EditRecipePage(constants.width, constants.height, srf);

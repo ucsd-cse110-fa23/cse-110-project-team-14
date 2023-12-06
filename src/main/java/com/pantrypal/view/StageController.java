@@ -20,14 +20,17 @@ public class StageController {
         return instance;
     }
 
+    // initializes a stage (must be done to create a stage)
     public void init(Stage stage) {
         this.primaryStage = stage;
     }
 
+    // register a page with its name as a key
     public void registerPage(String key, Page page) {
         pages.put(key, page);
     }
 
+    // switched to a page defined by the key passed in param
     public void changeTo(String key) {
         Page page = pages.get(key);
         if (page == null) {
@@ -40,11 +43,13 @@ public class StageController {
         currentPage = key;
     }
 
+    // gets the any page passed through with its name (key)
     public Page getPage(String key) {
         return pages.get(key);
     }
 
-    public String getCurrentPage(){
+    // gets the page that the app is currently on
+    public String getCurrentPage() {
         return currentPage;
     }
 
