@@ -1,5 +1,6 @@
 package com.pantrypal.model;
 
+import com.pantrypal.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.http.HttpClient;
@@ -22,7 +23,7 @@ public class ChatGPT {
 
 
 
-    void generatedRecipe(int maxTokens, String prompt) throws IOException, 
+    protected void generatedRecipe(int maxTokens, String prompt) throws IOException, 
         InterruptedException, URISyntaxException {
         // Set request parameters
         this.maxTokens = maxTokens;
@@ -75,7 +76,7 @@ public class ChatGPT {
     /**
      * Parses the response from the API call to get the title of the recipe
      */
-    String parseTitle() {
+    protected String parseTitle() {
         int indexFirstCharacter = 0;
         while(this.response.charAt(indexFirstCharacter) == '\n'){
             indexFirstCharacter++;
@@ -83,17 +84,17 @@ public class ChatGPT {
         //If statement for a bug where chatGPT returns "Recipe:"
         String title_checker = this.response; //Use to check where does the title starts 
         title_checker.toLowerCase();
-        if(this.response.contains("recipe:")){
-            indexFirstCharacter += 8;
-        }
-        else if (this.response.contains("recipe")){
-            indexFirstCharacter += 7;
-        }
-        else if (this.response.contains("recipe title:")){
+        if (this.response.contains("recipe title:")){
             indexFirstCharacter += 14;
         }
         else if (this.response.contains("recipe title")){
             indexFirstCharacter += 13;
+        }
+        else if(this.response.contains("recipe:")){
+            indexFirstCharacter += 8;
+        }
+        else if (this.response.contains("recipe")){
+            indexFirstCharacter += 7;
         }
         else if (this.response.contains("title:")){
             indexFirstCharacter += 7;
@@ -111,7 +112,7 @@ public class ChatGPT {
     /**
      * Parses the response from the API call to get the ingredients of the recipe
      */
-    String parseRecipeIngredients() {
+    protected String parseRecipeIngredients() {
         int indexOfIngredients = this.response.indexOf("Ingredients:");
 
         //Check if the ChatGPT Ingredients did not had semicolons
@@ -133,7 +134,7 @@ public class ChatGPT {
     /**
      * Parses the response from the API call to get the instructions of the recipe
      */
-    String parseRecipeInstructions() {
+    protected String parseRecipeInstructions() {
         int indexOfInstructions = this.response.indexOf("Instructions:");
 
         //Check if the ChatGPT Instructions did not had semicolons
