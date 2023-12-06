@@ -22,4 +22,5 @@ public class Globals {
     public static String username = "recipes";
     public static double appWidth = 600;
     public static double appHeight = 600;
+    public static String IPADRESS = "";
 }

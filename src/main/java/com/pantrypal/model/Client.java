@@ -38,7 +38,7 @@ public class Client {
     public void sendRequest() throws IOException, InterruptedException {
         try {
             // Replace with the actual URL
-            String url = "http://localhost:8100/share/" + user + "/" + recipeName;
+            String url = "http://" + ":8100/share/" + user + "/" + recipeName;
             System.out.println(url);
 
             // Perform HTTP GET request

@@ -70,7 +70,7 @@ public class Main extends Application {
     // checks for response code 200.
     // handled by server localhost:8100/status/ (returns 200 if server status UP)
     private static boolean isServerRunning() {
-        String SERVER_HOSTNAME = "localhost";
+        String SERVER_HOSTNAME = Globals.IPADRESS;
         String SERVER_PORT = "8100";
 
         try {
