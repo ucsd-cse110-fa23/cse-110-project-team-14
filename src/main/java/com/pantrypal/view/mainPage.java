@@ -107,6 +107,68 @@ public class mainPage extends Page {
         return this.signOutButton;
     }
 
+    public void sortBoxClick(String selectedOption){
+
+        // Get the selected item
+        // do a switch case to check between "Newest to Oldest", "Oldest to Newest", "A to Z", "Z to A"
+        switch(selectedOption) {
+            case "Newest to Oldest":
+                // sort by newest to oldest
+                //NEWTOOLD
+                Globals.sortingState = Globals.SortingState.NEWTOOLD;
+                update();
+                break;
+            case "Oldest to Newest":
+                // sort by oldest to newest
+                // OLDTONEW
+                Globals.sortingState = Globals.SortingState.OLDTONEW;
+                update();
+                break;
+            case "A to Z":
+                // sort by A to Z
+                // ATOZ
+                Globals.sortingState = Globals.SortingState.ATOZ;
+                update();
+                break;
+            case "Z to A":
+                // sort by Z to A
+                // ZTOA
+                Globals.sortingState = Globals.SortingState.ZTOA;
+                update();
+                break;
+        }
+        // Add your functionality here
+        System.out.println("Selected: " + selectedOption);
+    }
+
+    public void filterMealTypeBoxClick(String selectedOption){
+        // do a switch case to check between firs
+        switch(selectedOption) {
+            case "None":
+                //Filter by none
+                Globals.filterType = Globals.FilterType.NONE;
+                update();
+                break;
+            case "Breakfast":
+                // Filter by breakfast
+                Globals.filterType = Globals.FilterType.BREAKFAST;
+                update();
+                break;
+            case "Lunch":
+                // Filter by lunch
+                Globals.filterType = Globals.FilterType.LUNCH;
+                update();
+                break;
+            case "Dinner":
+                // Filter by dinner
+                Globals.filterType = Globals.FilterType.DINNER;
+                update();
+                break;
+        }
+        // Add your functionality here
+        System.out.println("Selected: " + selectedOption);
+    }
+
     // SET UP MAIN PAGE VIEW
     @Override
     protected void createView() {
@@ -132,76 +194,79 @@ public class mainPage extends Page {
                 "Lunch",
                 "Dinner"
         );
+
         
         sortBox.setItems(sort);
         filterMealTypeBox.setItems(filterMealType);
 
         sortBox.setOnAction(e -> {
+            sortBoxClick(sortBox.getValue());
                 // TODO:  Put into a helper method for refactoring purposes
                 
-                // Get the selected item
-                String selectedOption = sortBox.getValue();
-                // do a switch case to check between "Newest to Oldest", "Oldest to Newest", "A to Z", "Z to A"
-                switch(selectedOption) {
-                    case "Newest to Oldest":
-                        // sort by newest to oldest
-                        //NEWTOOLD
-                        Globals.sortingState = Globals.SortingState.NEWTOOLD;
-                        update();
-                        break;
-                    case "Oldest to Newest":
-                        // sort by oldest to newest
-                        // OLDTONEW
-                        Globals.sortingState = Globals.SortingState.OLDTONEW;
-                        update();
-                        break;
-                    case "A to Z":
-                        // sort by A to Z
-                        // ATOZ
-                        Globals.sortingState = Globals.SortingState.ATOZ;
-                        update();
-                        break;
-                    case "Z to A":
-                        // sort by Z to A
-                        // ZTOA
-                        Globals.sortingState = Globals.SortingState.ZTOA;
-                        update();
-                        break;
-                }
-                // Add your functionality here
-                System.out.println("Selected: " + selectedOption);
+                // // Get the selected item
+                // String selectedOption = sortBox.getValue();
+                // // do a switch case to check between "Newest to Oldest", "Oldest to Newest", "A to Z", "Z to A"
+                // switch(selectedOption) {
+                //     case "Newest to Oldest":
+                //         // sort by newest to oldest
+                //         //NEWTOOLD
+                //         Globals.sortingState = Globals.SortingState.NEWTOOLD;
+                //         update();
+                //         break;
+                //     case "Oldest to Newest":
+                //         // sort by oldest to newest
+                //         // OLDTONEW
+                //         Globals.sortingState = Globals.SortingState.OLDTONEW;
+                //         update();
+                //         break;
+                //     case "A to Z":
+                //         // sort by A to Z
+                //         // ATOZ
+                //         Globals.sortingState = Globals.SortingState.ATOZ;
+                //         update();
+                //         break;
+                //     case "Z to A":
+                //         // sort by Z to A
+                //         // ZTOA
+                //         Globals.sortingState = Globals.SortingState.ZTOA;
+                //         update();
+                //         break;
+                // }
+                // // Add your functionality here
+                // System.out.println("Selected: " + selectedOption);
         });
 
         filterMealTypeBox.setOnAction(e -> {
-                // TODO:  Put into a helper method for refactoring purposes
+            filterMealTypeBoxClick(filterMealTypeBox.getValue());
+                // // TODO:  Put into a helper method for refactoring purposes
                 
-                // Get the selected item
-                String selectedOption = filterMealTypeBox.getValue();
-                // do a switch case to check between firs
-                switch(selectedOption) {
-                    case "None":
-                        //Filter by none
-                        Globals.filterType = Globals.FilterType.NONE;
-                        update();
-                        break;
-                    case "Breakfast":
-                        // Filter by breakfast
-                        Globals.filterType = Globals.FilterType.BREAKFAST;
-                        update();
-                        break;
-                    case "Lunch":
-                        // Filter by lunch
-                        Globals.filterType = Globals.FilterType.LUNCH;
-                        update();
-                        break;
-                    case "Dinner":
-                        // Filter by dinner
-                        Globals.filterType = Globals.FilterType.DINNER;
-                        update();
-                        break;
-                }
-                // Add your functionality here
-                System.out.println("Selected: " + selectedOption);
+                // // Get the selected item
+                // String selectedOption = filterMealTypeBox.getValue();
+                // // do a switch case to check between firs
+                // switch(selectedOption) {
+                //     case "None":
+                //         //Filter by none
+                //         Globals.filterType = Globals.FilterType.NONE;
+                //         update();
+                //         break;
+                //     case "Breakfast":
+                //         // Filter by breakfast
+                //         Globals.filterType = Globals.FilterType.BREAKFAST;
+                //         update();
+                //         break;
+                //     case "Lunch":
+                //         // Filter by lunch
+                //         Globals.filterType = Globals.FilterType.LUNCH;
+                //         update();
+                //         break;
+                //     case "Dinner":
+                //         // Filter by dinner
+                //         Globals.filterType = Globals.FilterType.DINNER;
+                //         update();
+                //         break;
+                // }
+                // // Add your functionality here
+                // System.out.println("Selected: " + selectedOption);
         });
 
 
@@ -321,4 +386,5 @@ public class mainPage extends Page {
             RecipeTitleListView.getInstance().getChildren().add(recipeTitleView);
         }
     }
+
 }
