@@ -12,4 +12,4 @@
 4. The program will run and if the server is ON, the app will open to the login page. If the server is OFF, it will display an error page.
 5. The app will then prompt you to login/create account and then you will have access to all its features like: creating, editing, sharing, and sorting recipes.
 
-Team 14 MS2 PantryPal GitHub Repo Link: https://github.com/ucsd-cse110-fa23/cse-110-project-team-14
+Team 14 GitHub Repo Link: https://github.com/ucsd-cse110-fa23/cse-110-project-team-14
