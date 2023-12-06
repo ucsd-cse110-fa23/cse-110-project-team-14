@@ -14,6 +14,10 @@ import javafx.scene.text.Text;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 import java.awt.datatransfer.StringSelection;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.awt.Toolkit;
 
 import javafx.animation.KeyFrame;
@@ -176,20 +180,42 @@ public class SeeRecipePage extends Page implements ISeeRecipePage{
         //changing font size so itll fit
         ingredientLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 20;");
         recipeBox.setStyle("-fx-background-color: #FFEBD7;");
+        boolean isImageUrlAcc = false;
         if(imageURL == null){
             recipeBox.getChildren().addAll(ingredientLabel, detailLable);
         }
         else{
-            // Access the Recipe image from the URL
-            ImageView imageView = new ImageView();
+            ImageCreation imageCreation = new ImageCreation();
+            if(imageCreation.isValidURL(imageURL)) {
+                // Access the Recipe image from the URL
+                ImageView imageView = new ImageView();
 
-            // Load an image from a URL
-            String imageUrl = imageURL;
-            Image image = new Image(imageUrl);
+                // Load an image from a URL
+                String imageUrl = imageURL;
+                Image image = new Image(imageUrl);
 
-            // Set the image in the ImageView
-            imageView.setImage(image);
-            recipeBox.getChildren().addAll(ingredientLabel, detailLable, imageView);
+                // Set the image in the ImageView
+                imageView.setImage(image);
+                recipeBox.getChildren().addAll(ingredientLabel, detailLable, imageView);
+            } else {
+                String newImageURL = imageCreation.regenerateImageURL(title, r);
+                if(newImageURL != null) {
+                    imageURL = newImageURL;
+                    ImageView imageView = new ImageView();
+
+                    // Load an image from a URL
+                    String imageUrl = imageURL;
+                    Image image = new Image(imageUrl);
+
+                    // Set the image in the ImageView
+                    imageView.setImage(image);
+                    recipeBox.getChildren().addAll(ingredientLabel, detailLable, imageView);
+                } else {
+                    recipeBox.getChildren().addAll(ingredientLabel, detailLable);
+                }
+
+
+            }
         }
         ScrollPane recipePageScroller = new ScrollPane(recipeBox);
         recipePageScroller.setPrefSize(1000, 1000);
