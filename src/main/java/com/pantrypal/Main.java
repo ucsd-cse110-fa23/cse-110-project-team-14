@@ -6,6 +6,14 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import com.pantrypal.model.ErrorPage;
+import com.pantrypal.view.LoginPage;
+import com.pantrypal.view.MealTypePage;
+import com.pantrypal.view.RecordPage;
+import com.pantrypal.view.RegisterPage;
+import com.pantrypal.view.StageController;
+import com.pantrypal.view.mainPage;
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;

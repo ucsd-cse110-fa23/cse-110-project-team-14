@@ -3,6 +3,12 @@ package com.pantrypal;
 import java.io.*;
 import java.util.Scanner;
 
+import com.pantrypal.model.Recipe;
+import com.pantrypal.view.RecipeTitleListView;
+import com.pantrypal.view.RecipeTitleView;
+import com.pantrypal.view.SeeRecipePage;
+import com.pantrypal.view.StageController;
+
 public class IntializeRecipeList {
 
     public static void uploadRecipes() {

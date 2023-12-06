@@ -3,6 +3,8 @@ package com.pantrypal;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
+import com.pantrypal.model.ImageCreation;
+
 public class MockImageCreation extends ImageCreation {
     
     public String generateImageURL(String prompt)  throws IOException, InterruptedException, URISyntaxException {

@@ -3,6 +3,8 @@ package com.pantrypal;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
+import com.pantrypal.model.ChatGPT;
+
 public class MockChatGPT extends ChatGPT {
     private String prompt;
     private int maxTokens;
