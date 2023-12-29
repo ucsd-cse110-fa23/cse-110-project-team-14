@@ -24,4 +24,5 @@ public class Globals {
     public static double appHeight = 600;
     public static String IPADRESS = "100.64.219.78";
     public static String APIKEY = "";
+    public static String URI_MONGODB = "mongodb+srv://team14:team14onTop@cluster0.pqup4sj.mongodb.net/?retryWrites=true&w=majority"; // TEAM 14 Database managed by Aidan
 }

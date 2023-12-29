@@ -1,6 +1,7 @@
 package com.pantrypal.model;
 
 import com.mongodb.client.MongoClients;
+import com.pantrypal.Globals;
 import com.mongodb.client.MongoClient;
 
 public class MongoDBConnection {
@@ -19,7 +20,7 @@ public class MongoDBConnection {
             // URI string containing the MongoDB connection details
             // Note: Including credentials directly in the code is a security risk. 
             // Consider using environment variables or a configuration file.
-            String uri = "mongodb+srv://team14:team14onTop@cluster0.pqup4sj.mongodb.net/?retryWrites=true&w=majority"; // TEAM 14 Database managed by Aidan
+            String uri = Globals.URI_MONGODB; // TEAM 14 Database managed by Aidan
 
             // Create a new MongoClient instance with the given URI
             mongoClient = MongoClients.create(uri);

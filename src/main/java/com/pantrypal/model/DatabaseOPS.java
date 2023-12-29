@@ -25,7 +25,7 @@ import java.util.Iterator;
 
 public class DatabaseOPS {
     
-    private String uri = "mongodb+srv://team14:team14onTop@cluster0.pqup4sj.mongodb.net/?retryWrites=true&w=majority"; // TEAM 14 Database managed by Aidan
+    private String uri = Globals.URI_MONGODB; // TEAM 14 Database managed by Aidan
     // INSERT BACK --> "mongodb+srv://jarredondo:Lab6Connection@cluster0.qpdv67p.mongodb.net/?retryWrites=true&w=majority";
     private String collectionName;
     private final MongoClient mongoClient = MongoClients.create(uri);
