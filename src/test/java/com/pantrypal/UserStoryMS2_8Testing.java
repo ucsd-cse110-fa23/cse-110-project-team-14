@@ -15,7 +15,7 @@
 // import static org.junit.jupiter.api.Assertions.fail;
 
 // public class UserStoryMS2_8Testing {
-//     // Preprocess the server to turn on or off
+//     //Preprocess the server to turn on or off
 //     // @BeforeAll
 //     // public static void setUp() {
 //     //     // Start the server in a separate thread
@@ -37,7 +37,7 @@
 
 //     @Test
 //     public void serverIsUp() {
-//         assertEquals(isServerRunning(), true); // if server is running
+//         assertEquals(isServerRunning(), false); // if server is running
 //     }
 
 //     @Test

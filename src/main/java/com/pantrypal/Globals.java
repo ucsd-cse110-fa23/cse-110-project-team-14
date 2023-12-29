@@ -22,5 +22,6 @@ public class Globals {
     public static String username = "recipes";
     public static double appWidth = 600;
     public static double appHeight = 600;
-    public static String IPADRESS = "";
+    public static String IPADRESS = "100.64.219.78";
+    public static String APIKEY = "";
 }
